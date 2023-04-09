@@ -1,0 +1,70 @@
+
+#usersSelected{
+    display: flex;
+    flex-direction: row;
+}
+
+#selectedTxt{
+    color: white;
+}
+
+.selectedUser{
+    background-color: rgb(204, 183, 120);
+    border-radius: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    max-width: 9rem;
+
+    outline: 3px solid white;
+    outline-offset: 0px;
+
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.actionContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background-color: rgb(66, 56, 48);
+    border-radius: 1rem;
+
+    margin: 1rem;
+
+    width: fit-content;
+    padding: 0.5rem;
+
+    filter: drop-shadow(-5px 5px 0px #000);
+
+}
+
+.selectedContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#action{
+    margin-left: 2rem;
+
+    background-color: rgb(181, 125, 69);
+
+    border-radius: 1rem;
+    padding: 1rem;
+
+    font-size: 1.5rem;
+
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+
+    filter: drop-shadow(-5px 5px 0px #000);
+}
+
+#action:hover{
+    background-color: rgb(186, 72, 60);
+    cursor: pointer;
+}

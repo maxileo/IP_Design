@@ -1,0 +1,134 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
+
+*{
+    font-family: 'Crimson Text', serif;
+}
+
+.usersListContainerDiv{
+    padding: 0.5rem;
+    margin-left: 1rem;
+}
+
+#playersTxt{
+    font-size: large;
+    margin-bottom: 0.5rem;
+}
+
+.usersListContainer{
+    border: 2px solid rgb(20,15,0);
+    background-color: rgb(66, 56, 48);
+    border-radius: 1rem;
+
+    max-width: 15rem;
+    padding: 0.5rem;
+
+    color: white;
+
+    overflow-y: scroll;
+    height: 20rem;
+
+    filter: drop-shadow(-5px 5px 0px #000);
+}
+
+.usersListContainer::-webkit-scrollbar-track {
+    border: 2px solid rgb(20,15,0);
+    background-color: rgb(55, 46, 46);
+    border-radius: 1rem;
+  }
+  
+.usersListContainer::-webkit-scrollbar {
+    width: 0.5rem;
+}
+  
+.usersListContainer::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgb(181, 125, 69);
+    border: 2px solid #000;
+}
+
+.userContainer{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+
+.listUserName{
+    padding: 0.2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    min-width: 9rem;
+    background-color: rgb(204, 183, 120);
+    border-radius: 1rem;
+
+    margin-top: 0.1rem;
+
+    transition: 0.4s;
+}
+
+.listUserName.selected{
+    background-color: rgb(186, 72, 60);
+    border: 5px solid rgb(white);
+}
+
+
+.listUserName:hover{
+    background-color: rgb(255, 219, 112);
+    cursor: pointer;
+}
+
+
+.deadIcon{
+    max-width: 2rem;
+    margin-left: 0.5rem;
+
+    filter: drop-shadow(-5px 5px 0px #000);
+}
+
+
+.usersWillContainer{
+    display: flex;
+    flex-direction: row;
+
+    
+}
+
+#willContainer{
+    display: flex;
+    flex-direction: column;
+
+    padding: 0.5rem;
+    margin-left: 1rem;
+}
+
+.uiWillContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#closeWill{
+    max-width: 2rem;
+    max-height: 2rem;
+
+    filter: drop-shadow(-5px 5px 0px #000);
+}
+
+#willTxt{
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+#userWill{
+    background-color: rgb(125, 123, 114);
+    border-radius: 1rem;
+    border: 2px solid #000;
+
+    width: 12rem;
+    height: 8rem;
+
+    padding: 0.5rem;
+
+    filter: drop-shadow(-5px 5px 0px #000);
+}
