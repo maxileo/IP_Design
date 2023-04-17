@@ -11,7 +11,7 @@ function Action(props)
                     <div className={styles.selectedUser} style={{display: 'none'}}>User2</div>
                 </div>
             </div>
-            <button id={styles.action}>VOTE</button>
+            <button id={styles.action}>{props.gameState.state == "voting" ? "VOTE" : props.currentUser.actionText}</button>
         </div>
     );
 }
