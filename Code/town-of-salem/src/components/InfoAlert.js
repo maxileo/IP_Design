@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "../css/infoAlert.module.css";
 
-function InfoAlert(props) {
+export default function InfoAlert(props) {
   if (props.gameState.state == "voting")
     return (
       <div className={styles.infoAlertContainer}>
@@ -33,5 +33,3 @@ function InfoAlert(props) {
       </div>
     );
 }
-
-export default InfoAlert;
