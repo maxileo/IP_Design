@@ -1,3 +1,9 @@
 body{
   background-color: bisque;
 }
+
+.app{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

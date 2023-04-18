@@ -1,59 +1,54 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
 
 *{
     font-family: 'Crimson Text', serif;
 }
 
-.usersListContainerDiv{
+.roleListContainerDiv{
     padding: 0.5rem;
     margin-left: 1rem;
 }
 
-#playersTxt{
+#rolesTxt{
     font-size: large;
     margin-bottom: 0.5rem;
 }
 
-.usersListContainer{
+.roleListContainer{
     border: 2px solid rgb(20,15,0);
     background-color: rgb(66, 56, 48);
     border-radius: 1rem;
-
     max-width: 15rem;
     padding: 0.5rem;
-
     color: white;
-
     overflow-y: scroll;
     height: 20rem;
-
     filter: drop-shadow(-5px 5px 0px #000);
 }
 
-.usersListContainer::-webkit-scrollbar-track {
+.roleListContainer::-webkit-scrollbar-track {
     border: 2px solid rgb(20,15,0);
     background-color: rgb(55, 46, 46);
     border-radius: 1rem;
   }
   
-.usersListContainer::-webkit-scrollbar {
+.roleListContainer::-webkit-scrollbar {
     width: 0.5rem;
 }
   
-.usersListContainer::-webkit-scrollbar-thumb {
+.roleListContainer::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgb(181, 125, 69);
     border: 2px solid #000;
 }
 
-.userContainer{
+.roleContainer{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.listUserName{
+.listRole{
     padding: 0.2rem;
     padding-left: 2rem;
     padding-right: 2rem;
@@ -64,60 +59,49 @@
     transition: 0.4s;
 }
 
-.listUserName.selected{
+.listRole.selected{
     background-color: rgb(186, 72, 60);
     border: 5px solid rgb(white);
 }
 
 
-.listUserName:hover{
+.listRole:hover{
     background-color: rgb(255, 219, 112);
     cursor: pointer;
 }
 
 
-.deadIcon{
-    max-width: 2rem;
-    margin-left: 0.5rem;
-
-    filter: drop-shadow(-5px 5px 0px #000);
-}
-
-
-.usersWillContainer{
+.roleDescriptionContainer{
     display: flex;
     flex-direction: row;
-
-    
 }
 
-#willContainer{
+#descriptionContainer{
     display: flex;
     flex-direction: column;
-
     padding: 0.5rem;
     margin-left: 1rem;
 }
 
-.uiWillContainer{
+.uiDescriptionContainer{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-#closeWill{
+#closeDescription{
     max-width: 2rem;
     max-height: 2rem;
 
     filter: drop-shadow(-5px 5px 0px #000);
 }
 
-#willTxt{
+#descriptionTxt{
     margin-bottom: 0.5rem;
     margin-left: 0.5rem;
 }
 
-#userWill{
+#roleDescription{
     background-color: rgb(125, 123, 114);
     border-radius: 1rem;
     border: 2px solid #000;
@@ -126,6 +110,5 @@
     height: 8rem;
 
     padding: 0.5rem;
-
     filter: drop-shadow(-5px 5px 0px #000);
 }
