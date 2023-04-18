@@ -1,8 +1,10 @@
-import logo from "./logo.svg";
-import "./App.css";
-import UserList from "./components/UserList.js";
-import Action from "./components/Action.js";
+import logo from './logo.svg';
+import './App.css';
+import UserList from './components/UserList.js';
+import Action from './components/Action.js';
+import RoleList from './components/RoleList.js';
 import { useEffect, useState } from "react";
+import { makeRole } from './functions/roleFunctions';
 import InfoAlert from "./components/InfoAlert";
 
 function makeUser() {
@@ -15,6 +17,8 @@ function makeUser() {
 }
 
 let usersList = [];
+let rolesList = [];
+
 for (let i = 0; i < 20; i++) {
   usersList.push(makeUser());
 }
@@ -30,7 +34,14 @@ let currentGameState = {
   time: 30
 };
 
+for (let i = 0; i < 13; i++)
+{
+  rolesList.push(makeRole(i));
+}
+
+
 function App() {
+
   const [gameState, setGameState] = useState(currentGameState);
   const [timeLeft, setTimeLeft] = useState(currentGameState.time);
 
@@ -71,18 +82,24 @@ function App() {
   });
 
   return (
-    <div className="app">
+    <div className='app'>
       <InfoAlert
         gameState={gameState}
         timeLeft={timeLeft}
         currentUser={currentUser}
       />
-      <UserList
-        usersList={usersList}
-        gameState={gameState}
-        currentUser={currentUser}
-      />
-      <Action gameState={gameState} currentUser={currentUser} />
+      <div className='userList-action'>
+        <UserList
+          usersList = {usersList} gameState = {gameState} currentUser = {currentUser}
+        />
+        <Action gameState = {gameState} currentUser = {currentUser} />
+      </div>
+
+      <div className='roleList'>
+        <RoleList
+          rolesList = {rolesList}
+        />
+      </div>
     </div>
   );
 }
