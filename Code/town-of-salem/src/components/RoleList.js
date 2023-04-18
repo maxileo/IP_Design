@@ -23,9 +23,27 @@ function RoleList(props)
                         onClick={e => handleCloseDescriptionClick()}
                         id={styles.closeDescription} type="image" src='/media/close.png' alt=''>
                     </input>
-                    <h3 id={styles.descriptionTxt}>Role Description</h3>
+                    <h3 id={styles.descriptionTxt}>Role</h3>
                 </div>
-                <div id={styles.roleDescription}>This is the description of role.</div>
+                <div id={styles.roleDescription}>
+                    <div id={styles.roleAlignment}>
+                        <h4 id={styles.alignmentTxt}>Alignment</h4>
+                        <div id={styles.alignmentDescription}>This is the alignment of role.</div>
+                    </div>
+                    <div id={styles.roleGoal}>
+                        <h4 id={styles.goalTxt}>Goal</h4>
+                        <div id={styles.goalDescription}>This is the goal of role.</div>
+                    </div>
+                    <div id={styles.roleAbilities}>
+                        <h4 id={styles.abilitiesTxt}>Abillities</h4>
+                        <div id={styles.abilitiesDescription}>This is the ability of role.</div>
+                    </div>
+                    <div id={styles.roleAttributes}>
+                        <h4 id={styles.attributesTxt}>Attributes</h4>
+                        <div id={styles.attributesDescription}>These are the attributes of role.</div>
+                    </div>
+
+                </div>
             </div> 
 
             {/* lista de roluri */}

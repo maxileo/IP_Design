@@ -74,6 +74,7 @@
 .roleDescriptionContainer{
     display: flex;
     flex-direction: row;
+    margin-right: 10px;
 }
 
 #descriptionContainer{
@@ -99,16 +100,40 @@
 #descriptionTxt{
     margin-bottom: 0.5rem;
     margin-left: 0.5rem;
+    
 }
 
 #roleDescription{
     background-color: rgb(125, 123, 114);
     border-radius: 1rem;
     border: 2px solid #000;
-
-    width: 12rem;
-    height: 8rem;
-
+    width: 14rem;
+    height: auto;
     padding: 0.5rem;
     filter: drop-shadow(-5px 5px 0px #000);
 }
+
+#alignmentTxt{
+    
+    color: rgb(255, 219, 112);
+    margin:0;
+}
+
+#goalTxt{
+   
+    color: rgb(255, 219, 112);
+    margin: 0;
+}
+
+#abilitiesTxt{
+   
+    color: rgb(255, 219, 112);
+    margin: 0;
+}
+
+#attributesTxt{
+   
+    color: rgb(255, 219, 112);
+    margin: 0;
+}
+

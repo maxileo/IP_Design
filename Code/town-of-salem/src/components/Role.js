@@ -4,15 +4,45 @@ import styles from '../css/roles.module.css';
 //descrierea 
 function handleRoleClick(target, role)
 {
-    let roleName = target.role;
+    let roleName = target.parentElement.firstChild.innerText;
+    //let alignment = target.parentElement.lastChild.innerText;
+
     let descriptionElement = document.getElementById(styles.descriptionContainer);
     descriptionElement.style.display = "block";
 
     let descriptionTitle = descriptionElement.firstChild.lastChild;
-    descriptionTitle.innerText = roleName + "'s role description";
+    descriptionTitle.innerText = roleName ;
 
-    let descriptionText = descriptionElement.lastChild;
-    descriptionText.innerText = "This is the description of role: " + roleName;
+    //let descriptionText = descriptionElement.lastChild;
+    //descriptionText.innerText = "This is the description of role: " + roleName;
+
+    let alignmentText = descriptionElement.lastChild.firstChild.firstChild;
+    alignmentText.innerText = "Alignment: ";
+
+    let alignmentDescription = descriptionElement.lastChild.firstChild.lastChild;
+    alignmentDescription.innerText = role.alignment;
+
+    let goalText = descriptionElement.lastChild.children[1].firstChild;
+    goalText.innerText = "\nGoal: ";
+
+    let goalDescription = descriptionElement.lastChild.children[1].lastChild;
+    goalDescription.innerText = role.goal;
+
+    let abilitiesText = descriptionElement.lastChild.children[2].firstChild;
+    abilitiesText.innerText = "\nAbilities: ";
+
+    let abilitiesDescription = descriptionElement.lastChild.children[2].lastChild;
+    abilitiesDescription.innerText = role.abilities;
+
+    let attributesText = descriptionElement.lastChild.lastChild.firstChild;
+    attributesText.innerText = "\nAttributes: ";
+
+    let attributesDescription = descriptionElement.lastChild.lastChild.lastChild;
+    attributesDescription.innerText = role.attributes;
+
+    //descriptionText.innerText = "Alignment: " + role.alignment + "\nGoal: " + role.goal;
+
+    
 }
 
 function Role(props)
@@ -22,7 +52,7 @@ function Role(props)
     return (
         <div className={styles.descriptionContainer}>
             <button onClick={e =>handleRoleClick(e.target, roleObj)} className={styles.listRole}>
-                {roleObj.role}
+                {roleObj.roleName}
             </button>
         </div>
     );
