@@ -22,12 +22,12 @@ for (let i = 0; i < 20; i++) {
 let currentUser = {
   roleName: "doctor",
   actionText: "HEAL",
-  nrOfSelection: 1,
+  nrOfSelection: 1
 };
 
 let currentGameState = {
   state: "voting",
-  time: 30,
+  time: 30
 };
 
 function App() {
@@ -43,22 +43,22 @@ function App() {
         if (gameState.state == "voting") {
           nextGameState = {
             state: "votingEnd",
-            time: 5,
+            time: 5
           };
         } else if (gameState.state == "votingEnd") {
           nextGameState = {
             state: "nightStart",
-            time: 5,
+            time: 5
           };
         } else if (gameState.state == "nightStart") {
           nextGameState = {
             state: "night",
-            time: 45,
+            time: 45
           };
         } else {
           nextGameState = {
             state: "voting",
-            time: 30,
+            time: 30
           };
         }
 
