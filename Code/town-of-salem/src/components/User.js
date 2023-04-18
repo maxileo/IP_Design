@@ -2,8 +2,9 @@ import {useState} from 'react';
 import styles from '../css/users.module.css';
 import stylesAction from '../css/action.module.css';
 
-function handleClick(target, user)
+function handleClick(target, user, currentUser)
 {
+    let nrMaxSelection = currentUser.nrOfSelection;
     if (user.isAlive)
     {
         let selectedUsers = Array.from(
@@ -11,26 +12,22 @@ function handleClick(target, user)
         );
 
         let usersSelectedElement = document.getElementById(stylesAction.usersSelected);
-        console.log(usersSelectedElement);
 
-        if (selectedUsers.length < 2 || target.classList.contains(styles.selected))
+        if (selectedUsers.length < nrMaxSelection || target.classList.contains(styles.selected))
             target.classList.toggle(styles.selected);
 
         selectedUsers = Array.from(
             document.getElementsByClassName(styles.selected)
         );
-        console.log(selectedUsers);
 
         let selectedUsersAction = Array.from( document.getElementsByClassName(stylesAction.selectedUser));
         for (let i = 0; i < selectedUsers.length; i++)
         {
-            console.log(selectedUsersAction[i]);
             selectedUsersAction[i].style.display = "block";
             selectedUsersAction[i].innerText = selectedUsers[i].innerText;
         }
-        for (let i = selectedUsers.length; i < 2; i++)
+        for (let i = selectedUsers.length; i < nrMaxSelection; i++)
         {
-            console.log('2' + selectedUsersAction[i]);
             selectedUsersAction[i].style.display = "none";
         }
     }
@@ -55,7 +52,7 @@ function User(props)
 
     return (
         <div className={styles.userContainer}>
-            <button onClick={e => handleClick(e.target, userObj)} className={styles.listUserName}>
+            <button onClick={e => handleClick(e.target, userObj, props.currentUser)} className={styles.listUserName}>
                 {userObj.userName}
             </button>
             {userObj.isAlive ? <></> : (
