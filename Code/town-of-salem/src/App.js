@@ -89,7 +89,6 @@ function App() {
         currentUser={currentUser}
       />
       <div className='userList-action'>
-        <h1>State: {gameState.state} Remaining time {timeLeft}</h1>
         <UserList
           usersList = {usersList} gameState = {gameState} currentUser = {currentUser}
         />
