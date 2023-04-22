@@ -54,10 +54,12 @@ function Action(props)
                     <div className={styles.selectedUser} style={{display: 'none'}}>User2</div>
                 </div>
             </div>
-            <button 
-                onClick={e => handleClick(e.target, props.gameState, props.currentUser)}
-                id={styles.action}>{props.gameState.state == "voting" ? "VOTE" : props.currentUser.actionText}
-            </button>
+            <div className={styles.buttonBackground}>
+                <button 
+                    onClick={e => handleClick(e.target, props.gameState, props.currentUser)}
+                    id={styles.action}>{props.gameState.state == "voting" ? "VOTE" : props.currentUser.actionText}
+                </button>
+            </div>
         </div>
     );
 }

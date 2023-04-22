@@ -5,7 +5,7 @@
 }
 
 #Txt {
-  color: white;
+  color: #FBDA7D;
 }
 
 .infoAlertContainer {
@@ -20,8 +20,11 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: rgb(66, 56, 48);
-  border-radius: 1rem;
+
+  border: 3px solid #FBDA7D;
+  background: rgb(68,55,48);
+  background: linear-gradient(180deg, rgba(68,55,48,1) 0%, rgba(41,32,29,1) 100%);
+
   width: fit-content;
   padding: 0.5rem;
   filter: drop-shadow(-5px 5px 0px #000);

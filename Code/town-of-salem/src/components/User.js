@@ -52,9 +52,12 @@ function User(props)
 
     return (
         <div className={styles.userContainer}>
-            <button onClick={e => handleClick(e.target, userObj, props.currentUser)} className={styles.listUserName}>
-                {userObj.userName}
+            <div className = {styles.buttonBackground}>
+            <button onClick={e => handleClick(e.target, userObj, props.currentUser)} 
+                className={styles.listUserName}>
+                {userObj.userName} 
             </button>
+            </div>
             {userObj.isAlive ? <></> : (
                 <input onClick={e => handleDeadClick(e.target)}
                     className={styles.deadIcon} type="image" src='/media/dead.png'></input>
