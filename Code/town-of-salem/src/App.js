@@ -19,16 +19,6 @@ function makeUser() {
 let usersList = [];
 let rolesList = [];
 
-for (let i = 0; i < 20; i++) {
-  usersList.push(makeUser());
-}
-
-let currentUser = {
-  roleName: "doctor",
-  actionText: "HEAL",
-  nrOfSelection: 1
-};
-
 let currentGameState = {
   state: "voting",
   time: 30
@@ -39,42 +29,47 @@ for (let i = 0; i < 13; i++)
   rolesList.push(makeRole(i));
 }
 
+async function getState() {
+  let url = '../gameState.json';
+  try {
+      let res = await fetch(url);
+      return await res.json();
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+let currentUser;
+let timeLeftJson;
+
+async function createObjects() {
+  let gameStateJson = await getState();
+
+  currentUser = gameStateJson.currentUser;
+  usersList = gameStateJson.users;
+
+  currentGameState = gameStateJson.currentGameState;
+
+  const utcTimestamp = new Date().getTime();
+  timeLeftJson = currentGameState.timeEndState - Math.floor(utcTimestamp / 1000);
+  console.log(currentGameState.timeEndState - Math.floor(utcTimestamp / 1000));
+}
 
 function App() {
 
   const [gameState, setGameState] = useState(currentGameState);
   const [timeLeft, setTimeLeft] = useState(currentGameState.time);
 
+  createObjects();
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (timeLeft > 0) setTimeLeft(timeLeft - 1);
-      else {
-        clearTimeout(timer);
-        let nextGameState;
-        if (gameState.state == "voting") {
-          nextGameState = {
-            state: "votingEnd",
-            time: 5
-          };
-        } else if (gameState.state == "votingEnd") {
-          nextGameState = {
-            state: "nightStart",
-            time: 5
-          };
-        } else if (gameState.state == "nightStart") {
-          nextGameState = {
-            state: "night",
-            time: 45
-          };
-        } else {
-          nextGameState = {
-            state: "voting",
-            time: 30
-          };
-        }
+      createObjects();
 
-        setGameState(nextGameState);
-        setTimeLeft(nextGameState.time);
+      setGameState(currentGameState);
+      if (timeLeftJson > 0)
+      {
+        setTimeLeft(timeLeftJson);
       }
     }, 1000);
 
