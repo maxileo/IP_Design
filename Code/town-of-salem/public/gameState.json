@@ -51,11 +51,16 @@
 		"roleName" : "mafioso",
 		"actionText" : "KILL",
 		"nrOfSelection" : 1,
-		"isAlive" : true
+		"isAlive" : true,
+		"nightResults": [
+			"You died",
+			"Your role was blocked"
+		]
 	},
-	
-	"currentGameState" : {
-		"state" : "night",
-		"timeEndState" : 1682200005
-	}
+
+	"state": "Selection",
+
+	"timeEndState": 1682300005,
+
+	"judgedCharacter": "Pau"
 }

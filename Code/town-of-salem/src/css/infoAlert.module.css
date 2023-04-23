@@ -8,6 +8,10 @@
   color: #FBDA7D;
 }
 
+.TxtResult{
+  color: #FF3C3C;
+}
+
 .infoAlertContainer {
   display: flex;
   position: absolute;

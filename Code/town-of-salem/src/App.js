@@ -6,6 +6,7 @@ import RoleList from './components/RoleList.js';
 import { useEffect, useState } from "react";
 import { makeRole } from './functions/roleFunctions';
 import InfoAlert from "./components/InfoAlert";
+import Lobby from "./components/Lobby";
 
 function makeUser() {
   let user = {
@@ -16,12 +17,24 @@ function makeUser() {
   return user;
 }
 
+let userName = "";
+
+function setName(name){
+  userName = name;
+  console.log("Am setat username: " + userName);
+  localStorage.setItem("userName", userName);
+}
+
+function getName(){
+  return localStorage.getItem("userName");
+}
+
 let usersList = [];
 let rolesList = [];
 
 let currentGameState = {
-  state: "voting",
-  time: 30
+  state: "lobby",
+  timeEndState: 30
 };
 
 for (let i = 0; i < 13; i++)
@@ -40,15 +53,24 @@ async function getState() {
 }
 
 let currentUser;
-let timeLeftJson;
+let timeLeftJson = 0;
+let judgedCharacter = "";
 
 async function createObjects() {
   let gameStateJson = await getState();
 
   currentUser = gameStateJson.currentUser;
+  currentUser.userName = getName();
   usersList = gameStateJson.users;
 
-  currentGameState = gameStateJson.currentGameState;
+  currentGameState = {
+    state: "",
+    timeEndState: 0
+  };
+  currentGameState.state = gameStateJson.state;
+  currentGameState.timeEndState = gameStateJson.timeEndState;
+
+  judgedCharacter = gameStateJson.judgedCharacter;
 
   const utcTimestamp = new Date().getTime();
   timeLeftJson = currentGameState.timeEndState - Math.floor(utcTimestamp / 1000);
@@ -58,7 +80,7 @@ async function createObjects() {
 function App() {
 
   const [gameState, setGameState] = useState(currentGameState);
-  const [timeLeft, setTimeLeft] = useState(currentGameState.time);
+  const [timeLeft, setTimeLeft] = useState();
 
   createObjects();
 
@@ -67,27 +89,29 @@ function App() {
       createObjects();
 
       setGameState(currentGameState);
-      if (timeLeftJson > 0)
-      {
-        setTimeLeft(timeLeftJson);
-      }
-    }, 1000);
+      setTimeLeft(timeLeftJson);
+      
+    }, 200);
 
     return () => clearTimeout(timer);
   });
 
+
+  if (gameState.state != "Lobby")
+  {
   return (
     <div className='app'>
       <InfoAlert
         gameState={gameState}
         timeLeft={timeLeft}
         currentUser={currentUser}
+        judgedCharacter={judgedCharacter}
       />
       <div className='userList-action'>
         <UserList
           usersList = {usersList} gameState = {gameState} currentUser = {currentUser}
         />
-        <Action gameState = {gameState} currentUser = {currentUser} />
+        <Action gameState = {gameState} currentUser = {currentUser} judgedCharacter = {judgedCharacter}/>
       </div>
 
       <div className='roleList'>
@@ -97,6 +121,15 @@ function App() {
       </div>
     </div>
   );
+  }
+  else
+  {
+    return (
+      <div className='app'>
+        <Lobby setName = {setName}/>
+      </div>
+    );
+  }
 }
 
 export default App;

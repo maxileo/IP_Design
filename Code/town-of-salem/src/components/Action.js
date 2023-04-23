@@ -12,18 +12,19 @@ function postData(data)
     });
 }
 
-function handleClick(target, gameState, currentUser)
+let infoText = "";
+let buttonText = "";
+
+function handleClick(target, gameState, currentUser, judgedCharacter)
 {
-    if (currentUser.isAlive)
+    if (currentUser.isAlive && (gameState.state == "Voting" || gameState.state == "Selection" || gameState.state == "Night"))
     {
         let selectedUsers = Array.from(
             document.getElementsByClassName(stylesUser.selected)
         );
 
-        if (selectedUsers.length > 0)
+        if (selectedUsers.length > 0 || gameState.state == "Voting")
         {
-
-            let selectedUsersAction = Array.from( document.getElementsByClassName(stylesAction.selectedUser));
 
             let data = {
                 username: "",
@@ -32,9 +33,17 @@ function handleClick(target, gameState, currentUser)
 
             data.username = currentUser.userName;
 
-            for (let i = 0; i < selectedUsers.length; i++)
+            if (gameState.state == "Voting")
             {
-                data.targets.push(selectedUsersAction[i].innerText);
+                data.targets.push(judgedCharacter);
+            }
+            else
+            {
+                let selectedUsersAction = Array.from( document.getElementsByClassName(stylesAction.selectedUser));
+                for (let i = 0; i < selectedUsers.length; i++)
+                {
+                    data.targets.push(selectedUsersAction[i].innerText);
+                }
             }
             
 
@@ -45,10 +54,35 @@ function handleClick(target, gameState, currentUser)
 
 function Action(props)
 {
+    if (props.gameState.state == "Selection") {
+        let selectedUsers = Array.from(
+            document.getElementsByClassName(stylesUser.selected)
+        );
+        infoText = "You have chosen:";
+        if (selectedUsers.length == 0)
+            infoText = "Choose someone from the Players list";
+        buttonText = "SELECT";
+    }
+    if (props.gameState.state == "Voting") {
+        infoText = "Choose if " + props.judgedCharacter + " is guilty";
+        buttonText = "GUILTY";
+    }
+    if (props.gameState.state == "Night") {
+        infoText = "You have chosen:";
+        let selectedUsers = Array.from(
+            document.getElementsByClassName(stylesUser.selected)
+        );
+        if (selectedUsers.length == 0)
+            infoText = "Choose someone from the Players list";
+        buttonText = props.currentUser.actionText;
+    }
+
+    if ((props.gameState.state == "Voting" || props.gameState.state == "Selection" || props.gameState.state == "Night"))
+    {
     return (
         <div className={styles.actionContainer}>
             <div className={styles.selectedContainer}>
-                <h3 id={styles.selectedTxt} >You have selected:</h3>
+                <h3 id={styles.selectedTxt} >{infoText}</h3>
                 <div id={styles.usersSelected}>
                     <div className={styles.selectedUser} style={{display: 'none'}}>User1</div>
                     <div className={styles.selectedUser} style={{display: 'none'}}>User2</div>
@@ -56,12 +90,19 @@ function Action(props)
             </div>
             <div className={styles.buttonBackground}>
                 <button 
-                    onClick={e => handleClick(e.target, props.gameState, props.currentUser)}
-                    id={styles.action}>{props.gameState.state == "voting" ? "VOTE" : props.currentUser.actionText}
+                    onClick={e => handleClick(e.target, props.gameState, props.currentUser, props.judgedCharacter)}
+                    id={styles.action}>{buttonText}
                 </button>
             </div>
         </div>
     );
+    }
+    else
+    {
+        return (
+            <div></div>
+        );
+    }
 }
 
 export default Action;
