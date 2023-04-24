@@ -6,9 +6,12 @@ function postData(data)
 {
     console.log(JSON.stringify(data));
 
-    fetch('../post.json', {
-        method: 'post',
-        body: JSON.stringify(data)
+    fetch('http://localhost:3000/state/0', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
     });
 }
 
@@ -27,11 +30,11 @@ function handleClick(target, gameState, currentUser, judgedCharacter)
         {
 
             let data = {
-                username: "",
+                userId: "",
                 targets: []
             };
 
-            data.username = currentUser.userName;
+            data.userId = currentUser.userName;
 
             if (gameState.state == "Voting")
             {

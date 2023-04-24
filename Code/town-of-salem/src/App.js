@@ -42,7 +42,7 @@ for (let i = 0; i < 13; i++)
 }
 
 async function getState() {
-  let url = `http://localhost:4000/state/0?userId=${currentUser}`;
+  let url = `http://localhost:3000/state/0?userId=${currentUser}`;
   try {
       let res = await fetch(
           url);

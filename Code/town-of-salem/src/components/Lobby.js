@@ -5,26 +5,29 @@ async function postData(url, data)
 {
     try {
         const response = await fetch(url, {
-            method: 'post',
-            body: JSON.stringify(data)
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
     } catch ( error ) {
         console.log(error);
     }
 }
 
-function handleChooseClick(target, setName, setPressed)
+async function handleChooseClick(target, setName, setPressed)
 {
     let userName = document.getElementById(styles.name).value;
 
     if (userName.length > 0)
     {
         let data = {
-            userName: ""
+            userId: ""
         };
-        data.userName = userName;
+        data.userId = userName;
 
-        postData("urlForPostChoiceName", data);
+        await postData("http://localhost:3000/lobbies", data);
 
         setName(userName);
 
@@ -40,7 +43,7 @@ async function handleStartClick(pressed)
             start: true
         };
 
-        await postData("https://localhost:4000/lobbies", data);
+        await postData("http://localhost:3000/state/0/start_game", data);
     }
 }
 
