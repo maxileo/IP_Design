@@ -1,12 +1,16 @@
 import styles from '../css/lobby.module.css';
 import { useState } from "react";
 
-function postData(url, data) 
+async function postData(url, data)
 {
-    fetch(url, {
-        method: 'post',
-        body: JSON.stringify(data)
-    });
+    try {
+        const response = await fetch(url, {
+            method: 'post',
+            body: JSON.stringify(data)
+        });
+    } catch ( error ) {
+        console.log(error);
+    }
 }
 
 function handleChooseClick(target, setName, setPressed)
@@ -28,7 +32,7 @@ function handleChooseClick(target, setName, setPressed)
     }
 }
 
-function handleStartClick(pressed)
+async function handleStartClick(pressed)
 {
     if (pressed)
     {
@@ -36,7 +40,7 @@ function handleStartClick(pressed)
             start: true
         };
 
-        postData("urlForPostStart", data);
+        await postData("https://localhost:4000/lobbies", data);
     }
 }
 

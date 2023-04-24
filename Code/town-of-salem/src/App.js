@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import UserList from './components/UserList.js';
 import Action from './components/Action.js';
 import RoleList from './components/RoleList.js';
-import { useEffect, useState } from "react";
-import { makeRole } from './functions/roleFunctions';
+import {useEffect, useState} from "react";
+import {makeRole} from './functions/roleFunctions';
 import InfoAlert from "./components/InfoAlert";
 import Lobby from "./components/Lobby";
 
@@ -43,16 +42,17 @@ for (let i = 0; i < 13; i++)
 }
 
 async function getState() {
-  let url = '../gameState.json';
+  let url = `http://localhost:4000/state/0?userId=${currentUser}`;
   try {
-      let res = await fetch(url);
-      return await res.json();
+      let res = await fetch(
+          url);
+    return await res.json();
   } catch (error) {
       console.log(error);
   }
 }
 
-let currentUser;
+let currentUser = "Casu";
 let timeLeftJson = 0;
 let judgedCharacter = "";
 
