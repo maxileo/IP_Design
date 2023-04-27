@@ -13,15 +13,19 @@
 #playersTxt{
     font-size: large;
     margin-bottom: 0.5rem;
+    color: #FBDA7D;
 }
 
 .usersListContainer{
-    border: 2px solid rgb(20,15,0);
-    background-color: rgb(66, 56, 48);
-    border-radius: 1rem;
+    border: 3px solid #FBDA7D;
+    background: rgb(68,55,48);
+    background: linear-gradient(180deg, rgba(68,55,48,1) 0%, rgba(41,32,29,1) 100%);
 
-    max-width: 15rem;
+    max-width: 16rem;
+    min-width: 16rem;
     padding: 0.5rem;
+
+    padding-top: 1rem;
 
     color: white;
 
@@ -54,33 +58,55 @@
 }
 
 .listUserName{
+    padding: 0.6rem;
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+    min-width: 12rem;
+    background-color: transparent;
+
+    color: #FBDA7D;
+
+    background-image: url('../svg/button.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    border: none;
+    outline: none;
+
+    transition: 0.3s;
+    
+    cursor: pointer;
+}
+
+.buttonBackground{
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     padding: 0.2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    min-width: 9rem;
-    background-color: rgb(204, 183, 120);
-    border-radius: 1rem;
-    margin-top: 0.1rem;
-    transition: 0.4s;
 }
 
-.listUserName.selected{
-    background-color: rgb(186, 72, 60);
-    border: 5px solid rgb(white);
+.buttonBackground:hover{
+    background-image: radial-gradient(circle, rgba(197,54,26,1) 0%, rgba(161,67,24,0.4206932773109243) 68%, rgba(255,199,181,0) 100%);
 }
 
+.buttonBackground .selected{
+    background-image: radial-gradient(circle, rgba(197,54,26,1) 0%, rgba(161,67,24,0.4206932773109243) 68%, rgba(255,199,181,0) 100%);
+}
 
 .listUserName:hover{
-    background-color: rgb(255, 219, 112);
-    cursor: pointer;
+    transform: scale(1.05);
 }
 
 
 .deadIcon{
-    max-width: 2rem;
-    margin-left: 0.5rem;
+    max-width: 3rem;
+    margin-left: 0.2rem;
+}
 
-    filter: drop-shadow(-5px 5px 0px #000);
+.deadIcon:hover{
+    transform: scale(1.1);
 }
 
 
@@ -112,15 +138,23 @@
     filter: drop-shadow(-5px 5px 0px #000);
 }
 
+#closeWill:hover{
+    transform: scale(1.1);
+}
+
 #willTxt{
     margin-bottom: 0.5rem;
     margin-left: 0.5rem;
+
+    color: #FBDA7D;
 }
 
 #userWill{
-    background-color: rgb(125, 123, 114);
-    border-radius: 1rem;
-    border: 2px solid #000;
+    border: 3px solid #FBDA7D;
+    background: rgb(68,55,48);
+    background: linear-gradient(180deg, rgba(68,55,48,1) 0%, rgba(41,32,29,1) 100%);
+
+    color: #FBDA7D;
 
     width: 12rem;
     height: 8rem;

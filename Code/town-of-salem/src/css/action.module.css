@@ -5,23 +5,30 @@
 }
 
 #selectedTxt{
-    color: white;
+    color: #FBDA7D;
 }
 
 .selectedUser{
-    background-color: rgb(204, 183, 120);
-    border-radius: 2rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    max-width: 9rem;
+    background-color: transparent;
+    background-image: url('../svg/button.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
 
-    outline: 3px solid white;
-    outline-offset: 0px;
+    
+    padding: 0.6rem;
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+    min-width: 8rem;
+
+    color: #FBDA7D;
 
     margin-left: 1rem;
     margin-bottom: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .actionContainer{
@@ -29,10 +36,14 @@
     flex-direction: row;
     align-items: center;
 
-    background-color: rgb(66, 56, 48);
-    border-radius: 1rem;
+    
+    border: 3px solid #FBDA7D;
+    background: rgb(68,55,48);
+    background: linear-gradient(180deg, rgba(68,55,48,1) 0%, rgba(41,32,29,1) 100%);
 
     margin: 1rem;
+
+    margin-left: 1.4rem;
 
     width: fit-content;
     padding: 0.5rem;
@@ -49,22 +60,42 @@
 }
 
 #action{
-    margin-left: 2rem;
+    background-color: transparent;
 
-    background-color: rgb(181, 125, 69);
+    background-image: url('../svg/actionButton.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 
-    border-radius: 1rem;
-    padding: 1rem;
+    padding: 2rem;
+    padding-left: 4.5rem;
+    padding-right: 4rem;
 
-    font-size: 1.5rem;
+    color: #FBDA7D;
+
+    font-size: 2rem;
 
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
 
-    filter: drop-shadow(-5px 5px 0px #000);
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    transition: 0.3s;
 }
 
 #action:hover{
-    background-color: rgb(186, 72, 60);
-    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.buttonBackground{
+    margin-left: 2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.buttonBackground:hover{
+    background-image: radial-gradient(circle, rgba(197,54,26,1) 0%, rgba(161,67,24,0.4206932773109243) 68%, rgba(255,199,181,0) 100%);
 }

@@ -2,10 +2,10 @@ import {useState} from 'react';
 import styles from '../css/users.module.css';
 import stylesAction from '../css/action.module.css';
 
-function handleClick(target, user, currentUser)
+function handleClick(target, user, currentUser, gameState)
 {
     let nrMaxSelection = currentUser.nrOfSelection;
-    if (user.isAlive)
+    if (user.isAlive && (gameState.state == "Selection" || gameState.state == "Night"))
     {
         let selectedUsers = Array.from(
             document.getElementsByClassName(styles.selected)
@@ -52,9 +52,12 @@ function User(props)
 
     return (
         <div className={styles.userContainer}>
-            <button onClick={e => handleClick(e.target, userObj, props.currentUser)} className={styles.listUserName}>
-                {userObj.userName}
+            <div className = {styles.buttonBackground}>
+            <button onClick={e => handleClick(e.target, userObj, props.currentUser, props.gameState)} 
+                className={styles.listUserName}>
+                {userObj.userName} 
             </button>
+            </div>
             {userObj.isAlive ? <></> : (
                 <input onClick={e => handleDeadClick(e.target)}
                     className={styles.deadIcon} type="image" src='/media/dead.png'></input>

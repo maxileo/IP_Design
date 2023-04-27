@@ -1,0 +1,66 @@
+{
+	"users": [
+	{
+		"userName" : "Casu",
+		"isAlive" : true,
+		"nrVotes" : 0
+	},
+	{
+		"userName" : "Rares",
+		"isAlive" : false,
+		"nrVotes" : 0
+	},
+	{
+		"userName" : "Hara",
+		"isAlive" : true,
+		"nrVotes" : 0
+	},
+	{
+		"userName" : "Teodora",
+		"isAlive" : false,
+		"nrVotes" : 0
+	},
+	{
+		"userName" : "Apache",
+		"isAlive" : true,
+		"nrVotes" : 0
+	},
+	{
+		"userName" : "Calin",
+		"isAlive" : true,
+		"nrVotes" : 0
+	},
+	{
+		"userName" : "Pau",
+		"isAlive" : true,
+		"nrVotes" : 0
+	},
+	{
+		"userName" : "Miruna",
+		"isAlive" : false,
+		"nrVotes" : 0
+	},
+	{
+		"userName" : "Alex",
+		"isAlive" : true,
+		"nrVotes" : 0
+	}],
+	
+	"currentUser" : {
+		"userName" : "Casu",
+		"roleName" : "mafioso",
+		"actionText" : "KILL",
+		"nrOfSelection" : 1,
+		"isAlive" : true,
+		"nightResults": [
+			"You died",
+			"Your role was blocked"
+		]
+	},
+
+	"state": "Selection",
+
+	"timeEndState": 1682300005,
+
+	"judgedCharacter": "Pau"
+}
