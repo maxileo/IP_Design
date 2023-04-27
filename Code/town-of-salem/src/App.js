@@ -41,12 +41,26 @@ for (let i = 0; i < 13; i++)
   rolesList.push(makeRole(i));
 }
 
+/*
+// VARIANTA FINALA
 async function getState() {
   let url = `http://localhost:3000/state/0?userId=${currentUser}`;
   try {
       let res = await fetch(
           url);
     return await res.json();
+  } catch (error) {
+      console.log(error);
+  }
+}
+*/
+
+// VARIANTA DE TEST
+async function getState() {
+  let url = '../gameState.json';
+  try {
+      let res = await fetch(url);
+      return await res.json();
   } catch (error) {
       console.log(error);
   }
