@@ -1,11 +1,10 @@
-import {useState} from 'react';
 import styles from '../css/users.module.css';
 import stylesAction from '../css/action.module.css';
 
 function handleClick(target, user, currentUser, gameState)
 {
     let nrMaxSelection = currentUser.nrOfSelection;
-    if (user.isAlive && (gameState.state == "Selection" || gameState.state == "Night"))
+    if (user.isAlive && (gameState.state === "Selection" || gameState.state === "Night"))
     {
         let selectedUsers = Array.from(
             document.getElementsByClassName(styles.selected)
