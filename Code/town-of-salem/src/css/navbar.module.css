@@ -7,6 +7,26 @@
 
 #Txt {
   color: #fbda7d;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#townTxt {
+  color: #67e778;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#mafiaTxt {
+  color: #ff3c3c;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#neutralTxt {
+  color: #b9b9b9;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .TxtResult {
@@ -34,28 +54,33 @@
   filter: drop-shadow(-5px 5px 0px #000);
 }
 
-.userName {
-  margin-left: 10px;
-  margin-right: 10px;
+.h1 {
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
-.userName h1 {
-  font-size: 1.5rem;
-  color: #fbda7d;
-}
 .picture {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: rgb(234, 235, 198); /* Replace with your desired color */
-}
-
-.roleName {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: 0rem;
+  margin-left: 0rem;
+  align-items: center;
 }
 
 .writeWillButton {
+  margin-left: 2rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.writeWillButton:hover {
+  background-image: radial-gradient(
+    circle,
+    rgba(197, 54, 26, 1) 0%,
+    rgba(161, 67, 24, 0.4206932773109243) 68%,
+    rgba(255, 199, 181, 0) 100%
+  );
+  border-radius: 30%;
+}
+
+#willAction {
   background-color: transparent;
 
   background-image: url("../svg/actionButton.svg");
@@ -63,13 +88,13 @@
   background-repeat: no-repeat;
   background-position: center;
 
-  padding: 1rem;
-  padding-left: 4.5rem;
-  padding-right: 4rem;
+  padding: 1.3rem;
+  padding-left: 4rem;
+  padding-right: 3rem;
 
   color: #fbda7d;
 
-  font-size: 2rem;
+  font-size: 1rem;
 
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
@@ -78,4 +103,10 @@
   outline: none;
 
   cursor: pointer;
+
+  transition: 0.3s;
+}
+
+#willAction:hover {
+  transform: scale(1.05);
 }

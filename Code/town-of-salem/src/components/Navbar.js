@@ -2,21 +2,45 @@ import React from "react";
 import styles from "../css/navbar.module.css";
 
 function navbar(props) {
-  return (
-    <div className={styles.navbarContainer}>
-      <div className={styles.picture}>
-        <img src="../media/dead.png" alt="profile" />
+  if (props.currentUser.currentRoleName == "mafioso") {
+    return (
+      <div className={styles.navbarContainer}>
+        <div className={styles.picture}>
+          <img src="../media/dead.png" alt="profile" />
+        </div>
+        <h1 id={styles.Txt}>{props.currentUser.currentUserName}</h1>
+        <h1 id={styles.mafiaTxt}>{props.currentUser.currentRoleName}</h1>
+        <div className={styles.writeWillButton}>
+          <button id={styles.willAction}>Write WILL</button>
+        </div>
       </div>
-      <div className={styles.userName}>
-        <h1>{props.currentUser.currentUserName}</h1>
+    );
+  } else if (props.currentUser.currentRoleName == "town") {
+    return (
+      <div className={styles.navbarContainer}>
+        <div className={styles.picture}>
+          <img src="../media/dead.png" alt="profile" />
+        </div>
+        <h1 id={styles.Txt}>{props.currentUser.currentUserName}</h1>
+        <h1 id={styles.townTxt}>{props.currentUser.currentRoleName}</h1>
+        <div className={styles.writeWillButton}>
+          <button id={styles.willAction}>Write WILL</button>
+        </div>
       </div>
-      <div className={styles.roleName}>
-        <h1>{props.currentUser.currentRoleName}</h1>
+    );
+  } else if (props.currentUser.currentRoleName == "neutral") {
+    return (
+      <div className={styles.navbarContainer}>
+        <div className={styles.picture}>
+          <img src="../media/dead.png" alt="profile" />
+        </div>
+        <h1 id={styles.Txt}>{props.currentUser.currentUserName}</h1>
+        <h1 id={styles.neutralTxt}>{props.currentUser.currentRoleName}</h1>
+        <div className={styles.writeWillButton}>
+          <button id={styles.willAction}>Write WILL</button>
+        </div>
       </div>
-      <div className={styles.writeWillButton}>
-        <button>Write WILL</button>
-      </div>
-    </div>
-  );
+    );
+  }
 }
 export default navbar;
