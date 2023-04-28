@@ -23,7 +23,9 @@ function navbar(props) {
     props.currentUser.currentRoleName == "lookout" ||
     props.currentUser.currentRoleName == "investigator" ||
     props.currentUser.currentRoleName == "jailor" ||
-    props.currentUser.currentRoleName == "doctor"
+    props.currentUser.currentRoleName == "doctor" ||
+    props.currentUser.currentRoleName == "escort" ||
+    props.currentUser.currentRoleName == "medium"
   ) {
     return (
       <div className={styles.navbarContainer}>
@@ -37,7 +39,10 @@ function navbar(props) {
         </div>
       </div>
     );
-  } else if (props.currentUser.currentRoleName == "neutral") {
+  } else if (props.currentUser.currentRoleName == "framer" ||
+  props.currentUser.currentRoleName == "serialKiller" ||
+  props.currentUser.currentRoleName == "executioner" ||
+  props.currentUser.currentRoleName == "jester") {
     return (
       <div className={styles.navbarContainer}>
         <div className={styles.picture}>
