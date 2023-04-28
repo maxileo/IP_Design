@@ -8,6 +8,10 @@
  errorStatus will be set to 401 for any request requiring authentication if the token is not valid.
  */
 
+// Temporary for testing
+const baseUrl = "http://localhost:3001"
+//const baseUrl = "https:ip.tudorhutu.ro"
+
 /*
  Description: Request used for registering a user.
  Parameters:
@@ -17,7 +21,7 @@
  an object with errorStatus equal to 400.
  */
 const registerRequest = async (username, password) => {
-    const response = await fetch("/register", {
+    const response = await fetch(`${baseUrl}/register`, {
         method: "POST", headers: {
             "Content-Type": "application/json"
         }, body: JSON.stringify({
@@ -42,7 +46,7 @@ const registerRequest = async (username, password) => {
  an object with errorStatus equal to 400.
  */
 const loginRequest = async (username, password) => {
-    const response = await fetch("/login", {
+    const response = await fetch(`${baseUrl}/login`, {
         method: "POST", headers: {
             "Content-Type": "application/json"
         }, body: JSON.stringify({
@@ -65,7 +69,7 @@ const loginRequest = async (username, password) => {
  Return: If the request succeeds it will return the username of the current user.
  */
 const getOwnProfileRequest = async (token) => {
-    const response = await fetch("/profile", {
+    const response = await fetch(`${baseUrl}/profile`, {
         method: "GET", headers: {
             "Content-Type": "application/json", "Authorization": token
         },
@@ -87,7 +91,7 @@ const getOwnProfileRequest = async (token) => {
  Return: If the request succeeds it will return the username of the user with specified user id.
  */
 const getUserProfileRequest = async (userId, token) => {
-    const response = await fetch(`/profile?userId=${userId}`, {
+    const response = await fetch(`${baseUrl}/profile?userId=${userId}`, {
         method: "GET", headers: {
             "Content-Type": "application/json", "Authorization": token
         },
@@ -110,7 +114,7 @@ const getUserProfileRequest = async (userId, token) => {
  Return: True if the message has been sent.
  */
 const sendMessageRequest = async (lobbyId, message, token) => {
-    const response = await fetch(`/lobbies/${lobbyId}/messages`, {
+    const response = await fetch(`${baseUrl}/lobbies/${lobbyId}/messages`, {
         method: "POST", headers: {
             "Content-Type": "application/json", "Authorization": token
         }, body: JSON.stringify({
@@ -131,10 +135,10 @@ const sendMessageRequest = async (lobbyId, message, token) => {
              lobbyId: lobby of the user's current game
              lastRequestTime: time since which all messages will be retrieved
              token: JWT token of the user. User will be identified based on this token
- Return: String array of messages available to user.
+ Return: String of messages available to user.
  */
 const getChatRequest = async (lobbyId, lastRequestTime, token) => {
-    const response = await fetch(`/lobbies/${lobbyId}/messages?from=${lastRequestTime}`, {
+    const response = await fetch(`${baseUrl}/lobbies/${lobbyId}/messages?from=${lastRequestTime}`, {
         method: "GET", headers: {
             "Content-Type": "application/json", "Authorization": token
         },
@@ -157,7 +161,7 @@ const getChatRequest = async (lobbyId, lastRequestTime, token) => {
  Return: The will of the current user in a string format.
  */
 const getOwnWillRequest = async (lobbyId, token) => {
-    const response = await fetch(`/lobbies/${lobbyId}/will`, {
+    const response = await fetch(`${baseUrl}/lobbies/${lobbyId}/will`, {
         method: "GET", headers: {
             "Content-Type": "application/json", "Authorization": token
         },
@@ -180,7 +184,7 @@ const getOwnWillRequest = async (lobbyId, token) => {
  Return: The will content as a string.
  */
 const getUserWillRequest = async (lobbyId, userId, token) => {
-    const response = await fetch(`/lobbies/${lobbyId}/will?userId=${userId}`, {
+    const response = await fetch(`${baseUrl}/lobbies/${lobbyId}/will?userId=${userId}`, {
         method: "GET", headers: {
             "Content-Type": "application/json", "Authorization": token
         },
@@ -205,8 +209,8 @@ const getUserWillRequest = async (lobbyId, userId, token) => {
  // idk why this is returns content it should probably return just a 200 and error: false
  */
 const updateWillRequest = async (lobbyId, time, will, token) => {
-    const response = await fetch(`/lobbies/${lobbyId}/will`, {
-        method: "POST", headers: {
+    const response = await fetch(`${baseUrl}/lobbies/${lobbyId}/will`, {
+        method: "PUT", headers: {
             "Content-Type": "application/json", "Authorization": token
         }, body: JSON.stringify({
             time: time, content: will
