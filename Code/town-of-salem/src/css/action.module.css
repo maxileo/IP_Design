@@ -1,101 +1,106 @@
-
-#usersSelected{
-    display: flex;
-    flex-direction: row;
+#usersSelected {
+  display: flex;
+  flex-direction: row;
 }
 
-#selectedTxt{
-    color: #FBDA7D;
+#selectedTxt {
+  color: #fbda7d;
 }
 
-.selectedUser{
-    background-color: transparent;
-    background-image: url('../svg/button.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
+.selectedUser {
+  background-color: transparent;
+  background-image: url("../svg/button.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
 
-    
-    padding: 0.6rem;
-    padding-left: 2.4rem;
-    padding-right: 2.4rem;
-    min-width: 8rem;
+  padding: 0.6rem;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+  min-width: 8rem;
 
-    color: #FBDA7D;
+  color: #fbda7d;
 
-    margin-left: 1rem;
-    margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.actionContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.actionContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    
-    border: 3px solid #FBDA7D;
-    background: rgb(68,55,48);
-    background: linear-gradient(180deg, rgba(68,55,48,1) 0%, rgba(41,32,29,1) 100%);
+  border: 3px solid #fbda7d;
+  background: rgb(68, 55, 48);
+  background: linear-gradient(
+    180deg,
+    rgba(68, 55, 48, 1) 0%,
+    rgba(41, 32, 29, 1) 100%
+  );
 
-    margin: 1rem;
+  margin: 1rem;
 
-    margin-left: 1.4rem;
+  margin-left: 1.4rem;
 
-    width: fit-content;
-    padding: 0.5rem;
+  width: fit-content;
+  padding: 0.5rem;
 
-    filter: drop-shadow(-5px 5px 0px #000);
-
+  filter: drop-shadow(-5px 5px 0px #000);
 }
 
-.selectedContainer{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+.selectedContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
-#action{
-    background-color: transparent;
+#action {
+  background-color: transparent;
 
-    background-image: url('../svg/actionButton.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+  background-image: url("../svg/actionButton.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 
-    padding: 2rem;
-    padding-left: 4.5rem;
-    padding-right: 4rem;
+  padding: 2rem;
+  padding-left: 4.5rem;
+  padding-right: 4rem;
 
-    color: #FBDA7D;
+  color: #fbda7d;
 
-    font-size: 2rem;
+  font-size: 2rem;
 
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 
-    border: none;
-    outline: none;
+  border: none;
+  outline: none;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    transition: 0.3s;
+  transition: 0.3s;
 }
 
-#action:hover{
-    transform: scale(1.05);
+#action:hover {
+  transform: scale(1.05);
 }
 
-.buttonBackground{
-    margin-left: 2rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+.buttonBackground {
+  margin-left: 2rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
-.buttonBackground:hover{
-    background-image: radial-gradient(circle, rgba(197,54,26,1) 0%, rgba(161,67,24,0.4206932773109243) 68%, rgba(255,199,181,0) 100%);
+.buttonBackground:hover {
+  background-image: radial-gradient(
+    circle,
+    rgba(197, 54, 26, 1) 0%,
+    rgba(161, 67, 24, 0.4206932773109243) 68%,
+    rgba(255, 199, 181, 0) 100%
+  );
 }
