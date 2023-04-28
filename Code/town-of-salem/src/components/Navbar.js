@@ -2,7 +2,10 @@ import React from "react";
 import styles from "../css/navbar.module.css";
 
 function navbar(props) {
-  if (props.currentUser.currentRoleName == "mafioso") {
+  if (
+    props.currentUser.currentRoleName == "mafioso" ||
+    props.currentUser.currentRoleName == "godfather"
+  ) {
     return (
       <div className={styles.navbarContainer}>
         <div className={styles.picture}>
@@ -15,7 +18,13 @@ function navbar(props) {
         </div>
       </div>
     );
-  } else if (props.currentUser.currentRoleName == "town") {
+  } else if (
+    props.currentUser.currentRoleName == "sheriff" ||
+    props.currentUser.currentRoleName == "lookout" ||
+    props.currentUser.currentRoleName == "investigator" ||
+    props.currentUser.currentRoleName == "jailor" ||
+    props.currentUser.currentRoleName == "doctor"
+  ) {
     return (
       <div className={styles.navbarContainer}>
         <div className={styles.picture}>
