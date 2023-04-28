@@ -7,7 +7,9 @@ export default function InfoAlert(props) {
       <div className={styles.infoAlertContainer}>
         <h2 id={styles.Txt}>Remaining {props.gameState.state} time:</h2>
         <h1 id={styles.Txt}>{props.timeLeft > 0 ? props.timeLeft : 0} sec</h1>
-        <h2 id={styles.Txt}>You have to vote if {props.judgedCharacter} is guilty or innocent.</h2>
+        <h2 id={styles.Txt}>
+          You have to vote if {props.judgedCharacter} is guilty or innocent.
+        </h2>
       </div>
     );
   if (props.gameState.state == "Selection")
@@ -33,7 +35,7 @@ export default function InfoAlert(props) {
       <div className={styles.infoAlertContainer}>
         <h2 id={styles.Txt}>The night has ended.</h2>
         {props.currentUser.nightResults.map((result) => (
-        <h2 className={styles.TxtResult}>&lt;{result}&gt;</h2>
+          <h2 className={styles.TxtResult}>&lt;{result}&gt;</h2>
         ))}
         <h2 id={styles.Txt}>Prepare for the day to start</h2>
       </div>
