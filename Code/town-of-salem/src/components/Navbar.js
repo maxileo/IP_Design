@@ -39,10 +39,12 @@ function navbar(props) {
         </div>
       </div>
     );
-  } else if (props.currentUser.currentRoleName == "framer" ||
-  props.currentUser.currentRoleName == "serialKiller" ||
-  props.currentUser.currentRoleName == "executioner" ||
-  props.currentUser.currentRoleName == "jester") {
+  } else if (
+    props.currentUser.currentRoleName == "framer" ||
+    props.currentUser.currentRoleName == "serialKiller" ||
+    props.currentUser.currentRoleName == "executioner" ||
+    props.currentUser.currentRoleName == "jester"
+  ) {
     return (
       <div className={styles.navbarContainer}>
         <div className={styles.picture}>
