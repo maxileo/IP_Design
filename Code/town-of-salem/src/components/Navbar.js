@@ -33,8 +33,8 @@ function Navbar(props) {
     roleColor = styles.townTxt;
   }
   return (
-    //  {navbar}
     <div>
+      {/* {navbar} */}
       <div className={styles.navbarContainer}>
         <div className={styles.picture}>
           <img src="../media/dead.png" alt="profile" />
