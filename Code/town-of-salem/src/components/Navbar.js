@@ -59,8 +59,9 @@ function Navbar(props) {
           alt=""
         ></input>
         <textarea
+          autoComplete="off"
           placeholder="Write your WILL!"
-          id={styles.willText}
+          className={styles.willText}
         ></textarea>
       </div>
     </div>
