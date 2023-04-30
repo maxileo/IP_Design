@@ -145,8 +145,8 @@
   font-size: 200%;
 
   width: 35rem;
-  height: 30rem;
-  padding: 0.5rem;
+  height: 25rem;
+  padding: 1rem;
   filter: drop-shadow(-5px 5px 0px #000);
   resize: none;
 }
@@ -164,4 +164,52 @@
   border-radius: 10px;
   background-color: rgb(181, 125, 69);
   border: 2px solid #000;
+}
+
+.saveWillButton {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin: auto;
+  margin-top: 0.5rem;
+}
+.saveWillButton:hover {
+  background-image: radial-gradient(
+    circle,
+    rgba(197, 54, 26, 1) 0%,
+    rgba(161, 67, 24, 0.4206932773109243) 68%,
+    rgba(255, 199, 181, 0) 100%
+  );
+  background-position: center;
+  border-radius: 30%;
+}
+
+#saveButton {
+  background-color: transparent;
+
+  background-image: url("../svg/actionButton.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  padding: 1.3rem;
+  padding-left: 4rem;
+  padding-right: 3rem;
+
+  color: #fbda7d;
+
+  font-size: 1rem;
+
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+#saveButton:hover {
+  transform: scale(1.05);
 }
