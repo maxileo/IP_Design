@@ -134,6 +134,7 @@
 }
 
 .willText {
+  outline: none;
   border: 3px solid #fbda7d;
   background: rgb(68, 55, 48);
   background: linear-gradient(
