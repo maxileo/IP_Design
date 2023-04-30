@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../css/navbar.module.css";
-import Will from "./Will";
 
 function handleWillClick() {
   let descriptionElement = document.getElementById(styles.willContainer);
