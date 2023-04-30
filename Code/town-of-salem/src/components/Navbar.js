@@ -12,23 +12,23 @@ function handleCloseDescriptionClick() {
 
 function Navbar(props) {
   let roleColor;
-  if (props.roleName == "mafioso" || props.roleName == "godfather") {
+  if (props.roleName === "mafioso" || props.roleName === "godfather") {
     roleColor = styles.mafiaTxt;
   } else if (
-    props.roleName == "framer" ||
-    props.roleName == "serialKiller" ||
-    props.roleName == "executioner" ||
-    props.roleName == "jester"
+    props.roleName === "framer" ||
+    props.roleName === "serialKiller" ||
+    props.roleName === "executioner" ||
+    props.roleName === "jester"
   ) {
     roleColor = styles.neutralTxt;
   } else if (
-    props.roleName == "sheriff" ||
-    props.roleName == "lookout" ||
-    props.roleName == "investigator" ||
-    props.roleName == "jailor" ||
-    props.roleName == "doctor" ||
-    props.roleName == "escort" ||
-    props.roleName == "medium"
+    props.roleName === "sheriff" ||
+    props.roleName === "lookout" ||
+    props.roleName === "investigator" ||
+    props.roleName === "jailor" ||
+    props.roleName === "doctor" ||
+    props.roleName === "escort" ||
+    props.roleName === "medium"
   ) {
     roleColor = styles.townTxt;
   }
@@ -62,7 +62,7 @@ function Navbar(props) {
           placeholder="Write your WILL!"
           className={styles.willText}
         ></textarea>
-        <div class = {styles.saveWillButton}>
+        <div class={styles.saveWillButton}>
           <button id={styles.saveButton}>Save WILL</button>
         </div>
       </div>
