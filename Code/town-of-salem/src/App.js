@@ -112,7 +112,10 @@ function App() {
   if (gameState.state != "Lobby") {
     return (
       <div className="app">
-        <Navbar currentUser={currentUser} />
+        <Navbar
+          userName={currentUser.userName}
+          roleName={currentUser.roleName}
+        />
         <div className="content">
           <InfoAlert
             gameState={gameState}

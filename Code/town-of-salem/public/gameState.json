@@ -48,8 +48,8 @@
   ],
 
   "currentUser": {
-    "currentUserName": "Casu",
-    "currentRoleName": "mafioso",
+    "userName": "Casu",
+    "roleName": "mafioso",
     "actionText": "KILL",
     "nrOfSelection": 1,
     "isAlive": true,
