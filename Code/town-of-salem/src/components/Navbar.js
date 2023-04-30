@@ -1,20 +1,27 @@
 import React from "react";
 import styles from "../css/navbar.module.css";
+import Will from "./Will";
 
-function navbar(props) {
+function handleWillClick() {
+  let descriptionElement = document.getElementById(styles.willContainer);
+  descriptionElement.style.display = "flex";
+}
+function handleCloseDescriptionClick() {
+  let descriptionElement = document.getElementById(styles.willContainer);
+  descriptionElement.style.display = "none";
+}
+
+function Navbar(props) {
+  let roleColor;
   if (props.roleName == "mafioso" || props.roleName == "godfather") {
-    return (
-      <div className={styles.navbarContainer}>
-        <div className={styles.picture}>
-          <img src="../media/dead.png" alt="profile" />
-        </div>
-        <h1 id={styles.Txt}>{props.userName}</h1>
-        <h1 id={styles.mafiaTxt}>{props.roleName}</h1>
-        <div className={styles.writeWillButton}>
-          <button id={styles.willAction}>Write WILL</button>
-        </div>
-      </div>
-    );
+    roleColor = styles.mafiaTxt;
+  } else if (
+    props.roleName == "framer" ||
+    props.roleName == "serialKiller" ||
+    props.roleName == "executioner" ||
+    props.roleName == "jester"
+  ) {
+    roleColor = styles.neutralTxt;
   } else if (
     props.roleName == "sheriff" ||
     props.roleName == "lookout" ||
@@ -24,36 +31,39 @@ function navbar(props) {
     props.roleName == "escort" ||
     props.roleName == "medium"
   ) {
-    return (
-      <div className={styles.navbarContainer}>
-        <div className={styles.picture}>
-          <img src="../media/dead.png" alt="profile" />
-        </div>
-        <h1 id={styles.Txt}>{props.userName}</h1>
-        <h1 id={styles.townTxt}>{props.roleName}</h1>
-        <div className={styles.writeWillButton}>
-          <button id={styles.willAction}>Write WILL</button>
-        </div>
-      </div>
-    );
-  } else if (
-    props.roleName == "framer" ||
-    props.roleName == "serialKiller" ||
-    props.roleName == "executioner" ||
-    props.roleName == "jester"
-  ) {
-    return (
-      <div className={styles.navbarContainer}>
-        <div className={styles.picture}>
-          <img src="../media/dead.png" alt="profile" />
-        </div>
-        <h1 id={styles.Txt}>{props.userName}</h1>
-        <h1 id={styles.neutralTxt}>{props.roleName}</h1>
-        <div className={styles.writeWillButton}>
-          <button id={styles.willAction}>Write WILL</button>
-        </div>
-      </div>
-    );
+    roleColor = styles.townTxt;
   }
+  return (
+    //  {navbar}
+    <div>
+      <div className={styles.navbarContainer}>
+        <div className={styles.picture}>
+          <img src="../media/dead.png" alt="profile" />
+        </div>
+        <h1 id={styles.Txt}>{props.userName}</h1>
+        <h1 className={roleColor}>{props.roleName}</h1>
+        <div className={styles.writeWillButton}>
+          <button id={styles.willAction} onClick={(e) => handleWillClick()}>
+            Write WILL
+          </button>
+        </div>
+      </div>
+
+      {/* {will} */}
+      <div id={styles.willContainer} style={{ display: "none" }}>
+        <input
+          onClick={(e) => handleCloseDescriptionClick()}
+          id={styles.closeWill}
+          type="image"
+          src="/media/close.png"
+          alt=""
+        ></input>
+        <textarea
+          placeholder="Write your WILL!"
+          id={styles.willText}
+        ></textarea>
+      </div>
+    </div>
+  );
 }
-export default navbar;
+export default Navbar;

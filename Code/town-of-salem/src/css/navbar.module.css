@@ -11,19 +11,19 @@
   margin-right: 10px;
 }
 
-#townTxt {
+.townTxt {
   color: #67e778;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-#mafiaTxt {
+.mafiaTxt {
   color: #ff3c3c;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-#neutralTxt {
+.neutralTxt {
   color: #b9b9b9;
   margin-left: 10px;
   margin-right: 10px;
@@ -109,4 +109,43 @@
 
 #willAction:hover {
   transform: scale(1.05);
+}
+
+#willContainer {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#closeWill {
+  max-width: 3rem;
+  max-height: 3rem;
+  display: flex;
+  filter: drop-shadow(-5px 5px 0px #000);
+  margin-bottom: 0.5rem;
+}
+
+#closeWill:hover {
+  transform: scale(1.1);
+}
+
+#willText {
+  border: 3px solid #fbda7d;
+  background: rgb(68, 55, 48);
+  background: linear-gradient(
+    180deg,
+    rgba(68, 55, 48, 1) 0%,
+    rgba(41, 32, 29, 1) 100%
+  );
+  color: #fbda7d;
+  font-size: 200%;
+
+  width: 35rem;
+  height: 30rem;
+  padding: 0.5rem;
+  filter: drop-shadow(-5px 5px 0px #000);
 }
