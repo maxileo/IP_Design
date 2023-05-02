@@ -6,6 +6,8 @@ import {useEffect, useState} from "react";
 import {makeRole} from './functions/roleFunctions';
 import InfoAlert from "./components/InfoAlert";
 import Lobby from "./components/Lobby";
+import Login from "./components/LogIn";
+import Signup from "./components/Signup";
 
 function makeUser() {
   let user = {
@@ -111,7 +113,7 @@ function App() {
   });
 
 
-  if (gameState.state != "Lobby")
+  if (gameState.state == "Lobby")
   {
   return (
     <div className='app'>
