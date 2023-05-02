@@ -2,6 +2,8 @@ import React, { useState,useEffect } from "react";
 import loginstyle from "../css/login.module.css";
 
 const Login = ({ setUserState }) => {
+  const [passwordShown, setPasswordShown] = useState(false);
+
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [user, setUserDetails] = useState({
@@ -48,6 +50,12 @@ const Login = ({ setUserState }) => {
       });
     }
   }, [formErrors]);
+
+  const togglePassword = (e) => {
+    setPasswordShown(!passwordShown);
+    e.preventDefault();
+
+  };
   return (
     <div className={loginstyle.login}>
       <form>
@@ -60,13 +68,14 @@ const Login = ({ setUserState }) => {
         
         <p className={loginstyle.error}>{formErrors.username}</p>
         
-        <input type="password" minLength="8" maxLength="15" id={loginstyle.name}
-        name="password"
-        placeholder="Password"
-        onChange={changeHandler}
-        value={user.password}></input>
+        <div class={loginstyle.pass}>
+        <input label="password" minLength="8" maxLength="15" id={loginstyle.name}
+        name="password" secureTextEntru={true} placeholder="Password" onChange={changeHandler}
+        value={user.password} type={passwordShown ? "text" : "password"}></input>
+        <button class={loginstyle.buttonShow} id={loginstyle.name} onClick={togglePassword}>Show</button>
+        
+      </div>
 
-   
         <p className={loginstyle.error}>{formErrors.password}</p>
 
         <div class={loginstyle.buttonBackgroundLogin}>

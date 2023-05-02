@@ -1,35 +1,10 @@
 import React, { useEffect, useState } from "react";
 import style from "../css/signup.module.css";
-import { useNavigate, NavLink } from "react-router-dom";
-  async function postData(url, data)
-  {
-      try {
-          const response = await fetch(url, {
-              method: 'POST',
-              body: JSON.stringify(data),
-              headers: {
-                  "Content-Type": "application/json"
-              }
-          });
-      } catch ( error ) {
-          console.log(error);
-      }
-  }
-  async function SignupClick(pressed)
-{
-    if (pressed)
-    {
-        let data = {
-            start: true
-        };
 
-        await postData("http://localhost:3000/state/0", data);
-    }
-}
 function Signup(props)
 {
-const [pressed, setPressed] = useState(false);
-
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [passwordShownc, setPasswordShownc] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [user, setUserDetails] = useState({
@@ -64,9 +39,7 @@ const [pressed, setPressed] = useState(false);
       error.password = "Password is required";
     } else if (values.password.length < 4) {
       error.password = "Password must be more than 4 characters";
-    } else if (values.password.length > 10) {
-      error.password = "Password cannot exceed more than 10 characters";
-    }
+    } 
     if (!values.cpassword) {
       error.cpassword = "Confirm Password is required";
     } else if (values.cpassword !== values.password) {
@@ -82,13 +55,26 @@ const [pressed, setPressed] = useState(false);
     //   setIsSubmit(true);
     // }
   };
-
-
-
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(user);
+      fetch("http://localhost:9002/signup/", user).then((res) => {
+        alert(res.data.message);
+      });
+    }
+  }, [formErrors]);
+ const togglePassword = (e) => {
+    setPasswordShown(!passwordShown);
+    e.preventDefault();
+  };
+  const togglePasswordc = (e) => {
+    setPasswordShownc(!passwordShownc);
+    e.preventDefault();
+  };
   return (
     <div className={style.signup}>
       <form>
-        <h1 class={style.center}>Create your account</h1>
+        <h1 class={style.center}>CREATE YOUR ACCOUNT</h1>
         <input
             type="email" name="email" minLength="1" maxLength="30"  id={style.name} 
             placeholder="Email" onChange={changeHandler} value={user.email}
@@ -100,22 +86,28 @@ const [pressed, setPressed] = useState(false);
           
         <p className={style.error}>{formErrors.username}</p>
         
+        <div class={style.pass}>
         <input label="password" minLength="8" maxLength="15" id={style.name}
-        name="password"
-        secureTextEntru={true}
-        placeholder="Password"
-        onChange={changeHandler}
-        value={user.password}></input>
+        name="password" secureTextEntru={true} placeholder="Password" onChange={changeHandler}
+        value={user.password} type={passwordShown ? "text" : "password"}></input>
+        <button class={style.buttonShow} id={style.name} onClick={togglePassword}>Show</button>
+        
+      </div>
+       <p className={style.error}>{formErrors.password}</p>
+       <div class={style.pass}>
+        <input label="password" minLength="8" maxLength="15" id={style.name} 
+        name="cpassword" secureTextEntru={true} placeholder="Confirm Password" onChange={changeHandler} 
+        value={user.cpassword}type={passwordShownc ? "text" : "password"}></input>
+         <button class={style.buttonShow} id={style.name} onClick={togglePasswordc}>Show</button>
 
-   
-        <p className={style.error}>{formErrors.password}</p>
-        <input type="password" name="cpassword" id={style.name} placeholder="Confirm Password" onChange={changeHandler} value={user.cpassword}
-          />
+        </div>
           <p className={style.error}>{formErrors.cpassword}</p>
+
+
           <div class={style.buttonBackgroundLogin}>
                 <button 
                     onClick={signupHandler}
-                    id={style.start} className={style.buttonSignup}>Create account                </button>
+                    id={style.start} className={style.buttonSignup}>Create account</button>
             </div>
 
             </form>
