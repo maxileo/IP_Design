@@ -1,12 +1,12 @@
-import "./App.css";
-import UserList from "./components/UserList.js";
-import Action from "./components/Action.js";
-import RoleList from "./components/RoleList.js";
-import { useEffect, useState } from "react";
-import { makeRole } from "./functions/roleFunctions";
+import './App.css';
+import UserList from './components/UserList.js';
+import Action from './components/Action.js';
+import RoleList from './components/RoleList.js';
+import {useEffect, useState} from "react";
+import {makeRole} from './functions/roleFunctions';
 import InfoAlert from "./components/InfoAlert";
 import Lobby from "./components/Lobby";
-import Navbar from "./components/Navbar";
+import Navbar from './components/Navbar';
 
 function makeUser() {
   let user = {
@@ -19,13 +19,13 @@ function makeUser() {
 
 let userName = "";
 
-function setName(name) {
+function setName(name){
   userName = name;
   console.log("Am setat username: " + userName);
   localStorage.setItem("userName", userName);
 }
 
-function getName() {
+function getName(){
   return localStorage.getItem("userName");
 }
 
@@ -34,10 +34,11 @@ let rolesList = [];
 
 let currentGameState = {
   state: "lobby",
-  timeEndState: 30,
+  timeEndState: 30
 };
 
-for (let i = 0; i < 13; i++) {
+for (let i = 0; i < 13; i++)
+{
   rolesList.push(makeRole(i));
 }
 
@@ -57,12 +58,12 @@ async function getState() {
 
 // VARIANTA DE TEST
 async function getState() {
-  let url = "../gameState.json";
+  let url = '../gameState.json';
   try {
-    let res = await fetch(url);
-    return await res.json();
+      let res = await fetch(url);
+      return await res.json();
   } catch (error) {
-    console.log(error);
+      console.log(error);
   }
 }
 
@@ -79,7 +80,7 @@ async function createObjects() {
 
   currentGameState = {
     state: "",
-    timeEndState: 0,
+    timeEndState: 0
   };
   currentGameState.state = gameStateJson.state;
   currentGameState.timeEndState = gameStateJson.timeEndState;
@@ -87,12 +88,12 @@ async function createObjects() {
   judgedCharacter = gameStateJson.judgedCharacter;
 
   const utcTimestamp = new Date().getTime();
-  timeLeftJson =
-    currentGameState.timeEndState - Math.floor(utcTimestamp / 1000);
+  timeLeftJson = currentGameState.timeEndState - Math.floor(utcTimestamp / 1000);
   console.log(currentGameState.timeEndState - Math.floor(utcTimestamp / 1000));
 }
 
 function App() {
+
   const [gameState, setGameState] = useState(currentGameState);
   const [timeLeft, setTimeLeft] = useState();
 
@@ -104,12 +105,15 @@ function App() {
 
       setGameState(currentGameState);
       setTimeLeft(timeLeftJson);
+      
     }, 200);
 
     return () => clearTimeout(timer);
   });
 
-  if (gameState.state != "Lobby") {
+
+  if (gameState.state != "Lobby")
+  {
     return (
       <div className="app">
         <Navbar
@@ -142,11 +146,13 @@ function App() {
           </div>
         </div>
       </div>
-    );
-  } else {
+  );
+  }
+  else
+  {
     return (
-      <div className="app">
-        <Lobby setName={setName} />
+      <div className='app'>
+        <Lobby setName = {setName}/>
       </div>
     );
   }
