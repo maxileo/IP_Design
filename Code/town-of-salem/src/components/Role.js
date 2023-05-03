@@ -5,7 +5,6 @@ import styles from '../css/roles.module.css';
 function handleRoleClick(target, role)
 {
     let roleName = target.parentElement.firstChild.innerText;
-    //let alignment = target.parentElement.lastChild.innerText;
 
     let descriptionElement = document.getElementById(styles.descriptionContainer);
     descriptionElement.style.display = "block";
@@ -13,8 +12,6 @@ function handleRoleClick(target, role)
     let descriptionTitle = descriptionElement.firstChild.lastChild;
     descriptionTitle.innerText = roleName ;
 
-    //let descriptionText = descriptionElement.lastChild;
-    //descriptionText.innerText = "This is the description of role: " + roleName;
 
     let alignmentText = descriptionElement.lastChild.firstChild.firstChild;
     alignmentText.innerText = "Alignment: ";
@@ -40,7 +37,6 @@ function handleRoleClick(target, role)
     let attributesDescription = descriptionElement.lastChild.lastChild.lastChild;
     attributesDescription.innerText = role.attributes;
 
-    //descriptionText.innerText = "Alignment: " + role.alignment + "\nGoal: " + role.goal;
 
     
 }

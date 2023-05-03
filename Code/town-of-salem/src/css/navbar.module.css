@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
+
+* {
+  font-family: "Crimson Text", serif;
+}
+
+#Txt {
+  color: #fbda7d;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.townTxt {
+  color: #67e778;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.mafiaTxt {
+  color: #ff3c3c;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.neutralTxt {
+  color: #b9b9b9;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.TxtResult {
+  color: #ff3c3c;
+}
+
+.navbarContainer {
+  display: flex;
+  position: relative;
+  margin-top: 0rem;
+  line-height: 0.5rem;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+
+  border: 3px solid #fbda7d;
+  background: rgb(68, 55, 48);
+  background: linear-gradient(
+    180deg,
+    rgba(68, 55, 48, 1) 0%,
+    rgba(41, 32, 29, 1) 100%
+  );
+
+  padding: 0.5rem;
+  filter: drop-shadow(-5px 5px 0px #000);
+}
+
+.h1 {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.picture {
+  margin-top: 0rem;
+  margin-left: 0rem;
+  align-items: center;
+}
+
+.writeWillButton {
+  margin-left: 0rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.writeWillButton:hover {
+  background-image: radial-gradient(
+    circle,
+    rgba(197, 54, 26, 1) 0%,
+    rgba(161, 67, 24, 0.4206932773109243) 68%,
+    rgba(255, 199, 181, 0) 100%
+  );
+}
+
+#willAction {
+  background-color: transparent;
+
+  background-image: url("../svg/actionButton.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  padding: 1.3rem;
+  padding-left: 4rem;
+  padding-right: 3rem;
+
+  color: #fbda7d;
+
+  font-size: 1rem;
+
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+#willAction:hover {
+  transform: scale(1.05);
+}
+
+#willContainer {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#closeWill {
+  max-width: 3rem;
+  max-height: 3rem;
+  display: flex;
+  filter: drop-shadow(-5px 5px 0px #000);
+  margin-bottom: 0.5rem;
+}
+
+#closeWill:hover {
+  transform: scale(1.1);
+}
+
+.willText {
+  outline: none;
+  border: 3px solid #fbda7d;
+  background: rgb(68, 55, 48);
+  background: linear-gradient(
+    180deg,
+    rgba(68, 55, 48, 1) 0%,
+    rgba(41, 32, 29, 1) 100%
+  );
+  color: #fbda7d;
+  font-size: 200%;
+
+  width: 35rem;
+  height: 25rem;
+  padding: 1rem;
+  filter: drop-shadow(-5px 5px 0px #000);
+  resize: none;
+}
+.willText::-webkit-scrollbar-track {
+  border: 2px solid rgb(20, 15, 0);
+  background-color: rgb(55, 46, 46);
+  border-radius: 1rem;
+}
+
+.willText::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.willText::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgb(181, 125, 69);
+  border: 2px solid #000;
+}
+
+.saveWillButton {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin: auto;
+  margin-top: 0.5rem;
+}
+.saveWillButton:hover {
+  background-image: radial-gradient(
+    circle,
+    rgba(197, 54, 26, 1) 0%,
+    rgba(161, 67, 24, 0.4206932773109243) 68%,
+    rgba(255, 199, 181, 0) 100%
+  );
+  background-position: center;
+}
+
+#saveButton {
+  background-color: transparent;
+
+  background-image: url("../svg/actionButton.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  padding: 1.3rem;
+  padding-left: 4rem;
+  padding-right: 3rem;
+
+  color: #fbda7d;
+
+  font-size: 1rem;
+
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+#saveButton:hover {
+  transform: scale(1.05);
+}
