@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {makeRole} from './functions/roleFunctions';
 import InfoAlert from "./components/InfoAlert";
 import Lobby from "./components/Lobby";
+import Help from "./components/Help";
 
 function makeUser() {
   let user = {
@@ -110,9 +111,9 @@ function App() {
     return () => clearTimeout(timer);
   });
 
-
   if (gameState.state != "Lobby")
   {
+    
   return (
     <div className='app'>
       <InfoAlert
@@ -133,6 +134,8 @@ function App() {
           rolesList = {rolesList}
         />
       </div>
+
+     <Help />
     </div>
   );
   }

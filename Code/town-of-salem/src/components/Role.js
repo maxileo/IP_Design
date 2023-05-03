@@ -42,7 +42,6 @@ function handleRoleClick(target, role)
 
     //descriptionText.innerText = "Alignment: " + role.alignment + "\nGoal: " + role.goal;
 
-    
 }
 
 function Role(props)
