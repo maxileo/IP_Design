@@ -9,12 +9,11 @@ import Lobby from "./components/Lobby";
 import Navbar from './components/Navbar';
 
 function makeUser() {
-  let user = {
+  return {
     userName: "Username" + Math.floor(Math.random() * 100),
-    isAlive: Math.floor(Math.random() * 2) == 1 ? false : true,
+    isAlive: Math.floor(Math.random() * 2) !== 1,
     id: Math.floor(Math.random() * 10000),
   };
-  return user;
 }
 
 let userName = "";
@@ -112,7 +111,7 @@ function App() {
   });
 
 
-  if (gameState.state != "Lobby")
+  if (gameState.state !== "Lobby")
   {
     return (
       <div className="app">
