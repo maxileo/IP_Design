@@ -77,7 +77,6 @@
     rgba(161, 67, 24, 0.4206932773109243) 68%,
     rgba(255, 199, 181, 0) 100%
   );
-  border-radius: 30%;
 }
 
 #willAction {
@@ -181,7 +180,6 @@
     rgba(255, 199, 181, 0) 100%
   );
   background-position: center;
-  border-radius: 30%;
 }
 
 #saveButton {

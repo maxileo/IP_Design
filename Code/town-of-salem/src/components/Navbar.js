@@ -40,7 +40,7 @@ function Navbar(props) {
           <img src="../media/dead.png" alt="profile" />
         </div>
         <h1 id={styles.Txt}>{props.userName}</h1>
-        <h1 className={roleColor}>{props.roleName}</h1>
+        <h1 className={roleColor}>({props.roleName})</h1>
         <div className={styles.writeWillButton}>
           <button id={styles.willAction} onClick={(e) => handleWillClick()}>
             Write WILL
