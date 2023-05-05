@@ -43,4 +43,12 @@ export default function InfoAlert(props) {
         <h2 id={styles.Txt}>The night is starting, do your role carefully</h2>
       </div>
     );
+  else if (props.gameState.state === "Discussion")
+    return (
+      <div className={styles.infoAlertContainer}>
+        <h2 id={styles.Txt}>Discussion time</h2>
+        <h2 id={styles.Txt}>Remaining {props.gameState.state} time:</h2>
+        <h2 id={styles.Txt}>  </h2>
+      </div>
+    );
 }

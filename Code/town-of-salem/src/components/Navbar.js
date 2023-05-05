@@ -62,7 +62,7 @@ function Navbar(props) {
           placeholder="Write your WILL!"
           className={styles.willText}
         ></textarea>
-        <div class={styles.saveWillButton}>
+        <div className={styles.saveWillButton}>
           <button id={styles.saveButton}>Save WILL</button>
         </div>
       </div>

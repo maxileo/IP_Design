@@ -7,6 +7,9 @@ import {makeRole} from './functions/roleFunctions';
 import InfoAlert from "./components/InfoAlert";
 import Lobby from "./components/Lobby";
 import Navbar from './components/Navbar';
+import Chat from './components/Chat';
+const { getChatRequest } = require('./functions/requests.js')
+
 
 function makeUser() {
   let user = {
@@ -70,6 +73,7 @@ async function getState() {
 let currentUser = "Casu";
 let timeLeftJson = 0;
 let judgedCharacter = "";
+let messages = [];
 
 async function createObjects() {
   let gameStateJson = await getState();
@@ -90,6 +94,53 @@ async function createObjects() {
   const utcTimestamp = new Date().getTime();
   timeLeftJson = currentGameState.timeEndState - Math.floor(utcTimestamp / 1000);
   console.log(currentGameState.timeEndState - Math.floor(utcTimestamp / 1000));
+
+  if (currentGameState.state === "Discussion")
+  {
+    // request-ul aici, ar trebui schimbat 0 si 0 cu lobbyId si tokenUser
+    /*
+    let newMessages = [];
+    if (messages.length > 0)
+      newMessages = await getChatRequest(0, messages[messages.length - 1].createdAt, 0);
+    else
+      newMessages = await getChatRequest(0, utcTimestamp - 10000, 0);
+    
+    // add new messages
+    for (let message in newMessages)
+    {
+      if (!messages.includes(message))
+      {
+        messages.push(message);
+      }
+    }
+    */
+
+    // de test
+    messages = [
+      {
+        userName: "Mihai",
+        content: "Who seems sus??",
+        createdAt: 1682301505
+      },
+      {
+      userName: "Casutu",
+      content: "This is my message, I believe the mafioso is dienus!",
+      createdAt: 1682300005
+      },
+      {
+      userName: "Diana",
+      content: "Noo :(",
+      createdAt: 1682300505
+      }
+    ];
+
+    // sort messages by createdAt field
+    messages.sort(function(a, b) {
+      if (a.createdAt < b.createdAt) return -1;
+      if (a.createdAt > b.createdAt) return 1;
+      return 0;
+    });
+  }
 }
 
 function App() {
@@ -129,11 +180,17 @@ function App() {
           />
 
           <div className="userList-action">
-            <UserList
-              usersList={usersList}
-              gameState={gameState}
-              currentUser={currentUser}
-            />
+            <div className="chat-users-container">
+              <Chat 
+                messages={messages}
+                currentUser={currentUser}
+              />
+              <UserList
+                usersList={usersList}
+                gameState={gameState}
+                currentUser={currentUser}
+              />
+            </div>
             <Action
               gameState={gameState}
               currentUser={currentUser}
