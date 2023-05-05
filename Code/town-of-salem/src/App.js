@@ -7,6 +7,7 @@ import {makeRole} from './functions/roleFunctions';
 import InfoAlert from "./components/InfoAlert";
 import Lobby from "./components/Lobby";
 import Help from "./components/Help";
+import Navbar from './components/Navbar';
 
 function makeUser() {
   let user = {
@@ -116,6 +117,10 @@ function App() {
     
   return (
     <div className='app'>
+        <Navbar
+          userName={currentUser.userName}
+          roleName={currentUser.roleName}
+        />
       <InfoAlert
         gameState={gameState}
         timeLeft={timeLeft}
@@ -126,13 +131,31 @@ function App() {
         <UserList
           usersList = {usersList} gameState = {gameState} currentUser = {currentUser}
         />
-        <Action gameState = {gameState} currentUser = {currentUser} judgedCharacter = {judgedCharacter}/>
-      </div>
+        <div className="content">
+          <InfoAlert
+            gameState={gameState}
+            timeLeft={timeLeft}
+            currentUser={currentUser}
+            judgedCharacter={judgedCharacter}
+          />
 
-      <div className='roleList'>
-        <RoleList
-          rolesList = {rolesList}
-        />
+          <div className="userList-action">
+            <UserList
+              usersList={usersList}
+              gameState={gameState}
+              currentUser={currentUser}
+            />
+            <Action
+              gameState={gameState}
+              currentUser={currentUser}
+              judgedCharacter={judgedCharacter}
+            />
+          </div>
+
+          <div className="roleList">
+            <RoleList rolesList={rolesList} />
+          </div>
+        </div>
       </div>
 
      <Help />
