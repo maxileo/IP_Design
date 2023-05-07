@@ -72,10 +72,10 @@ async function getState() {
 async function getState() {
   let url = '../gameState.json';
   try {
-      let res = await fetch(url);
-      return await res.json();
+    let res = await fetch(url);
+    return await res.json();
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 }
 
@@ -113,7 +113,7 @@ async function createObjects() {
       newMessages = await getChatRequest(0, messages[messages.length - 1].createdAt, 0);
     else
       newMessages = await getChatRequest(0, utcTimestamp - 10000, 0);
-    
+
     // add new messages
     for (let message in newMessages)
     {
@@ -132,14 +132,14 @@ async function createObjects() {
         createdAt: 1682301505
       },
       {
-      userName: "Casutu",
-      content: "This is my message, I believe the mafioso is dienus!",
-      createdAt: 1682300005
+        userName: "Casutu",
+        content: "This is my message, I believe the mafioso is dienus!",
+        createdAt: 1682300005
       },
       {
-      userName: "Diana",
-      content: "Noo :(",
-      createdAt: 1682300505
+        userName: "Diana",
+        content: "Noo :(",
+        createdAt: 1682300505
       }
     ];
 
@@ -161,6 +161,9 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       token = getToken();
+      createObjects();
+      setGameState(currentGameState);
+      setTimeLeft(timeLeftJson);
       if (token !== null)
       {
         createObjects();
@@ -168,7 +171,7 @@ function App() {
         setGameState(currentGameState);
         setTimeLeft(timeLeftJson);
       }
-      
+
     }, 1000);
 
     return () => clearTimeout(timer);
@@ -179,83 +182,83 @@ function App() {
     console.log(window.location.pathname);
     if (window.location.pathname.startsWith("/signup")) {
       return (
-        <div className='app'>
-          <div className="content">
-            <Signup/>
+          <div className='app'>
+            <div className="content">
+              <Signup/>
+            </div>
           </div>
-        </div>
       );
     }
     else
     {
       return (
-        <div className='app'>
-          <div className="content">
-            <Login/>
+          <div className='app'>
+            <div className="content">
+              <Login/>
+            </div>
           </div>
-        </div>
       );
     }
   }
   else
   {
-  createObjects();
+    createObjects();
 
 
-  if (gameState.state != "Lobby")
-  {
-    return (
-      <div className="app">
-        <Navbar
-          userName={currentUser.userName}
-          roleName={currentUser.roleName}
-          lobbyId = {lobbyId}
-          token = {token}
-        />
-        <div className="content">
-          <InfoAlert
-            gameState={gameState}
-            timeLeft={timeLeft}
-            currentUser={currentUser}
-            judgedCharacter={judgedCharacter}
-          />
-
-          <div className="userList-action">
-            <div className="chat-users-container">
-              <Chat 
-                messages={messages}
-                currentUser={currentUser}
-              />
-              <UserList
-                usersList={usersList}
-                gameState={gameState}
-                currentUser={currentUser}
+    if (gameState.state != "Lobby")
+    {
+      return (
+          <div className="app">
+            <Navbar
+                userName={currentUser.userName}
+                roleName={currentUser.roleName}
                 lobbyId = {lobbyId}
                 token = {token}
-              />
-            </div>
-            <Action
-              gameState={gameState}
-              currentUser={currentUser}
-              judgedCharacter={judgedCharacter}
             />
-          </div>
+            <div className="content">
+              <InfoAlert
+                  gameState={gameState}
+                  timeLeft={timeLeft}
+                  currentUser={currentUser}
+                  judgedCharacter={judgedCharacter}
+              />
 
-          <div className="roleList">
-            <RoleList rolesList={rolesList} />
+              <div className="userList-action">
+                <div className="chat-users-container">
+                  <Chat
+                      messages={messages}
+                      currentUser={currentUser}
+                  />
+                  <UserList
+                      usersList={usersList}
+                      gameState={gameState}
+                      currentUser={currentUser}
+                      lobbyId = {lobbyId}
+                      token = {token}
+                  />
+                </div>
+                <Action
+                    gameState={gameState}
+                    currentUser={currentUser}
+                    judgedCharacter={judgedCharacter}
+                />
+              </div>
+
+              <div className="roleList">
+                <RoleList rolesList={rolesList} />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-  );
-  }
-  else
-  {
-    return (
-      <div className='app'>
-        <Lobby setName = {setName}/>
-      </div>
-    );
-  }
+      );
+    }
+    else
+    {
+      return (
+          <div className='app'>
+            <Lobby setName = {setName}/>
+          </div>
+      );
+    }
   }
 }
 
