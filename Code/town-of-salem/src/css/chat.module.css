@@ -1,0 +1,97 @@
+
+.chatBigContainer{
+    margin-left: 1rem;
+}
+
+.chatContainer{
+    padding: 0.5rem;
+    max-width: 16rem;
+    min-width: 16rem;
+
+    height: 20rem;
+   
+    background-color: aqua;
+
+    border: 3px solid #FBDA7D;
+    background: rgb(68,55,48);
+    background: linear-gradient(180deg, rgba(68,55,48,1) 0%, rgba(41,32,29,1) 100%);
+    filter: drop-shadow(-5px 5px 0px #000);
+
+    overflow-y: scroll;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.chatContainer::-webkit-scrollbar-track {
+    border: 2px solid rgb(20,15,0);
+    background-color: rgb(55, 46, 46);
+    border-radius: 1rem;
+  }
+  
+.chatContainer::-webkit-scrollbar {
+    width: 0.5rem;
+}
+  
+.chatContainer::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgb(181, 125, 69);
+    border: 2px solid #000;
+}
+
+#titleTxt{
+    font-size: large;
+    margin-bottom: 0.5rem;
+    color: #FBDA7D;
+}
+
+.messageContainer{
+    background-color: #FBDA7D;
+    border-radius: 0.5rem;
+    border: 3px solid #FBDA7D;
+    margin-bottom: 0.2rem;
+    padding: 0.2rem;
+
+    padding-right: 0.5rem;
+
+    width: fit-content;
+    max-width: 12rem;
+}
+
+.messageUserName{
+    font-size: 0.9rem;
+    color: #FBDA7D;
+}
+
+.messageText{
+    color: #21232a;
+}
+
+.sentByUser{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sentByUser .messageContainer{
+    background-color: #773632;
+    border: 3px solid #773632;
+}
+
+.sentByUser .messageText{
+    color: #FBDA7D;
+}
+
+.sentByUser .messageUserName{
+    justify-self: flex-end;
+}
+
+
+.sentByOtherUser{
+    float: left;
+}
+
+.columns{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}

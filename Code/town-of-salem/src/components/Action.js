@@ -1,6 +1,7 @@
 import styles from '../css/action.module.css';
 import stylesUser from '../css/users.module.css';
 import stylesAction from '../css/action.module.css';
+const { sendMessageRequest } = require('../functions/requests.js')
 
 function postData(data) 
 {
@@ -13,6 +14,14 @@ function postData(data)
             "Content-Type": "application/json"
         }
     });
+}
+
+async function handleSendClick(target, gameState, currentUser)
+{
+    let textArea = document.getElementById(styles.messageTextArea);
+
+    let response = await sendMessageRequest(0, textArea.value, 0);
+    console.log(response);
 }
 
 let infoText = "";
@@ -99,6 +108,23 @@ function Action(props)
             </div>
         </div>
     );
+    }
+    else if (props.gameState.state === "Discussion")
+    {
+        return (
+            <div className={styles.actionContainer}>
+                <textarea 
+                    autoComplete="off" placeholder="..." spellCheck="false" id={styles.messageTextArea}> 
+                </textarea>
+                <div className={styles.buttonBackground}>
+                    <button 
+                        onClick={e => handleSendClick(e.target, props.gameState, props.currentUser)}
+                        id={styles.action}>Send
+                    </button>
+                </div>
+            </div>
+
+        );
     }
     else
     {

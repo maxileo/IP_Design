@@ -43,8 +43,6 @@
 
     margin: 1rem;
 
-    margin-left: 1.4rem;
-
     width: fit-content;
     padding: 0.5rem;
 
@@ -98,4 +96,42 @@
 
 .buttonBackground:hover{
     background-image: radial-gradient(circle, rgba(197,54,26,1) 0%, rgba(161,67,24,0.4206932773109243) 68%, rgba(255,199,181,0) 100%);
+}
+
+
+#messageTextArea{
+    width: 15rem;
+    height: 6rem;
+
+    border-radius: 0.5rem;
+    background-color: #773632;
+    border: 3px solid #773632;
+    margin-bottom: 0.2rem;
+    padding: 0.5rem;
+
+    font-size: 0.9rem;
+    color: #FBDA7D;
+
+    resize: none;
+}
+
+#messageTextArea:focus{
+    border-color: #FBDA7D;
+    outline: none;
+}
+
+#messageTextArea::-webkit-scrollbar-track {
+    border: 2px solid rgb(20,15,0);
+    background-color: rgb(55, 46, 46);
+    border-radius: 1rem;
+  }
+  
+#messageTextArea::-webkit-scrollbar {
+    width: 0.5rem;
+}
+  
+#messageTextArea::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgb(181, 125, 69);
+    border: 2px solid #000;
 }
