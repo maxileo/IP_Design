@@ -132,7 +132,7 @@
   transform: scale(1.1);
 }
 
-.willText {
+#willText {
   outline: none;
   border: 3px solid #fbda7d;
   background: rgb(68, 55, 48);
@@ -150,17 +150,17 @@
   filter: drop-shadow(-5px 5px 0px #000);
   resize: none;
 }
-.willText::-webkit-scrollbar-track {
+#willText::-webkit-scrollbar-track {
   border: 2px solid rgb(20, 15, 0);
   background-color: rgb(55, 46, 46);
   border-radius: 1rem;
 }
 
-.willText::-webkit-scrollbar {
+#willText::-webkit-scrollbar {
   width: 0.5rem;
 }
 
-.willText::-webkit-scrollbar-thumb {
+#willText::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: rgb(181, 125, 69);
   border: 2px solid #000;

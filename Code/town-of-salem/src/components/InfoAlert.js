@@ -48,6 +48,7 @@ export default function InfoAlert(props) {
       <div className={styles.infoAlertContainer}>
         <h2 id={styles.Txt}>Discussion time</h2>
         <h2 id={styles.Txt}>Remaining {props.gameState.state} time:</h2>
+        <h1 id={styles.Txt}>{props.timeLeft} sec</h1>
         <h2 id={styles.Txt}>  </h2>
       </div>
     );

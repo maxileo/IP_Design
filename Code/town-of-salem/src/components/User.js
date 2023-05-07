@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import styles from '../css/users.module.css';
 import stylesAction from '../css/action.module.css';
+const { getUserWillRequest } = require('../functions/requests.js')
 
 function handleClick(target, user, currentUser, gameState)
 {
@@ -33,7 +34,7 @@ function handleClick(target, user, currentUser, gameState)
     }
 }
 
-function handleDeadClick(target)
+async function handleDeadClick(target, lobbyId, token)
 {
     let userName = target.parentElement.firstChild.innerText;
     let willElement = document.getElementById(styles.willContainer);
@@ -43,7 +44,8 @@ function handleDeadClick(target)
     willTitle.innerText = userName + "` will";
 
     let willText = willElement.lastChild;
-    willText.innerText = "This is the will of user: " + userName;
+    willText.innerText = await getUserWillRequest(lobbyId, userName, token);
+    //willText.innerText = "This is the will of user: " + userName;
 }
 
 function User(props)
@@ -59,7 +61,7 @@ function User(props)
             </button>
             </div>
             {userObj.isAlive ? <></> : (
-                <input onClick={e => handleDeadClick(e.target)}
+                <input onClick={e => handleDeadClick(e.target, props.lobbyId, props.token)}
                     className={styles.deadIcon} type="image" src='/media/dead.png'></input>
             )}
         </div>

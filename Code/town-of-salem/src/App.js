@@ -10,6 +10,9 @@ import Navbar from './components/Navbar';
 import Chat from './components/Chat';
 const { getChatRequest } = require('./functions/requests.js')
 
+const lobbyId = "000000";
+const token = "randomfaketokenhere";
+
 
 function makeUser() {
   let user = {
@@ -170,6 +173,8 @@ function App() {
         <Navbar
           userName={currentUser.userName}
           roleName={currentUser.roleName}
+          lobbyId = {lobbyId}
+          token = {token}
         />
         <div className="content">
           <InfoAlert
@@ -189,6 +194,8 @@ function App() {
                 usersList={usersList}
                 gameState={gameState}
                 currentUser={currentUser}
+                lobbyId = {lobbyId}
+                token = {token}
               />
             </div>
             <Action

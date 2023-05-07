@@ -15,7 +15,13 @@ function UserList(props)
             <div className={styles.usersListContainerDiv}>
                 <h3 id={styles.playersTxt}>Players List</h3>
                 <div className={styles.usersListContainer}>
-                    {usersList.map((user) => <User key={user.id} user={user} gameState={props.gameState} currentUser={props.currentUser} />)}
+                    {usersList.map((user) => <User key={user.id} 
+                    user={user} 
+                    gameState={props.gameState} 
+                    currentUser={props.currentUser}
+                    lobbyId = {props.lobbyId}
+                    token = {props.token} 
+                    />)}
                 </div>
             </div>
             <div id={styles.willContainer} style={{display: "none"}}>
