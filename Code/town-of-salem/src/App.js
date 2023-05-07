@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {makeRole} from './functions/roleFunctions';
 import InfoAlert from "./components/InfoAlert";
 import Lobby from "./components/Lobby";
+import Help from "./components/Help";
 import Navbar from './components/Navbar';
 import Chat from './components/Chat';
 const { getChatRequest } = require('./functions/requests.js')
@@ -162,14 +163,24 @@ function App() {
     return () => clearTimeout(timer);
   });
 
-
   if (gameState.state != "Lobby")
   {
-    return (
-      <div className="app">
+    
+  return (
+    <div className='app'>
         <Navbar
           userName={currentUser.userName}
           roleName={currentUser.roleName}
+        />
+      <InfoAlert
+        gameState={gameState}
+        timeLeft={timeLeft}
+        currentUser={currentUser}
+        judgedCharacter={judgedCharacter}
+      />
+      <div className='userList-action'>
+        <UserList
+          usersList = {usersList} gameState = {gameState} currentUser = {currentUser}
         />
         <div className="content">
           <InfoAlert
@@ -203,6 +214,9 @@ function App() {
           </div>
         </div>
       </div>
+
+     <Help />
+    </div>
   );
   }
   else

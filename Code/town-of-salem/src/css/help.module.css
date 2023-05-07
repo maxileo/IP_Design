@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
+
+*{
+    font-family: 'Crimson Text', serif;
+}
+
+#helpDescription{
+    
+    width: 400px;
+    height: auto;
+    background-color: rgb(68,55,48);
+    color:whitesmoke;
+    padding: 0.5rem;
+    font-size: 15px;
+}
+
+.divHelp
+{
+    height: 20%;
+    margin-top: 5%;
+    margin-bottom: 90%;
+    border: 3px solid #FBDA7D;
+}
+
+.buttonCSS
+{
+    background-color: rgb(68,55,48);
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100px;
+
+}
+
+.buttonCSS:hover{
+    background-image: radial-gradient(circle, rgba(197,54,26,1) 0%, rgba(161,67,24,0.4206932773109243) 68%, rgba(255,199,181,0) 100%);
+}
+
+.descriptionContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 0.4rem;
+    margin-left: 1rem;
+    margin-top: 0.3rem;
+}
+
+.descriptionContainer:hover{
+    background-image: radial-gradient(circle, rgba(197,54,26,1) 0%, rgba(161,67,24,0.4206932773109243) 68%, rgba(255,199,181,0) 100%);
+}
+
+.uiDescriptionContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#closeDescription{
+    max-width: 2rem;
+    max-height: 2rem;
+    filter: drop-shadow(-5px 5px 0px #000);
+}
+
+#closeDescription:hover{
+    transform: scale(1.1);
+}
+
+
+#aboutGameText {
+    text-align: center;
+}

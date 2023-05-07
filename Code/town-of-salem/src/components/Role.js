@@ -38,7 +38,6 @@ function handleRoleClick(target, role)
     attributesDescription.innerText = role.attributes;
 
 
-    
 }
 
 function Role(props)
