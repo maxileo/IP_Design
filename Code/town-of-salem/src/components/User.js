@@ -57,7 +57,7 @@ function User(props)
             <div className = {styles.buttonBackground}>
             <button onClick={e => handleClick(e.target, userObj, props.currentUser, props.gameState)} 
                 className={styles.listUserName}>
-                {userObj.userName} 
+                {userObj.username}
             </button>
             </div>
             {userObj.isAlive ? <></> : (

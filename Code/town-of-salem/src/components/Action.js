@@ -7,7 +7,7 @@ function postData(data)
 {
     console.log(JSON.stringify(data));
 
-    fetch('http://localhost:3000/state/0', {
+    fetch('http://localhost:3000/state/000000', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

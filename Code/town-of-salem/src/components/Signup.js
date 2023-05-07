@@ -41,12 +41,12 @@ function Signup(props)
     return error;
   };
 
-  const signupHandler = (e) => {
+  const signupHandler = async (e) => {
     e.preventDefault();
     setFormErrors(validateForm(user));
 
     if (Object.keys(formErrors).length === 0) {
-        let response = registerRequest(user.username, user.password);
+        let response = await registerRequest(user.username, user.password);
         console.log(response);
         if (response["token"] !== null && response["token"] !== undefined)
         {
