@@ -161,13 +161,9 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       token = getToken();
-      if (token !== null)
-      {
-        createObjects();
-
-        setGameState(currentGameState);
-        setTimeLeft(timeLeftJson);
-      }
+      createObjects();
+      setGameState(currentGameState);
+      setTimeLeft(timeLeftJson);
       
     }, 1000);
 

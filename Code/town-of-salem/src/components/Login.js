@@ -33,12 +33,12 @@ const Login = ({ setUserState }) => {
     return error;
   };
 
-  const loginHandler = (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
     setFormErrors(validateForm(user));
     
     if (Object.keys(formErrors).length === 0) {
-        let response = loginRequest(user.username, user.password);
+        let response = await loginRequest(user.username, user.password);
         console.log(response);
         if (response["token"] !== null && response["token"] !== undefined)
         {
