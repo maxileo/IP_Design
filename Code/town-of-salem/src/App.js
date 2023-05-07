@@ -8,10 +8,12 @@ import InfoAlert from "./components/InfoAlert";
 import Lobby from "./components/Lobby";
 import Navbar from './components/Navbar';
 import Chat from './components/Chat';
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 const { getChatRequest } = require('./functions/requests.js')
 
-const lobbyId = "000000";
-const token = "randomfaketokenhere";
+let lobbyId = "000000";
+let token = "";
 
 
 function makeUser() {
@@ -33,6 +35,10 @@ function setName(name){
 
 function getName(){
   return localStorage.getItem("userName");
+}
+
+function getToken(){
+  return localStorage.getItem("token");
 }
 
 let usersList = [];
@@ -147,23 +153,53 @@ async function createObjects() {
 }
 
 function App() {
+  token = getToken();
 
   const [gameState, setGameState] = useState(currentGameState);
   const [timeLeft, setTimeLeft] = useState();
 
-  createObjects();
-
   useEffect(() => {
     const timer = setTimeout(() => {
-      createObjects();
+      token = getToken();
+      if (token !== null)
+      {
+        createObjects();
 
-      setGameState(currentGameState);
-      setTimeLeft(timeLeftJson);
+        setGameState(currentGameState);
+        setTimeLeft(timeLeftJson);
+      }
       
-    }, 200);
+    }, 1000);
 
     return () => clearTimeout(timer);
   });
+
+  if (token === null)
+  {
+    console.log(window.location.pathname);
+    if (window.location.pathname.startsWith("/signup")) {
+      return (
+        <div className='app'>
+          <div className="content">
+            <Signup/>
+          </div>
+        </div>
+      );
+    }
+    else
+    {
+      return (
+        <div className='app'>
+          <div className="content">
+            <Login/>
+          </div>
+        </div>
+      );
+    }
+  }
+  else
+  {
+  createObjects();
 
 
   if (gameState.state != "Lobby")
@@ -219,6 +255,7 @@ function App() {
         <Lobby setName = {setName}/>
       </div>
     );
+  }
   }
 }
 

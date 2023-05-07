@@ -31,7 +31,7 @@ const registerRequest = async (username, password) => {
 
     if (response.ok) {
         const json = await response.json();
-        return json["token"];
+        return json;
     }
 
     return {errorStatus: response.status};
@@ -56,7 +56,7 @@ const loginRequest = async (username, password) => {
 
     if (response.ok) {
         const json = await response.json();
-        return json["token"];
+        return json;
     }
 
     return {errorStatus: response.status};

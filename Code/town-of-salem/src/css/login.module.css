@@ -1,0 +1,119 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    color: #FBDA7D;
+    
+    border: 3px solid #FBDA7D;
+    background: rgb(68,55,48);
+    background: linear-gradient(180deg, rgba(68,55,48,1) 0%, rgba(41,32,29,1) 100%);
+
+    padding: 2rem;
+    filter: drop-shadow(-5px 5px 0px #000);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    
+}
+.login > form input {
+    border-radius: 20px;
+    border: 2px solid lightgrey;
+    outline: none;
+    color: #1d2129;
+    margin: 2% 0;
+    width: 90%;
+    padding: 12px;
+    font-size: 16px;
+}
+.buttonLogin{
+    background-color: transparent;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('../svg/startButton.svg');
+    padding: 0.5rem;
+
+    padding-left: 5rem;
+    padding-right: 5rem;
+
+    color: #FBDA7D;
+
+    font-size: 2rem;
+
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.buttonLogin:hover{
+    transform: scale(1.05);
+}
+
+.buttonBackgroundLogin{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonBackgroundLogin:hover{
+    background-image: radial-gradient(circle, rgba(197,54,26,1) 0%, rgba(161,67,24,0.4206932773109243) 68%, rgba(255,199,181,0) 100%);
+}
+.nav{
+    color:bisque;
+}
+.center{
+    text-align: center;
+}
+#name{
+    border: 3px solid #FBDA7D;
+    background: rgb(68,55,48);
+    background: linear-gradient(180deg, rgba(68,55,48,1) 0%, rgba(41,32,29,1) 100%);
+
+    padding: 0.5rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+
+    color: #FBDA7D;
+}
+
+#name:focus{
+    outline: none;
+}
+.error {
+    color: #FBDA7D;
+    text-align: left;
+    margin: auto;
+    font-size: 16px;
+    padding: 0px 1rem;
+}
+.buttonShow {
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 15px;
+    position: absolute;
+    right: 15px;
+    top: 8px;
+}
+.pass {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
