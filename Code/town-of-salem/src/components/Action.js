@@ -11,7 +11,8 @@ function postData(data)
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": localStorage.getItem("token")
         }
     });
 }
@@ -27,7 +28,7 @@ async function handleSendClick(target, gameState, currentUser)
 let infoText = "";
 let buttonText = "";
 
-function handleClick(target, gameState, currentUser, judgedCharacter)
+function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersToId)
 {
     if (currentUser.isAlive && (gameState.state == "Voting" || gameState.state == "Selection" || gameState.state == "Night"))
     {
@@ -44,17 +45,20 @@ function handleClick(target, gameState, currentUser, judgedCharacter)
             };
 
             data.userId = currentUser.userName;
+            //data.userId = currentUser.userId;
 
             if (gameState.state == "Voting")
             {
-                data.targets.push(judgedCharacter);
+                data.targets.push(mapUsersToId.get(judgedCharacter));
+                //data.targets.push(judgedCharacter);
             }
             else
             {
                 let selectedUsersAction = Array.from( document.getElementsByClassName(stylesAction.selectedUser));
                 for (let i = 0; i < selectedUsers.length; i++)
                 {
-                    data.targets.push(selectedUsersAction[i].innerText);
+                    data.targets.push(mapUsersToId.get(selectedUsersAction[i].innerText));
+                    //data.targets.push(selectedUsersAction[i].innerText);
                 }
             }
             
@@ -102,7 +106,7 @@ function Action(props)
             </div>
             <div className={styles.buttonBackground}>
                 <button 
-                    onClick={e => handleClick(e.target, props.gameState, props.currentUser, props.judgedCharacter)}
+                    onClick={e => handleClick(e.target, props.gameState, props.currentUser, props.judgedCharacter, props.mapUsersToId)}
                     id={styles.action}>{buttonText}
                 </button>
             </div>

@@ -11,9 +11,14 @@ import Chat from './components/Chat';
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 const { getChatRequest } = require('./functions/requests.js')
+const { getUserProfileRequest } = require('./functions/requests.js')
+//const { getState } = require('./functions/requests.js')
 
 let lobbyId = "000000";
 let token = "";
+
+const mapIdToUsers = new Map();
+const mapUsersToId = new Map();
 
 
 function makeUser() {
@@ -54,22 +59,9 @@ for (let i = 0; i < 13; i++)
   rolesList.push(makeRole(i));
 }
 
-/*
-// VARIANTA FINALA
-async function getState() {
-  let url = `http://localhost:3000/state/0?userId=${currentUser}`;
-  try {
-      let res = await fetch(
-          url);
-    return await res.json();
-  } catch (error) {
-      console.log(error);
-  }
-}
-*/
-
-// VARIANTA DE TEST
-async function getState() {
+// VARIANTA DE TEST. PENTRU FINAL, PUR SI SIMPLU COMENTAT ASTA
+// SI FOLOSIT getState din requests.js, ( de decomentat sus )
+async function getState(lobbyId, token) {
   let url = '../gameState.json';
   try {
       let res = await fetch(url);
@@ -84,12 +76,27 @@ let timeLeftJson = 0;
 let judgedCharacter = "";
 let messages = [];
 
-async function createObjects() {
-  let gameStateJson = await getState();
+async function createObjects(token) {
+  let gameStateJson = await getState(lobbyId, token);
 
   currentUser = gameStateJson.currentUser;
   currentUser.userName = getName();
   usersList = gameStateJson.users;
+  for (let i = 0; i < usersList.length; i++)
+  {
+    if (mapIdToUsers.get(usersList[i].userId) === undefined) {
+      //let response = await getUserProfileRequest(usersList[i].userId, token);
+      let response = 1;
+      if (response.errorStatus !== null && response.errorStatus !== undefined) {
+        mapIdToUsers.set(usersList[i].userId, response);
+        mapUsersToId.set(response, usersList[i].userId);
+      }
+      else
+        mapIdToUsers.set(usersList[i].userId, "Casutuu" + usersList[i].userId);
+        mapUsersToId.set("Casutuu" + usersList[i].userId, usersList[i].userId);
+    }
+    usersList[i].userName = mapIdToUsers.get(usersList[i].userId);
+  }
 
   currentGameState = {
     state: "",
@@ -99,6 +106,7 @@ async function createObjects() {
   currentGameState.timeEndState = gameStateJson.timeEndState;
 
   judgedCharacter = gameStateJson.judgedCharacter;
+  judgedCharacter = mapIdToUsers.get(judgedCharacter);
 
   const utcTimestamp = new Date().getTime();
   timeLeftJson = currentGameState.timeEndState - Math.floor(utcTimestamp / 1000);
@@ -161,7 +169,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       token = getToken();
-      createObjects();
+      createObjects(token);
       setGameState(currentGameState);
       setTimeLeft(timeLeftJson);
       
@@ -234,6 +242,7 @@ function App() {
               gameState={gameState}
               currentUser={currentUser}
               judgedCharacter={judgedCharacter}
+              mapUsersToId = {mapUsersToId}
             />
           </div>
 

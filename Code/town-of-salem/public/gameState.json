@@ -1,47 +1,47 @@
 {
   "users": [
     {
-      "userName": "Casu",
+      "userId": "1",
       "isAlive": true,
       "nrVotes": 0
     },
     {
-      "userName": "Rares",
+      "userId": "2",
       "isAlive": false,
       "nrVotes": 0
     },
     {
-      "userName": "Hara",
+      "userId": "3",
       "isAlive": true,
       "nrVotes": 0
     },
     {
-      "userName": "Teodora",
+      "userId": "4",
       "isAlive": false,
       "nrVotes": 0
     },
     {
-      "userName": "Apache",
+      "userId": "5",
       "isAlive": true,
       "nrVotes": 0
     },
     {
-      "userName": "Calin",
+      "userId": "6",
       "isAlive": true,
       "nrVotes": 0
     },
     {
-      "userName": "Pau",
+      "userId": "7",
       "isAlive": true,
       "nrVotes": 0
     },
     {
-      "userName": "Miruna",
+      "userId": "8",
       "isAlive": false,
       "nrVotes": 0
     },
     {
-      "userName": "Alex",
+      "userId": "9",
       "isAlive": true,
       "nrVotes": 0
     }
@@ -60,5 +60,5 @@
 
   "timeEndState": 1682300005,
 
-  "judgedCharacter": "Pau"
+  "judgedCharacter": "8"
 }

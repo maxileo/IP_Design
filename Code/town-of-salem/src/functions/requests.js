@@ -12,6 +12,21 @@
 const baseUrl = "http://localhost:3001"
 //const baseUrl = "https:ip.tudorhutu.ro"
 
+const getState = async (lobbyId, token) => {
+    const response = await fetch(`${baseUrl}/state/${lobbyId}`, {
+        method: "GET", headers: {
+            "Content-Type": "application/json", "Authorization": token
+        }
+    });
+
+    if (response.ok) {
+        const json = await response.json();
+        return json;
+    }
+
+    return {errorStatus: response.status};
+}
+
 /*
  Description: Request used for registering a user.
  Parameters:

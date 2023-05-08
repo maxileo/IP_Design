@@ -52,6 +52,7 @@ function Signup(props)
         {
             console.log(response["token"]);
             localStorage.setItem("token", response["token"]);
+            localStorage.setItem("userName", user.username);
         }
         else
         {
