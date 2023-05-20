@@ -205,7 +205,14 @@ function App() {
   {
   createObjects();
 
-
+  if (gameState.state === "Lobbies")
+  {
+    return (
+      <div className="app">
+        <Lobbies/>
+      </div>
+    );
+  }
   if (gameState.state != "Lobby")
   {
     return (
@@ -262,6 +269,7 @@ function App() {
     );
   }
   }
+
 }
 
 export default App;
