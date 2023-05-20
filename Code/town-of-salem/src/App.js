@@ -110,8 +110,10 @@ async function createObjects(token) {
         mapUsersToId.set(response, usersList[i].userId);
       }
       else
+      {
         mapIdToUsers.set(usersList[i].userId, "Casutuu" + usersList[i].userId);
         mapUsersToId.set("Casutuu" + usersList[i].userId, usersList[i].userId);
+      }
     }
     usersList[i].userName = mapIdToUsers.get(usersList[i].userId);
   }
@@ -126,12 +128,12 @@ async function createObjects(token) {
   if (currentGameState.state === "Discussion")
   {
     // request-ul aici, ar trebui schimbat 0 si 0 cu lobbyId si tokenUser
-    /*
+    
     let newMessages = [];
     if (messages.length > 0)
-      newMessages = await getChatRequest(0, messages[messages.length - 1].createdAt, 0);
+      newMessages = await getChatRequest(lobbyId, messages[messages.length - 1].createdAt, token);
     else
-      newMessages = await getChatRequest(0, utcTimestamp - 10000, 0);
+      newMessages = await getChatRequest(lobbyId, utcTimestamp - 10000, token);
     
     // add new messages
     for (let message in newMessages)
@@ -141,9 +143,10 @@ async function createObjects(token) {
         messages.push(message);
       }
     }
-    */
+    
 
     // de test
+    /*
     messages = [
       {
         userName: "Mihai",
@@ -161,6 +164,7 @@ async function createObjects(token) {
       createdAt: 1682300505
       }
     ];
+    */
 
     // sort messages by createdAt field
     messages.sort(function(a, b) {
@@ -200,7 +204,7 @@ function App() {
 
   if (token === null)
   {
-    console.log(window.location.pathname);
+    //console.log(window.location.pathname);
     if (window.location.pathname.startsWith("/signup")) {
       return (
         <div className='app'>
