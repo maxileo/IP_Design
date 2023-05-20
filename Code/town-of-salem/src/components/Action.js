@@ -17,11 +17,11 @@ function postData(data)
     });
 }
 
-async function handleSendClick(target, gameState, currentUser)
+async function handleSendClick(target, gameState, currentUser, lobbyId, token)
 {
     let textArea = document.getElementById(styles.messageTextArea);
 
-    let response = await sendMessageRequest(0, textArea.value, 0);
+    let response = await sendMessageRequest(lobbyId, textArea.value, token);
     console.log(response);
 }
 
@@ -122,7 +122,7 @@ function Action(props)
                 </textarea>
                 <div className={styles.buttonBackground}>
                     <button 
-                        onClick={e => handleSendClick(e.target, props.gameState, props.currentUser)}
+                        onClick={e => handleSendClick(e.target, props.gameState, props.currentUser, props.lobbyId, props.token)}
                         id={styles.action}>Send
                     </button>
                 </div>

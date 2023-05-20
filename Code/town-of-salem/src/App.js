@@ -267,6 +267,8 @@ function App() {
               currentUser={currentUser}
               judgedCharacter={judgedCharacter}
               mapUsersToId = {mapUsersToId}
+              lobbyId = {lobbyId}
+              token = {token}
             />
           </div>
 
