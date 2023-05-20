@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from "react";
 import loginstyle from "../css/login.module.css";
 const { loginRequest } = require('../functions/requests.js')
+const { sendToLobby } = require('../functions/requests.js')
 
 const Login = ({ setUserState }) => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -45,6 +46,8 @@ const Login = ({ setUserState }) => {
             console.log(response["token"]);
             localStorage.setItem("token", response["token"]);
             localStorage.setItem("userName", user.username);
+
+            let responseLobby = await sendToLobby("000000", response["token"]);
         }
         else
         {

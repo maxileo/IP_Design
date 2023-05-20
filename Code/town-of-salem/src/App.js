@@ -12,7 +12,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 const { getChatRequest } = require('./functions/requests.js')
 const { getUserProfileRequest } = require('./functions/requests.js')
-//const { getState } = require('./functions/requests.js')
+const { getState } = require('./functions/requests.js')
 
 let lobbyId = "000000";
 let token = "";
@@ -61,6 +61,7 @@ for (let i = 0; i < 13; i++)
 
 // VARIANTA DE TEST. PENTRU FINAL, PUR SI SIMPLU COMENTAT ASTA
 // SI FOLOSIT getState din requests.js, ( de decomentat sus )
+/*
 async function getState(lobbyId, token) {
   let url = '../gameState.json';
   try {
@@ -70,8 +71,11 @@ async function getState(lobbyId, token) {
       console.log(error);
   }
 }
+*/
 
-let currentUser = "Casu";
+let currentUser = {
+  userName: "Casu"
+};
 let timeLeftJson = 0;
 let judgedCharacter = "";
 let messages = [];
@@ -79,14 +83,28 @@ let messages = [];
 async function createObjects(token) {
   let gameStateJson = await getState(lobbyId, token);
 
+  //if (gameStateJson.errorStatus !== null || gameStateJson.errorStatus !== undefined)
+  //  return -1;
+
+  currentGameState = {
+    state: "",
+    timeEndState: 0
+  };
+  currentGameState.state = gameStateJson.state;
+  currentGameState.timeEndState = gameStateJson.timeEndState;
+
+  if (gameStateJson.state !== "Lobby")
+  {
+
   currentUser = gameStateJson.currentUser;
   currentUser.userName = getName();
   usersList = gameStateJson.users;
   for (let i = 0; i < usersList.length; i++)
   {
+    usersList[i].userId = usersList[i].username;
     if (mapIdToUsers.get(usersList[i].userId) === undefined) {
-      //let response = await getUserProfileRequest(usersList[i].userId, token);
-      let response = 1;
+      let response = await getUserProfileRequest(usersList[i].userId, token);
+      //let response = 1;
       if (response.errorStatus !== null && response.errorStatus !== undefined) {
         mapIdToUsers.set(usersList[i].userId, response);
         mapUsersToId.set(response, usersList[i].userId);
@@ -98,19 +116,12 @@ async function createObjects(token) {
     usersList[i].userName = mapIdToUsers.get(usersList[i].userId);
   }
 
-  currentGameState = {
-    state: "",
-    timeEndState: 0
-  };
-  currentGameState.state = gameStateJson.state;
-  currentGameState.timeEndState = gameStateJson.timeEndState;
-
   judgedCharacter = gameStateJson.judgedCharacter;
   judgedCharacter = mapIdToUsers.get(judgedCharacter);
 
   const utcTimestamp = new Date().getTime();
-  timeLeftJson = currentGameState.timeEndState - Math.floor(utcTimestamp / 1000);
-  console.log(currentGameState.timeEndState - Math.floor(utcTimestamp / 1000));
+  timeLeftJson = Math.floor((currentGameState.timeEndState - utcTimestamp) / 1000);
+  console.log(timeLeftJson);
 
   if (currentGameState.state === "Discussion")
   {
@@ -158,6 +169,8 @@ async function createObjects(token) {
       return 0;
     });
   }
+  }
+  return 1;
 }
 
 function App() {
@@ -169,8 +182,15 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       token = getToken();
-      createObjects(token);
-      setGameState(currentGameState);
+
+      const utcTimestamp = new Date().getTime();
+      timeLeftJson = Math.floor((currentGameState.timeEndState - utcTimestamp) / 1000);
+
+      if (token !== undefined && token !== null) {
+        createObjects(token);
+        setGameState(currentGameState);
+      }
+
       setTimeLeft(timeLeftJson);
       
     }, 1000);
@@ -203,7 +223,7 @@ function App() {
   }
   else
   {
-  createObjects();
+  createObjects(token);
 
 
   if (gameState.state != "Lobby")
