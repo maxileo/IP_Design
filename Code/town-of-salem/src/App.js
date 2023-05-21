@@ -13,7 +13,7 @@ import Signup from "./components/Signup";
 import Lobbies from './components/Lobbies';
 const { getChatRequest } = require('./functions/requests.js')
 const { getUserProfileRequest } = require('./functions/requests.js')
-//const { getState } = require('./functions/requests.js')
+const { getState } = require('./functions/requests.js')
 
 let lobbyId = "000000";
 let token = "";
@@ -63,15 +63,15 @@ for (let i = 0; i < 13; i++)
 // VARIANTA DE TEST. PENTRU FINAL, PUR SI SIMPLU COMENTAT ASTA
 // SI FOLOSIT getState din requests.js, ( de decomentat sus )
 
-async function getState(lobbyId, token) {
-  let url = '../gameState.json';
-  try {
-      let res = await fetch(url);
-      return await res.json();
-  } catch (error) {
-      console.log(error);
-  }
-}
+// async function getState(lobbyId, token) {
+//   let url = '../gameState.json';
+//   try {
+//       let res = await fetch(url);
+//       return await res.json();
+//   } catch (error) {
+//       console.log(error);
+//   }
+// }
 
 
 let currentUser = {
@@ -102,18 +102,20 @@ async function createObjects(token) {
   usersList = gameStateJson.users;
   for (let i = 0; i < usersList.length; i++)
   {
-    usersList[i].userId = usersList[i].username;
+    // usersList[i].userId = usersList[i].username;
     if (mapIdToUsers.get(usersList[i].userId) === undefined) {
-      let response = await getUserProfileRequest(usersList[i].userId, token);
-      //let response = 1;
-      if (response.errorStatus !== null && response.errorStatus !== undefined) {
-        mapIdToUsers.set(usersList[i].userId, response);
-        mapUsersToId.set(response, usersList[i].userId);
-      }
-      else
       {
-        mapIdToUsers.set(usersList[i].userId, "Casutuu" + usersList[i].userId);
-        mapUsersToId.set("Casutuu" + usersList[i].userId, usersList[i].userId);
+        let response = await getUserProfileRequest(usersList[i].userId, token);
+        //let response = 1;
+        if (response.errorStatus !== null && response.errorStatus !== undefined) {
+          mapIdToUsers.set(usersList[i].userId, "Casutuu" + usersList[i].userId);
+          mapUsersToId.set("Casutuu" + usersList[i].userId, usersList[i].userId);
+        }
+        else
+        {
+          mapIdToUsers.set(usersList[i].userId, response);
+          mapUsersToId.set(response, usersList[i].userId);
+        }
       }
     }
     usersList[i].userName = mapIdToUsers.get(usersList[i].userId);
@@ -129,22 +131,31 @@ async function createObjects(token) {
   if (currentGameState.state === "Discussion")
   {
     // request-ul aici, ar trebui schimbat 0 si 0 cu lobbyId si tokenUser
-    
+
     let newMessages = [];
     if (messages.length > 0)
       newMessages = await getChatRequest(lobbyId, messages[messages.length - 1].createdAt, token);
     else
-      newMessages = await getChatRequest(lobbyId, utcTimestamp - 10000, token);
-    
+      newMessages = await getChatRequest(lobbyId, 1, token);
+
     // add new messages
-    for (let message in newMessages)
+    if (!(newMessages.errorStatus !== null && newMessages.errorStatus !== undefined))
     {
-      if (!messages.includes(message))
+      for (let i = 0; i < newMessages.length; i++)
       {
-        messages.push(message);
+        if (newMessages[i].createdAt !== null && newMessages[i].createdAt !== undefined)
+        {
+          const exists = messages.some(item => (item.createdAt === newMessages[i].createdAt && item.content === newMessages[i].content));
+          if (!exists)
+              //if (!messages.includes(newMessages[i]))
+          {
+            newMessages[i].userName = mapIdToUsers.get(newMessages[i].userId);
+            messages.push(newMessages[i]);
+          }
+        }
       }
     }
-    
+
 
     // de test
     /*
@@ -247,7 +258,7 @@ function App() {
           <div className="app">
             <Navbar
               userName={currentUser.userName}
-              roleName={currentUser.roleName}
+              role={currentUser.role}
               lobbyId = {lobbyId}
               token = {token}
             />

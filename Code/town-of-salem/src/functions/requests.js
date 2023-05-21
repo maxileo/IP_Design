@@ -9,9 +9,9 @@
  */
 
 // Temporary for testing
-//const baseUrl = "http://localhost:3001"
+const baseUrl = "http://localhost:3000"
 //const baseUrl = "https://5db2-46-97-168-226.ngrok-free.app"
-const baseUrl = "http://192.168.43.218:3000"
+// const baseUrl = "http://192.168.43.218:3000"
 //const baseUrl = "https:ip.tudorhutu.ro"
 
 const sendToLobby = async (lobbyId, token) => {
@@ -124,6 +124,7 @@ const getOwnProfileRequest = async (token) => {
  Return: If the request succeeds it will return the username of the user with specified user id.
  */
 const getUserProfileRequest = async (userId, token) => {
+    console.log("id user=" + userId);
     const response = await fetch(`${baseUrl}/profile?userId=${userId}`, {
         method: "GET", headers: {
             "Content-Type": "application/json", "Authorization": token
@@ -202,7 +203,7 @@ const getOwnWillRequest = async (lobbyId, token) => {
 
     if (response.ok) {
         const json = await response.json();
-        return json["content"];
+        return json["data"];
     }
 
     return {errorStatus: response.status};
@@ -225,7 +226,7 @@ const getUserWillRequest = async (lobbyId, userId, token) => {
 
     if (response.ok) {
         const json = await response.json();
-        return json["content"];
+        return json["data"];
     }
 
     return {errorStatus: response.status};
@@ -251,8 +252,7 @@ const updateWillRequest = async (lobbyId, time, will, token) => {
     });
 
     if (response.ok) {
-        const json = await response.json();
-        return json["content"];
+        return true;
     }
 
     return {errorStatus: response.status};
