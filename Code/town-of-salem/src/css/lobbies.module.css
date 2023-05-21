@@ -1,0 +1,97 @@
+.lobbies{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    padding-top: 2rem;
+}
+
+.topBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+
+    border: 3px solid #FBDA7D;
+    background: rgb(68,55,48);
+    background: linear-gradient(180deg, rgba(68,55,48,1) 0%, rgba(41,32,29,1) 100%);    
+    display: flex;
+    padding: 1rem;  
+    z-index: 999;
+
+    padding-left: 5rem;
+}
+  
+#createButton {
+    background-color: transparent;
+    background-image: url('../svg/startButton.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0.5rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    color: #FBDA7D;
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#createButton:hover{
+    transform: scale(1.05);
+}
+
+#searchButton{
+    background-color: transparent;
+    outline: none;
+    margin: none;
+    border: none;
+    transition: 0.3s;
+}
+
+#searchButton i{
+    transform: scale(2);
+    color: #FBDA7D;
+    cursor: pointer;
+}
+
+#searchButton:hover{
+    transform: scale(1.15);
+}
+
+.buttonBackgroundLobby{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonBackgroundLobby:hover{
+    background-image: radial-gradient(circle, rgba(197,54,26,1) 0%, rgba(161,67,24,0.4206932773109243) 68%, rgba(255,199,181,0) 100%);
+}
+  
+#searchInput {
+  background-color: #FBDA7D;
+  color: rgb(41,32,29);
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  width: 10rem;
+}
+
+.lobbyContainerWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 4rem;
+  }

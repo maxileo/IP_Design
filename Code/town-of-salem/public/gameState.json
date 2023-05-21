@@ -56,7 +56,7 @@
     "nightResults": ["You died", "Your role was blocked"]
   },
 
-  "state": "Selection",
+  "state": "Lobby",
 
   "timeEndState": 1682300005,
 

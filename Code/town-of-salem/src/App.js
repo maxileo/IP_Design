@@ -10,9 +10,10 @@ import Navbar from './components/Navbar';
 import Chat from './components/Chat';
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Lobbies from './components/Lobbies';
 const { getChatRequest } = require('./functions/requests.js')
 const { getUserProfileRequest } = require('./functions/requests.js')
-const { getState } = require('./functions/requests.js')
+//const { getState } = require('./functions/requests.js')
 
 let lobbyId = "000000";
 let token = "";
@@ -35,15 +36,15 @@ let userName = "";
 function setName(name){
   userName = name;
   console.log("Am setat username: " + userName);
-  localStorage.setItem("userName", userName);
+  sessionStorage.setItem("userName", userName);
 }
 
 function getName(){
-  return localStorage.getItem("userName");
+  return sessionStorage.getItem("userName");
 }
 
 function getToken(){
-  return localStorage.getItem("token");
+  return sessionStorage.getItem("token");
 }
 
 let usersList = [];
@@ -61,7 +62,7 @@ for (let i = 0; i < 13; i++)
 
 // VARIANTA DE TEST. PENTRU FINAL, PUR SI SIMPLU COMENTAT ASTA
 // SI FOLOSIT getState din requests.js, ( de decomentat sus )
-/*
+
 async function getState(lobbyId, token) {
   let url = '../gameState.json';
   try {
@@ -71,7 +72,7 @@ async function getState(lobbyId, token) {
       console.log(error);
   }
 }
-*/
+
 
 let currentUser = {
   userName: "Casu"
@@ -227,66 +228,77 @@ function App() {
   }
   else
   {
-  createObjects(token);
+    if (window.location.pathname.startsWith("/lobbies")) {
+      return (
+        <div className='app'>
+          <div className="content">
+            <Lobbies/>
+          </div>
+        </div>
+      );
+    }
+    else {
+      createObjects(token);
 
 
-  if (gameState.state != "Lobby")
-  {
-    return (
-      <div className="app">
-        <Navbar
-          userName={currentUser.userName}
-          roleName={currentUser.roleName}
-          lobbyId = {lobbyId}
-          token = {token}
-        />
-        <div className="content">
-          <InfoAlert
-            gameState={gameState}
-            timeLeft={timeLeft}
-            currentUser={currentUser}
-            judgedCharacter={judgedCharacter}
-          />
-
-          <div className="userList-action">
-            <div className="chat-users-container">
-              <Chat 
-                messages={messages}
-                currentUser={currentUser}
-              />
-              <UserList
-                usersList={usersList}
-                gameState={gameState}
-                currentUser={currentUser}
-                lobbyId = {lobbyId}
-                token = {token}
-              />
-            </div>
-            <Action
-              gameState={gameState}
-              currentUser={currentUser}
-              judgedCharacter={judgedCharacter}
-              mapUsersToId = {mapUsersToId}
+      if (gameState.state != "Lobby")
+      {
+        return (
+          <div className="app">
+            <Navbar
+              userName={currentUser.userName}
+              roleName={currentUser.roleName}
               lobbyId = {lobbyId}
               token = {token}
             />
-          </div>
+            <div className="content">
+              <InfoAlert
+                gameState={gameState}
+                timeLeft={timeLeft}
+                currentUser={currentUser}
+                judgedCharacter={judgedCharacter}
+              />
 
-          <div className="roleList">
-            <RoleList rolesList={rolesList} />
+              <div className="userList-action">
+                <div className="chat-users-container">
+                  <Chat 
+                    messages={messages}
+                    currentUser={currentUser}
+                  />
+                  <UserList
+                    usersList={usersList}
+                    gameState={gameState}
+                    currentUser={currentUser}
+                    lobbyId = {lobbyId}
+                    token = {token}
+                  />
+                </div>
+                <Action
+                  gameState={gameState}
+                  currentUser={currentUser}
+                  judgedCharacter={judgedCharacter}
+                  mapUsersToId = {mapUsersToId}
+                  lobbyId = {lobbyId}
+                  token = {token}
+                />
+              </div>
+
+              <div className="roleList">
+                <RoleList rolesList={rolesList} />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-  );
-  }
-  else
-  {
-    return (
-      <div className='app'>
-        <Lobby setName = {setName}/>
-      </div>
-    );
-  }
+      );
+      }
+      else
+      {
+        return (
+          <div className='app'>
+            <Lobby setName = {setName} token = {token} lobbyId = {lobbyId}/>
+          </div>
+        );
+      }
+    }
   }
 }
 

@@ -1,5 +1,6 @@
 import styles from '../css/lobby.module.css';
 import { useState } from "react";
+const { startGameRequest } = require('../functions/requests.js')
 
 async function postData(url, data)
 {
@@ -35,22 +36,17 @@ async function handleChooseClick(target, setName, setPressed)
     }
 }
 
-async function handleStartClick(pressed)
+async function handleStartClick(pressed, lobbyId, token)
 {
-    if (pressed)
-    {
-        let data = {
-            start: true
-        };
+    let response = await startGameRequest(lobbyId, token);
 
-        await postData("http://localhost:3000/state/0/start_game", data);
-    }
 }
 
 function Lobby(props)
 {
     const [pressed, setPressed] = useState(false);
 
+    /*
     return (
         <div className={styles.center}>
         <div className={styles.formContainer}>
@@ -66,6 +62,21 @@ function Lobby(props)
             <div className={styles.buttonBackgroundLobby}>
                 <button 
                     onClick={e => handleStartClick(pressed)}
+                    id={styles.start} className={styles.buttonLobby}>START
+                </button>
+            </div>
+        </div>
+        </div>
+    );
+    */
+
+    return (
+        <div className={styles.center}>
+        <div className={styles.formContainer}>
+            <h1>WHEN YOU ARE READY PRESS START TO START THE GAME</h1>
+            <div className={styles.buttonBackgroundLobby}>
+                <button 
+                    onClick={e => handleStartClick(pressed, props.lobbyId, props.token)}
                     id={styles.start} className={styles.buttonLobby}>START
                 </button>
             </div>

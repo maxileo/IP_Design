@@ -1,0 +1,72 @@
+.lobbyContainer{
+    padding: 0.5rem;
+    margin: 2rem;
+    /*width: 25%;*/
+    min-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    border: 3px solid #FBDA7D;
+    background: rgb(68,55,48);
+    background: linear-gradient(180deg, rgba(68,55,48,1) 0%, rgba(41,32,29,1) 100%);
+
+    filter: drop-shadow(-5px 5px 0px #000);
+}
+
+.lobbyId{
+    font-size: 2rem;
+    color: #FBDA7D;
+}
+
+.userCount{
+    font-size: 1rem;
+    color: #FBDA7D;
+}
+
+.joinButton{
+    background-color: transparent;
+
+    background-image: url('../svg/startButton.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    padding: 0.5rem;
+
+    padding-left: 5rem;
+    padding-right: 5rem;
+
+    color: #FBDA7D;
+
+    font-size: 1.5rem;
+
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.joinButton:hover{
+    transform: scale(1.05);
+}
+
+.buttonBackgroundLobby{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonBackgroundLobby:hover{
+    background-image: radial-gradient(circle, rgba(197,54,26,1) 0%, rgba(161,67,24,0.4206932773109243) 68%, rgba(255,199,181,0) 100%);
+}

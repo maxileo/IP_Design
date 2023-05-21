@@ -44,8 +44,8 @@ const Login = ({ setUserState }) => {
         if (response["token"] !== null && response["token"] !== undefined)
         {
             console.log(response["token"]);
-            localStorage.setItem("token", response["token"]);
-            localStorage.setItem("userName", user.username);
+            sessionStorage.setItem("token", response["token"]);
+            sessionStorage.setItem("userName", user.username);
 
             let responseLobby = await sendToLobby("000000", response["token"]);
         }
