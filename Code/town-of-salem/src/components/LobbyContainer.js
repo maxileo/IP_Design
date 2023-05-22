@@ -3,9 +3,15 @@ const { sendToLobby } = require('../functions/requests.js')
 
 async function handleJoinLobbyClick(token, idLobby)
 {
-    let response = await sendToLobby(idLobby, token);
     sessionStorage.setItem("lobbyId", idLobby);
-    window.location.pathname = "/game";
+    token = sessionStorage.getItem("token");
+    console.log(token);
+    let response = await sendToLobby(idLobby, token);
+    setTimeout(() => {
+        window.location.pathname = "/game";
+    },
+        1000
+    );
 }
 
 

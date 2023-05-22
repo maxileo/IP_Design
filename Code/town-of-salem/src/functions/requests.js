@@ -15,6 +15,7 @@ const baseUrl = "http://localhost:3000"
 //const baseUrl = "https:ip.tudorhutu.ro"
 
 const sendToLobby = async (lobbyId, token) => {
+    console.log(token);
     const response = await fetch(`${baseUrl}/lobbies/${lobbyId}`, {
         method: "POST", headers: {
             "Content-Type": "application/json", "Authorization": token
@@ -22,8 +23,7 @@ const sendToLobby = async (lobbyId, token) => {
     });
 
     if (response.ok) {
-        const json = await response.json();
-        return json;
+        return true;
     }
 
     return {errorStatus: response.status};
