@@ -216,10 +216,13 @@ function App() {
       const utcTimestamp = new Date().getTime();
       timeLeftJson = Math.floor((currentGameState.timeEndState - utcTimestamp) / 1000);
 
-      if (token !== undefined && token !== null) {
+      if (token !== undefined && token !== null && !window.location.pathname.startsWith("/lobbies")) {
         createObjects(token);
-        createLobbies(token);
         setGameState(currentGameState);
+      }
+
+      if (token !== undefined && token !== null) {
+        createLobbies(token);
       }
 
       setTimeLeft(timeLeftJson);
