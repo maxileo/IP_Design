@@ -89,7 +89,9 @@ let judgedCharacter = "";
 let messages = [];
 
 async function createLobbies(token) {
-  lobbies = await getLobbies(token);
+  let lobbiesJson = await getLobbies(token);
+
+  lobbies = lobbiesJson.lobbies;
 }
 
 async function createObjects(token) {
@@ -216,6 +218,7 @@ function App() {
 
       if (token !== undefined && token !== null) {
         createObjects(token);
+        createLobbies(token);
         setGameState(currentGameState);
       }
 
@@ -252,7 +255,7 @@ function App() {
   else
   {
     if (window.location.pathname.startsWith("/lobbies")) {
-      createLobbies(token);
+      
       if (lobbies.errorStatus !== null && lobbies.errorStatus !== undefined)
       {
         return (

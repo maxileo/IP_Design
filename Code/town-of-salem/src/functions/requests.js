@@ -281,7 +281,7 @@ const getLobbies = async (token) => {
 
     if (response.ok) {
         const json = await response.json();
-        return json["lobbies"];
+        return json;
     }
 
     return {errorStatus: response.status};

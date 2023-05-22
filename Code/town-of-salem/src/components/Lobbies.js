@@ -39,7 +39,7 @@ function Lobbies(props)
     const [searchValue, setSearchValue] = useState("");
     lobbies = props.lobbies;
 
-    if (lobbies[0].id !== undefined && lobbies[0].id !== null)
+    if (lobbies.length > 0)
     {
     return (
         <div className={styles.lobbies}>
