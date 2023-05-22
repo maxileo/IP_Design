@@ -37,6 +37,7 @@ function handleSearchClick(setSearchValue)
 function Lobbies(props)
 {
     const [searchValue, setSearchValue] = useState("");
+    lobbies = props.lobbies;
 
     return (
         <div className={styles.lobbies}>

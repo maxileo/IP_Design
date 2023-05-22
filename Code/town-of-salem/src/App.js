@@ -14,6 +14,8 @@ import Lobbies from './components/Lobbies';
 const { getChatRequest } = require('./functions/requests.js')
 const { getUserProfileRequest } = require('./functions/requests.js')
 const { getState } = require('./functions/requests.js')
+const { getLobbies } = require('./functions/requests.js')
+
 
 let lobbyId = "000000";
 let token = "";
@@ -53,6 +55,7 @@ function getLobbyId(){
 
 let usersList = [];
 let rolesList = [];
+let lobbies = [];
 
 let currentGameState = {
   state: "lobby",
@@ -245,13 +248,30 @@ function App() {
   else
   {
     if (window.location.pathname.startsWith("/lobbies")) {
-      return (
-        <div className='app'>
-          <div className="content">
-            <Lobbies/>
+      lobbies = getLobbies(token);
+      if (lobbies.errorStatus !== null && lobbies.errorStatus !== undefined)
+      {
+        return (
+          <div className='app'>
+            <div className='content'></div>
           </div>
-        </div>
-      );
+        );
+      }
+      else
+      {
+        for (let i = 0; i < lobbies.length; i++)
+        {
+          lobbies[i].id = lobbies[i].joinCode;
+          lobbies[i].users = lobbies[i].noUsers;
+        }
+        return (
+          <div className='app'>
+            <div className="content">
+              <Lobbies lobbies = {lobbies}/>
+            </div>
+          </div>
+        );
+      }
     }
     else {
       createObjects(token);

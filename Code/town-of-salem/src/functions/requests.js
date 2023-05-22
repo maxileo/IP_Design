@@ -272,7 +272,22 @@ const startGameRequest = async (lobbyId, token) => {
     return {errorStatus: response.status};
 }
 
+const getLobbies = async (token) => {
+    const response = await fetch(`${baseUrl}/lobbies`, {
+        method: "GET", headers: {
+            "Content-Type": "application/json", "Authorization": token
+        },
+    });
+
+    if (response.ok) {
+        const json = await response.json();
+        return json["lobbies"];
+    }
+
+    return {errorStatus: response.status};
+}
+
 module.exports = {
     registerRequest, loginRequest, getOwnProfileRequest, getUserProfileRequest, sendMessageRequest, getChatRequest,
-    getOwnWillRequest, getUserWillRequest, updateWillRequest, getState, sendToLobby, startGameRequest
+    getOwnWillRequest, getUserWillRequest, updateWillRequest, getState, sendToLobby, startGameRequest, getLobbies
 }
