@@ -88,6 +88,10 @@ let timeLeftJson = 0;
 let judgedCharacter = "";
 let messages = [];
 
+async function createLobbies(token) {
+  lobbies = await getLobbies(token);
+}
+
 async function createObjects(token) {
   let gameStateJson = await getState(lobbyId, token);
 
@@ -248,7 +252,7 @@ function App() {
   else
   {
     if (window.location.pathname.startsWith("/lobbies")) {
-      lobbies = getLobbies(token);
+      createLobbies(token);
       if (lobbies.errorStatus !== null && lobbies.errorStatus !== undefined)
       {
         return (
