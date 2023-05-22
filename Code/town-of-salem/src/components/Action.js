@@ -7,12 +7,12 @@ function postData(data)
 {
     console.log(JSON.stringify(data));
 
-    fetch('http://localhost:3000/state/000000', {
+    fetch('http://localhost:3000/state/' + sessionStorage.getItem("lobbyId"), {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            "Authorization": sessionStorage.getItem("token")
         }
     });
 }

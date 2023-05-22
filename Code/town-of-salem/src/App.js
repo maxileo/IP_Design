@@ -47,6 +47,10 @@ function getToken(){
   return sessionStorage.getItem("token");
 }
 
+function getLobbyId(){
+  return sessionStorage.getItem("lobbyId");
+}
+
 let usersList = [];
 let rolesList = [];
 
@@ -191,6 +195,7 @@ async function createObjects(token) {
 
 function App() {
   token = getToken();
+  lobbyId = getLobbyId();
 
   const [gameState, setGameState] = useState(currentGameState);
   const [timeLeft, setTimeLeft] = useState();

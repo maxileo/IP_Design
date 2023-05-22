@@ -47,7 +47,9 @@ const Login = ({ setUserState }) => {
             sessionStorage.setItem("token", response["token"]);
             sessionStorage.setItem("userName", user.username);
 
-            let responseLobby = await sendToLobby("000000", response["token"]);
+            window.location.pathname = "/lobbies";
+
+            //let responseLobby = await sendToLobby("000000", response["token"]);
         }
         else
         {
