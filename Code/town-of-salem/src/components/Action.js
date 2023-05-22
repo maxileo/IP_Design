@@ -7,7 +7,7 @@ function postData(data)
 {
     console.log(JSON.stringify(data));
 
-    fetch('http://localhost:3000/state/' + sessionStorage.getItem("lobbyId"), {
+    fetch('https:ip.tudorhutu.ro/state/' + sessionStorage.getItem("lobbyId"), {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
