@@ -26,23 +26,23 @@ async function handleSaveWillClick(lobbyId, token) {
 
 function Navbar(props) {
   let roleColor;
-  if (props.role === "mafioso" || props.role === "godfather") {
+  if (props.role === "Mafioso" || props.role === "Godfather") {
     roleColor = styles.mafiaTxt;
   } else if (
-      props.role === "framer" ||
-      props.role === "serialKiller" ||
-      props.role === "executioner" ||
-      props.role === "jester"
+      props.role === "Framer" ||
+      props.role === "SerialKiller" ||
+      props.role === "Executioner" ||
+      props.role === "Jester"
   ) {
     roleColor = styles.neutralTxt;
   } else if (
-      props.role === "sheriff" ||
-      props.role === "lookout" ||
-      props.role === "investigator" ||
-      props.role === "jailor" ||
-      props.role === "doctor" ||
-      props.role === "escort" ||
-      props.role === "medium"
+      props.role === "Sheriff" ||
+      props.role === "Lookout" ||
+      props.role === "Investigator" ||
+      props.role === "Jailor" ||
+      props.role === "Doctor" ||
+      props.role === "Escort" ||
+      props.role === "Medium"
   ) {
     roleColor = styles.townTxt;
   }
