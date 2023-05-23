@@ -13,7 +13,9 @@ import Signup from "./components/Signup";
 import Lobbies from './components/Lobbies';
 const { getChatRequest } = require('./functions/requests.js')
 const { getUserProfileRequest } = require('./functions/requests.js')
-//const { getState } = require('./functions/requests.js')
+const { getState } = require('./functions/requests.js')
+const { getLobbies } = require('./functions/requests.js')
+
 
 let lobbyId = "000000";
 let token = "";
@@ -47,8 +49,13 @@ function getToken(){
   return sessionStorage.getItem("token");
 }
 
+function getLobbyId(){
+  return sessionStorage.getItem("lobbyId");
+}
+
 let usersList = [];
 let rolesList = [];
+let lobbies = [];
 
 let currentGameState = {
   state: "lobby",
@@ -63,15 +70,15 @@ for (let i = 0; i < 13; i++)
 // VARIANTA DE TEST. PENTRU FINAL, PUR SI SIMPLU COMENTAT ASTA
 // SI FOLOSIT getState din requests.js, ( de decomentat sus )
 
-async function getState(lobbyId, token) {
-  let url = '../gameState.json';
-  try {
-      let res = await fetch(url);
-      return await res.json();
-  } catch (error) {
-      console.log(error);
-  }
-}
+// async function getState(lobbyId, token) {
+//   let url = '../gameState.json';
+//   try {
+//       let res = await fetch(url);
+//       return await res.json();
+//   } catch (error) {
+//       console.log(error);
+//   }
+// }
 
 
 let currentUser = {
@@ -80,6 +87,12 @@ let currentUser = {
 let timeLeftJson = 0;
 let judgedCharacter = "";
 let messages = [];
+
+async function createLobbies(token) {
+  let lobbiesJson = await getLobbies(token);
+
+  lobbies = lobbiesJson.lobbies;
+}
 
 async function createObjects(token) {
   let gameStateJson = await getState(lobbyId, token);
@@ -102,18 +115,20 @@ async function createObjects(token) {
   usersList = gameStateJson.users;
   for (let i = 0; i < usersList.length; i++)
   {
-    usersList[i].userId = usersList[i].username;
+    // usersList[i].userId = usersList[i].username;
     if (mapIdToUsers.get(usersList[i].userId) === undefined) {
-      let response = await getUserProfileRequest(usersList[i].userId, token);
-      //let response = 1;
-      if (response.errorStatus !== null && response.errorStatus !== undefined) {
-        mapIdToUsers.set(usersList[i].userId, response);
-        mapUsersToId.set(response, usersList[i].userId);
-      }
-      else
       {
-        mapIdToUsers.set(usersList[i].userId, "Casutuu" + usersList[i].userId);
-        mapUsersToId.set("Casutuu" + usersList[i].userId, usersList[i].userId);
+        let response = await getUserProfileRequest(usersList[i].userId, token);
+        //let response = 1;
+        if (response.errorStatus !== null && response.errorStatus !== undefined) {
+          mapIdToUsers.set(usersList[i].userId, "Casutuu" + usersList[i].userId);
+          mapUsersToId.set("Casutuu" + usersList[i].userId, usersList[i].userId);
+        }
+        else
+        {
+          mapIdToUsers.set(usersList[i].userId, response);
+          mapUsersToId.set(response, usersList[i].userId);
+        }
       }
     }
     usersList[i].userName = mapIdToUsers.get(usersList[i].userId);
@@ -129,22 +144,31 @@ async function createObjects(token) {
   if (currentGameState.state === "Discussion")
   {
     // request-ul aici, ar trebui schimbat 0 si 0 cu lobbyId si tokenUser
-    
+
     let newMessages = [];
     if (messages.length > 0)
       newMessages = await getChatRequest(lobbyId, messages[messages.length - 1].createdAt, token);
     else
-      newMessages = await getChatRequest(lobbyId, utcTimestamp - 10000, token);
-    
+      newMessages = await getChatRequest(lobbyId, 1, token);
+
     // add new messages
-    for (let message in newMessages)
+    if (!(newMessages.errorStatus !== null && newMessages.errorStatus !== undefined))
     {
-      if (!messages.includes(message))
+      for (let i = 0; i < newMessages.length; i++)
       {
-        messages.push(message);
+        if (newMessages[i].createdAt !== null && newMessages[i].createdAt !== undefined)
+        {
+          const exists = messages.some(item => (item.createdAt === newMessages[i].createdAt && item.content === newMessages[i].content));
+          if (!exists)
+              //if (!messages.includes(newMessages[i]))
+          {
+            newMessages[i].userName = mapIdToUsers.get(newMessages[i].userId);
+            messages.push(newMessages[i]);
+          }
+        }
       }
     }
-    
+
 
     // de test
     /*
@@ -180,6 +204,7 @@ async function createObjects(token) {
 
 function App() {
   token = getToken();
+  lobbyId = getLobbyId();
 
   const [gameState, setGameState] = useState(currentGameState);
   const [timeLeft, setTimeLeft] = useState();
@@ -191,9 +216,13 @@ function App() {
       const utcTimestamp = new Date().getTime();
       timeLeftJson = Math.floor((currentGameState.timeEndState - utcTimestamp) / 1000);
 
-      if (token !== undefined && token !== null) {
+      if (token !== undefined && token !== null && !window.location.pathname.startsWith("/lobbies")) {
         createObjects(token);
         setGameState(currentGameState);
+      }
+
+      if (token !== undefined && token !== null) {
+        createLobbies(token);
       }
 
       setTimeLeft(timeLeftJson);
@@ -229,13 +258,30 @@ function App() {
   else
   {
     if (window.location.pathname.startsWith("/lobbies")) {
-      return (
-        <div className='app'>
-          <div className="content">
-            <Lobbies/>
+      
+      if (lobbies.errorStatus !== null && lobbies.errorStatus !== undefined)
+      {
+        return (
+          <div className='app'>
+            <div className='content'></div>
           </div>
-        </div>
-      );
+        );
+      }
+      else
+      {
+        for (let i = 0; i < lobbies.length; i++)
+        {
+          lobbies[i].id = lobbies[i].joinCode;
+          lobbies[i].users = lobbies[i].noUsers;
+        }
+        return (
+          <div className='app'>
+            <div className="content">
+              <Lobbies lobbies = {lobbies}/>
+            </div>
+          </div>
+        );
+      }
     }
     else {
       createObjects(token);
@@ -247,7 +293,7 @@ function App() {
           <div className="app">
             <Navbar
               userName={currentUser.userName}
-              roleName={currentUser.roleName}
+              role={currentUser.role}
               lobbyId = {lobbyId}
               token = {token}
             />

@@ -13,13 +13,14 @@ async function handleCreateLobbyClick(token)
     window.location.pathname = "/game";
 }
 
-function handleCreateLobbyContainer(lobby, searchValue)
+function handleCreateLobbyContainer(lobby, searchValue, token)
 {
     if (lobby.id === searchValue || searchValue === "") {
         return (
             <LobbyContainer 
                 id = {lobby.id}
                 users = {lobby.users}
+                token = {token}
             />
         );
     }
@@ -37,7 +38,10 @@ function handleSearchClick(setSearchValue)
 function Lobbies(props)
 {
     const [searchValue, setSearchValue] = useState("");
+    lobbies = props.lobbies;
 
+    if (lobbies.length > 0)
+    {
     return (
         <div className={styles.lobbies}>
             <div className={styles.topBar}>
@@ -58,10 +62,14 @@ function Lobbies(props)
                 </div>
             </div>
             <div className={styles.lobbyContainerWrapper}>
-                {lobbies.map((lobby) => handleCreateLobbyContainer(lobby, searchValue) )}
+                {lobbies.map((lobby) => handleCreateLobbyContainer(lobby, searchValue, props.token) )}
             </div>
         </div>
     );
+    }
+    else {
+        return (<div></div>);
+    }
 }
 
 export default Lobbies;

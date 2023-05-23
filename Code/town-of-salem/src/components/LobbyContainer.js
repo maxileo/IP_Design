@@ -1,9 +1,17 @@
 import styles from '../css/lobbyContainer.module.css';
+const { sendToLobby } = require('../functions/requests.js')
 
 async function handleJoinLobbyClick(token, idLobby)
 {
-    //let response = await sendJoinLobbyRequest(idLobby, token);
-    window.location.pathname = "/game";
+    sessionStorage.setItem("lobbyId", idLobby);
+    token = sessionStorage.getItem("token");
+    console.log(token);
+    let response = await sendToLobby(idLobby, token);
+    setTimeout(() => {
+        window.location.pathname = "/game";
+    },
+        1000
+    );
 }
 
 

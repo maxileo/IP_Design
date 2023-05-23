@@ -9,12 +9,13 @@
  */
 
 // Temporary for testing
-//const baseUrl = "http://localhost:3001"
+// const baseUrl = "http://localhost:3000"
 //const baseUrl = "https://5db2-46-97-168-226.ngrok-free.app"
-const baseUrl = "http://192.168.43.218:3000"
-//const baseUrl = "https:ip.tudorhutu.ro"
+// const baseUrl = "http://192.168.43.218:3000"
+const baseUrl = "https:ip.tudorhutu.ro"
 
 const sendToLobby = async (lobbyId, token) => {
+    console.log(token);
     const response = await fetch(`${baseUrl}/lobbies/${lobbyId}`, {
         method: "POST", headers: {
             "Content-Type": "application/json", "Authorization": token
@@ -22,8 +23,7 @@ const sendToLobby = async (lobbyId, token) => {
     });
 
     if (response.ok) {
-        const json = await response.json();
-        return json;
+        return true;
     }
 
     return {errorStatus: response.status};
@@ -124,6 +124,7 @@ const getOwnProfileRequest = async (token) => {
  Return: If the request succeeds it will return the username of the user with specified user id.
  */
 const getUserProfileRequest = async (userId, token) => {
+    console.log("id user=" + userId);
     const response = await fetch(`${baseUrl}/profile?userId=${userId}`, {
         method: "GET", headers: {
             "Content-Type": "application/json", "Authorization": token
@@ -202,7 +203,7 @@ const getOwnWillRequest = async (lobbyId, token) => {
 
     if (response.ok) {
         const json = await response.json();
-        return json["content"];
+        return json["data"];
     }
 
     return {errorStatus: response.status};
@@ -225,7 +226,7 @@ const getUserWillRequest = async (lobbyId, userId, token) => {
 
     if (response.ok) {
         const json = await response.json();
-        return json["content"];
+        return json["data"];
     }
 
     return {errorStatus: response.status};
@@ -251,8 +252,7 @@ const updateWillRequest = async (lobbyId, time, will, token) => {
     });
 
     if (response.ok) {
-        const json = await response.json();
-        return json["content"];
+        return true;
     }
 
     return {errorStatus: response.status};
@@ -272,7 +272,22 @@ const startGameRequest = async (lobbyId, token) => {
     return {errorStatus: response.status};
 }
 
+const getLobbies = async (token) => {
+    const response = await fetch(`${baseUrl}/lobbies`, {
+        method: "GET", headers: {
+            "Content-Type": "application/json", "Authorization": token
+        },
+    });
+
+    if (response.ok) {
+        const json = await response.json();
+        return json;
+    }
+
+    return {errorStatus: response.status};
+}
+
 module.exports = {
     registerRequest, loginRequest, getOwnProfileRequest, getUserProfileRequest, sendMessageRequest, getChatRequest,
-    getOwnWillRequest, getUserWillRequest, updateWillRequest, getState, sendToLobby, startGameRequest
+    getOwnWillRequest, getUserWillRequest, updateWillRequest, getState, sendToLobby, startGameRequest, getLobbies
 }
