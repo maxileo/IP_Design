@@ -27,18 +27,21 @@ async function handleSendClick(target, gameState, currentUser, lobbyId, token)
 
 let infoText = "";
 let buttonText = "";
+let buttonPressed= false;
 
 function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersToId)
 {
     if (currentUser.isAlive && (gameState.state == "Voting" || gameState.state == "Selection" || gameState.state == "Night"))
     {
+        let descriptionElement = document.getElementsByClassName(styles.buttonBackground);
         let selectedUsers = Array.from(
             document.getElementsByClassName(stylesUser.selected)
         );
 
         if (selectedUsers.length > 0 || gameState.state == "Voting")
         {
-
+            descriptionElement[0].style.display = "none";
+            buttonPressed = true;
             let data = {
                 userId: "",
                 targets: []
@@ -77,6 +80,8 @@ function Action(props)
         infoText = "You have chosen:";
         if (selectedUsers.length == 0)
             infoText = "Choose someone from the Players list";
+        if (buttonPressed === true)
+            infoText = "YOU SELECTED";
         buttonText = "SELECT";
     }
     if (props.gameState.state == "Voting") {
@@ -90,6 +95,8 @@ function Action(props)
         );
         if (selectedUsers.length == 0)
             infoText = "Choose someone from the Players list";
+        if (buttonPressed === true)
+            infoText = `YOU CHOSE TO ${props.currentUser.actionText}`;
         buttonText = props.currentUser.actionText;
     }
 
@@ -104,7 +111,7 @@ function Action(props)
                     <div className={styles.selectedUser} style={{display: 'none'}}>User2</div>
                 </div>
             </div>
-            <div className={styles.buttonBackground}>
+            <div className={styles.buttonBackground} style={{display: 'block'}}>
                 <button 
                     onClick={e => handleClick(e.target, props.gameState, props.currentUser, props.judgedCharacter, props.mapUsersToId)}
                     id={styles.action}>{buttonText}
@@ -120,7 +127,7 @@ function Action(props)
                 <textarea 
                     autoComplete="off" placeholder="..." spellCheck="false" id={styles.messageTextArea}> 
                 </textarea>
-                <div className={styles.buttonBackground}>
+                <div className={styles.buttonBackground} style={{display: 'block'}}>
                     <button 
                         onClick={e => handleSendClick(e.target, props.gameState, props.currentUser, props.lobbyId, props.token)}
                         id={styles.action}>Send
