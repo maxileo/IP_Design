@@ -146,7 +146,8 @@
     margin-bottom: 0.5rem;
     margin-left: 0.5rem;
 
-    color: #FBDA7D;
+    z-index: 10;
+    color: rgba(197,54,26,1);
 }
 
 #userWill{
