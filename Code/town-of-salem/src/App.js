@@ -1,28 +1,26 @@
-import './App.css';
-import UserList from './components/UserList.js';
-import Action from './components/Action.js';
-import RoleList from './components/RoleList.js';
-import {useEffect, useState} from "react";
-import {makeRole} from './functions/roleFunctions';
+import "./App.css";
+import UserList from "./components/UserList.js";
+import Action from "./components/Action.js";
+import RoleList from "./components/RoleList.js";
+import { useEffect, useState } from "react";
+import { makeRole } from "./functions/roleFunctions";
 import InfoAlert from "./components/InfoAlert";
 import Lobby from "./components/Lobby";
-import Navbar from './components/Navbar';
-import Chat from './components/Chat';
+import Navbar from "./components/Navbar";
+import Chat from "./components/Chat";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import Lobbies from './components/Lobbies';
-const { getChatRequest } = require('./functions/requests.js')
-const { getUserProfileRequest } = require('./functions/requests.js')
-const { getState } = require('./functions/requests.js')
-const { getLobbies } = require('./functions/requests.js')
-
+import Lobbies from "./components/Lobbies";
+const { getChatRequest } = require("./functions/requests.js");
+const { getUserProfileRequest } = require("./functions/requests.js");
+// const { getState } = require('./functions/requests.js')
+const { getLobbies } = require("./functions/requests.js");
 
 let lobbyId = "000000";
 let token = "";
 
 const mapIdToUsers = new Map();
 const mapUsersToId = new Map();
-
 
 function makeUser() {
   let user = {
@@ -35,21 +33,21 @@ function makeUser() {
 
 let userName = "";
 
-function setName(name){
+function setName(name) {
   userName = name;
   console.log("Am setat username: " + userName);
   sessionStorage.setItem("userName", userName);
 }
 
-function getName(){
+function getName() {
   return sessionStorage.getItem("userName");
 }
 
-function getToken(){
+function getToken() {
   return sessionStorage.getItem("token");
 }
 
-function getLobbyId(){
+function getLobbyId() {
   return sessionStorage.getItem("lobbyId");
 }
 
@@ -59,30 +57,28 @@ let lobbies = [];
 
 let currentGameState = {
   state: "lobby",
-  timeEndState: 30
+  timeEndState: 30,
 };
 
-for (let i = 0; i < 13; i++)
-{
+for (let i = 0; i < 13; i++) {
   rolesList.push(makeRole(i));
 }
 
 // VARIANTA DE TEST. PENTRU FINAL, PUR SI SIMPLU COMENTAT ASTA
 // SI FOLOSIT getState din requests.js, ( de decomentat sus )
 
-// async function getState(lobbyId, token) {
-//   let url = '../gameState.json';
-//   try {
-//       let res = await fetch(url);
-//       return await res.json();
-//   } catch (error) {
-//       console.log(error);
-//   }
-// }
-
+async function getState(lobbyId, token) {
+  let url = "../gameState.json";
+  try {
+    let res = await fetch(url);
+    return await res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 let currentUser = {
-  userName: "Casu"
+  userName: "Casu",
 };
 let timeLeftJson = 0;
 let judgedCharacter = "";
@@ -102,76 +98,94 @@ async function createObjects(token) {
 
   currentGameState = {
     state: "",
-    timeEndState: 0
+    timeEndState: 0,
   };
   currentGameState.state = gameStateJson.state;
   currentGameState.timeEndState = gameStateJson.timeEndState;
 
-  if (gameStateJson.state !== "Lobby")
-  {
-
-  currentUser = gameStateJson.currentUser;
-  currentUser.userName = getName();
-  usersList = gameStateJson.users;
-  for (let i = 0; i < usersList.length; i++)
-  {
-    // usersList[i].userId = usersList[i].username;
-    if (mapIdToUsers.get(usersList[i].userId) === undefined) {
-      {
-        let response = await getUserProfileRequest(usersList[i].userId, token);
-        //let response = 1;
-        if (response.errorStatus !== null && response.errorStatus !== undefined) {
-          mapIdToUsers.set(usersList[i].userId, "Casutuu" + usersList[i].userId);
-          mapUsersToId.set("Casutuu" + usersList[i].userId, usersList[i].userId);
-        }
-        else
+  if (gameStateJson.state !== "Lobby") {
+    currentUser = gameStateJson.currentUser;
+    currentUser.userName = getName();
+    usersList = gameStateJson.users;
+    for (let i = 0; i < usersList.length; i++) {
+      // usersList[i].userId = usersList[i].username;
+      if (mapIdToUsers.get(usersList[i].userId) === undefined) {
         {
-          mapIdToUsers.set(usersList[i].userId, response);
-          mapUsersToId.set(response, usersList[i].userId);
-        }
-      }
-    }
-    usersList[i].userName = mapIdToUsers.get(usersList[i].userId);
-  }
-
-  judgedCharacter = gameStateJson.judgedCharacter;
-  judgedCharacter = mapIdToUsers.get(judgedCharacter);
-
-  const utcTimestamp = new Date().getTime();
-  timeLeftJson = Math.floor((currentGameState.timeEndState - utcTimestamp) / 1000);
-  console.log(timeLeftJson);
-
-  if (currentGameState.state === "Discussion")
-  {
-    // request-ul aici, ar trebui schimbat 0 si 0 cu lobbyId si tokenUser
-
-    let newMessages = [];
-    if (messages.length > 0)
-      newMessages = await getChatRequest(lobbyId, messages[messages.length - 1].createdAt, token);
-    else
-      newMessages = await getChatRequest(lobbyId, 1, token);
-
-    // add new messages
-    if (!(newMessages.errorStatus !== null && newMessages.errorStatus !== undefined))
-    {
-      for (let i = 0; i < newMessages.length; i++)
-      {
-        if (newMessages[i].createdAt !== null && newMessages[i].createdAt !== undefined)
-        {
-          const exists = messages.some(item => (item.createdAt === newMessages[i].createdAt && item.content === newMessages[i].content));
-          if (!exists)
-              //if (!messages.includes(newMessages[i]))
-          {
-            newMessages[i].userName = mapIdToUsers.get(newMessages[i].userId);
-            messages.push(newMessages[i]);
+          let response = await getUserProfileRequest(
+            usersList[i].userId,
+            token
+          );
+          //let response = 1;
+          if (
+            response.errorStatus !== null &&
+            response.errorStatus !== undefined
+          ) {
+            mapIdToUsers.set(
+              usersList[i].userId,
+              "Casutuu" + usersList[i].userId
+            );
+            mapUsersToId.set(
+              "Casutuu" + usersList[i].userId,
+              usersList[i].userId
+            );
+          } else {
+            mapIdToUsers.set(usersList[i].userId, response);
+            mapUsersToId.set(response, usersList[i].userId);
           }
         }
       }
+      usersList[i].userName = mapIdToUsers.get(usersList[i].userId);
     }
 
+    judgedCharacter = gameStateJson.judgedCharacter;
+    judgedCharacter = mapIdToUsers.get(judgedCharacter);
 
-    // de test
-    /*
+    const utcTimestamp = new Date().getTime();
+    timeLeftJson = Math.floor(
+      (currentGameState.timeEndState - utcTimestamp) / 1000
+    );
+    console.log(timeLeftJson);
+
+    if (currentGameState.state === "Discussion") {
+      // request-ul aici, ar trebui schimbat 0 si 0 cu lobbyId si tokenUser
+
+      let newMessages = [];
+      if (messages.length > 0)
+        newMessages = await getChatRequest(
+          lobbyId,
+          messages[messages.length - 1].createdAt,
+          token
+        );
+      else newMessages = await getChatRequest(lobbyId, 1, token);
+
+      // add new messages
+      if (
+        !(
+          newMessages.errorStatus !== null &&
+          newMessages.errorStatus !== undefined
+        )
+      ) {
+        for (let i = 0; i < newMessages.length; i++) {
+          if (
+            newMessages[i].createdAt !== null &&
+            newMessages[i].createdAt !== undefined
+          ) {
+            const exists = messages.some(
+              (item) =>
+                item.createdAt === newMessages[i].createdAt &&
+                item.content === newMessages[i].content
+            );
+            if (!exists) {
+              //if (!messages.includes(newMessages[i]))
+              newMessages[i].userName = mapIdToUsers.get(newMessages[i].userId);
+              messages.push(newMessages[i]);
+            }
+          }
+        }
+      }
+
+      // de test
+      /*
     messages = [
       {
         userName: "Mihai",
@@ -191,13 +205,13 @@ async function createObjects(token) {
     ];
     */
 
-    // sort messages by createdAt field
-    messages.sort(function(a, b) {
-      if (a.createdAt < b.createdAt) return -1;
-      if (a.createdAt > b.createdAt) return 1;
-      return 0;
-    });
-  }
+      // sort messages by createdAt field
+      messages.sort(function (a, b) {
+        if (a.createdAt < b.createdAt) return -1;
+        if (a.createdAt > b.createdAt) return 1;
+        return 0;
+      });
+    }
   }
   return 1;
 }
@@ -214,9 +228,15 @@ function App() {
       token = getToken();
 
       const utcTimestamp = new Date().getTime();
-      timeLeftJson = Math.floor((currentGameState.timeEndState - utcTimestamp) / 1000);
+      timeLeftJson = Math.floor(
+        (currentGameState.timeEndState - utcTimestamp) / 1000
+      );
 
-      if (token !== undefined && token !== null && !window.location.pathname.startsWith("/lobbies")) {
+      if (
+        token !== undefined &&
+        token !== null &&
+        !window.location.pathname.startsWith("/lobbies")
+      ) {
         createObjects(token);
         setGameState(currentGameState);
       }
@@ -226,76 +246,62 @@ function App() {
       }
 
       setTimeLeft(timeLeftJson);
-      
     }, 1000);
 
     return () => clearTimeout(timer);
   });
 
-  if (token === null)
-  {
+  if (token === null) {
     //console.log(window.location.pathname);
     if (window.location.pathname.startsWith("/signup")) {
       return (
-        <div className='app'>
+        <div className="app">
           <div className="content">
-            <Signup/>
+            <Signup />
           </div>
         </div>
       );
-    }
-    else
-    {
+    } else {
       return (
-        <div className='app'>
+        <div className="app">
           <div className="content">
-            <Login/>
+            <Login />
           </div>
         </div>
       );
     }
-  }
-  else
-  {
+  } else {
     if (window.location.pathname.startsWith("/lobbies")) {
-      
-      if (lobbies.errorStatus !== null && lobbies.errorStatus !== undefined)
-      {
+      if (lobbies.errorStatus !== null && lobbies.errorStatus !== undefined) {
         return (
-          <div className='app'>
-            <div className='content'></div>
+          <div className="app">
+            <div className="content"></div>
           </div>
         );
-      }
-      else
-      {
-        for (let i = 0; i < lobbies.length; i++)
-        {
+      } else {
+        for (let i = 0; i < lobbies.length; i++) {
           lobbies[i].id = lobbies[i].joinCode;
           lobbies[i].users = lobbies[i].noUsers;
         }
         return (
-          <div className='app'>
+          <div className="app">
             <div className="content">
-              <Lobbies lobbies = {lobbies}/>
+              <Lobbies lobbies={lobbies} />
             </div>
           </div>
         );
       }
-    }
-    else {
+    } else {
       createObjects(token);
 
-
-      if (gameState.state != "Lobby")
-      {
+      if (gameState.state != "Lobby") {
         return (
           <div className="app">
             <Navbar
               userName={currentUser.userName}
               role={currentUser.role}
-              lobbyId = {lobbyId}
-              token = {token}
+              lobbyId={lobbyId}
+              token={token}
             />
             <div className="content">
               <InfoAlert
@@ -307,25 +313,22 @@ function App() {
 
               <div className="userList-action">
                 <div className="chat-users-container">
-                  <Chat 
-                    messages={messages}
-                    currentUser={currentUser}
-                  />
+                  <Chat messages={messages} currentUser={currentUser} />
                   <UserList
                     usersList={usersList}
                     gameState={gameState}
                     currentUser={currentUser}
-                    lobbyId = {lobbyId}
-                    token = {token}
+                    lobbyId={lobbyId}
+                    token={token}
                   />
                 </div>
                 <Action
                   gameState={gameState}
                   currentUser={currentUser}
                   judgedCharacter={judgedCharacter}
-                  mapUsersToId = {mapUsersToId}
-                  lobbyId = {lobbyId}
-                  token = {token}
+                  mapUsersToId={mapUsersToId}
+                  lobbyId={lobbyId}
+                  token={token}
                 />
               </div>
 
@@ -334,13 +337,11 @@ function App() {
               </div>
             </div>
           </div>
-      );
-      }
-      else
-      {
+        );
+      } else {
         return (
-          <div className='app'>
-            <Lobby setName = {setName} token = {token} lobbyId = {lobbyId}/>
+          <div className="app">
+            <Lobby setName={setName} token={token} lobbyId={lobbyId} />
           </div>
         );
       }
