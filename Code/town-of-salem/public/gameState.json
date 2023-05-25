@@ -46,9 +46,8 @@
       "nrVotes": 0
     }
   ],
-
   "currentUser": {
-    "userName": "Casu",
+    "userName": "Casutuu2",
     "roleName": "mafioso",
     "actionText": "KILL",
     "nrOfSelection": 1,
@@ -56,9 +55,8 @@
     "nightResults": ["You died", "Your role was blocked"]
   },
 
-  "state": "Discussion",
+  "state": "Lobby",
 
   "timeEndState": 1682300005,
-
   "judgedCharacter": "8"
 }

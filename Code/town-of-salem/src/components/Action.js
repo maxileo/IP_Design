@@ -4,8 +4,7 @@ import stylesAction from '../css/action.module.css';
 import React, { useState, useEffect } from 'react';
 const { sendMessageRequest } = require('../functions/requests.js')
 
-function postData(data) 
-{
+function postData(data) {
     console.log(JSON.stringify(data));
 
     fetch('https:ip.tudorhutu.ro/state/' + sessionStorage.getItem("lobbyId"), {
@@ -18,21 +17,19 @@ function postData(data)
     });
 }
 
-async function handleSendClick(target, gameState, currentUser, lobbyId, token)
-{
+async function handleSendClick(target, gameState, currentUser, lobbyId, token) {
     let textArea = document.getElementById(styles.messageTextArea);
 
     let response = await sendMessageRequest(lobbyId, textArea.value, token);
     console.log(response);
+    textArea.value = "";
 }
 
 let infoText = "";
 let buttonText = "";
 
-function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersToId,setButtonPressed)
-{
-    if (currentUser.isAlive && (gameState.state == "Voting" || gameState.state == "Selection" || gameState.state == "Night"))
-    {
+function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersToId, setButtonPressed) {
+    if (currentUser.isAlive && (gameState.state == "Voting" || gameState.state == "Selection" || gameState.state == "Night")) {
         let descriptionElement = document.getElementsByClassName(styles.buttonBackground);
         let selectedUsers = Array.from(
             document.getElementsByClassName(stylesUser.selected)
@@ -50,21 +47,18 @@ function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersTo
             data.userId = currentUser.userName;
             //data.userId = currentUser.userId;
 
-            if (gameState.state == "Voting")
-            {
+            if (gameState.state == "Voting") {
                 data.targets.push(mapUsersToId.get(judgedCharacter));
                 //data.targets.push(judgedCharacter);
             }
-            else
-            {
-                let selectedUsersAction = Array.from( document.getElementsByClassName(stylesAction.selectedUser));
-                for (let i = 0; i < selectedUsers.length; i++)
-                {
+            else {
+                let selectedUsersAction = Array.from(document.getElementsByClassName(stylesAction.selectedUser));
+                for (let i = 0; i < selectedUsers.length; i++) {
                     data.targets.push(mapUsersToId.get(selectedUsersAction[i].innerText));
                     //data.targets.push(selectedUsersAction[i].innerText);
                 }
             }
-            
+
             let userList = document.getElementsByClassName(stylesUser.listUserName);
             for (let i = 0; i < userList.length; i++) {
                 userList[i].disabled = true;
@@ -76,8 +70,7 @@ function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersTo
 
 }
 
-function Action(props)
-{
+function Action(props) {
     const [buttonPressed, setButtonPressed] = useState(false);
 
     useEffect(() => {
@@ -88,7 +81,7 @@ function Action(props)
             userList[i].disabled = false;
         }
         setButtonPressed(false);
-      }, [props.gameState.state]);
+    }, [props.gameState.state]);
 
     if (props.gameState.state == "Selection") {
         let selectedUsers = Array.from(
@@ -153,21 +146,24 @@ function Action(props)
             if(props.currentUser.isAlive === true)
         return (
             <div className={styles.actionContainer}>
-                <textarea 
-                    autoComplete="off" placeholder="..." spellCheck="false" id={styles.messageTextArea}> 
-                </textarea>
-                <div className={styles.buttonBackground} style={{display: 'block'}}>
-                    <button 
-                        onClick={e => handleSendClick(e.target, props.gameState, props.currentUser, props.lobbyId, props.token)}
-                        id={styles.action}>Send
+                <div className={styles.selectedContainer}>
+                    <h3 id={styles.selectedTxt} >{infoText}</h3>
+                    <div id={styles.usersSelected}>
+                        <div className={styles.selectedUser} style={{ display: 'none' }}>User1</div>
+                        <div className={styles.selectedUser} style={{ display: 'none' }}>User2</div>
+                    </div>
+                </div>
+                <div className={styles.buttonBackground} style={{ display: 'block' }}>
+                    <button
+                        onClick={e => handleClick(e.target, props.gameState, props.currentUser, props.judgedCharacter, props.mapUsersToId, setButtonPressed)}
+                        id={styles.action}>{buttonText}
                     </button>
                 </div>
             </div>
-
-        );}
+        );
     }
-    else
-    {
+    }
+    else {
         return (
             <div></div>
         );
