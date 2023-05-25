@@ -1,6 +1,7 @@
 import styles from '../css/action.module.css';
 import stylesUser from '../css/users.module.css';
 import stylesAction from '../css/action.module.css';
+import React, { useState, useEffect } from 'react';
 const { sendMessageRequest } = require('../functions/requests.js')
 
 function postData(data) 
@@ -27,9 +28,8 @@ async function handleSendClick(target, gameState, currentUser, lobbyId, token)
 
 let infoText = "";
 let buttonText = "";
-let buttonPressed= false;
 
-function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersToId)
+function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersToId,setButtonPressed)
 {
     if (currentUser.isAlive && (gameState.state == "Voting" || gameState.state == "Selection" || gameState.state == "Night"))
     {
@@ -41,7 +41,7 @@ function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersTo
         if (selectedUsers.length > 0 || gameState.state == "Voting")
         {
             descriptionElement[0].style.display = "none";
-            buttonPressed = true;
+            setButtonPressed(true);
             let data = {
                 userId: "",
                 targets: []
@@ -65,6 +65,10 @@ function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersTo
                 }
             }
             
+            let userList = document.getElementsByClassName(stylesUser.listUserName);
+            for (let i = 0; i < userList.length; i++) {
+                userList[i].disabled = true;
+            }
 
             postData(data);
         }
@@ -73,6 +77,18 @@ function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersTo
 
 function Action(props)
 {
+    const [buttonPressed, setButtonPressed] = useState(false);
+
+    useEffect(() => {
+        const selectedUsers = Array.from(document.getElementsByClassName(stylesUser.selected));
+        selectedUsers.forEach(user => user.classList.remove(stylesUser.selected));
+        let userList = document.getElementsByClassName(stylesUser.listUserName);
+        for (let i = 0; i < userList.length; i++) {
+            userList[i].disabled = false;
+        }
+        setButtonPressed(false);
+      }, [props.gameState.state]);
+
     if (props.gameState.state == "Selection") {
         let selectedUsers = Array.from(
             document.getElementsByClassName(stylesUser.selected)
@@ -113,7 +129,7 @@ function Action(props)
             </div>
             <div className={styles.buttonBackground} style={{display: 'block'}}>
                 <button 
-                    onClick={e => handleClick(e.target, props.gameState, props.currentUser, props.judgedCharacter, props.mapUsersToId)}
+                    onClick={e => handleClick(e.target, props.gameState, props.currentUser, props.judgedCharacter, props.mapUsersToId, setButtonPressed)}
                     id={styles.action}>{buttonText}
                 </button>
             </div>
