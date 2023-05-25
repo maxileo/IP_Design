@@ -12,7 +12,7 @@
 // const baseUrl = "http://localhost:3000"
 //const baseUrl = "https://5db2-46-97-168-226.ngrok-free.app"
 // const baseUrl = "http://192.168.43.218:3000"
-const baseUrl = "https:ip.tudorhutu.ro"
+const baseUrl = "https://townofsalem-backend.tedyst.ro"
 
 const sendToLobby = async (lobbyId, token) => {
     console.log(token);
@@ -26,7 +26,7 @@ const sendToLobby = async (lobbyId, token) => {
         return true;
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 
@@ -42,7 +42,7 @@ const getState = async (lobbyId, token) => {
         return json;
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 /*
@@ -67,7 +67,7 @@ const registerRequest = async (username, password) => {
         return json;
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 /*
@@ -92,7 +92,7 @@ const loginRequest = async (username, password) => {
         return json;
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 /*
@@ -113,7 +113,7 @@ const getOwnProfileRequest = async (token) => {
         return json["username"];
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 /*
@@ -136,7 +136,7 @@ const getUserProfileRequest = async (userId, token) => {
         return json["username"];
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 /*
@@ -160,7 +160,7 @@ const sendMessageRequest = async (lobbyId, message, token) => {
         return true;
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 /*
@@ -184,7 +184,7 @@ const getChatRequest = async (lobbyId, lastRequestTime, token) => {
         return json["messages"];
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 /*
@@ -206,7 +206,7 @@ const getOwnWillRequest = async (lobbyId, token) => {
         return json["data"];
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 /*
@@ -229,7 +229,7 @@ const getUserWillRequest = async (lobbyId, userId, token) => {
         return json["data"];
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 /*
@@ -255,7 +255,7 @@ const updateWillRequest = async (lobbyId, time, will, token) => {
         return true;
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 const startGameRequest = async (lobbyId, token) => {
@@ -269,7 +269,7 @@ const startGameRequest = async (lobbyId, token) => {
         return true;
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 const getLobbies = async (token) => {
@@ -284,7 +284,7 @@ const getLobbies = async (token) => {
         return json;
     }
 
-    return {errorStatus: response.status};
+    return { errorStatus: response.status };
 }
 
 module.exports = {

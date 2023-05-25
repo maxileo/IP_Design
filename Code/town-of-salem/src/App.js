@@ -13,7 +13,7 @@ import Signup from "./components/Signup";
 import Lobbies from "./components/Lobbies";
 const { getChatRequest } = require("./functions/requests.js");
 const { getUserProfileRequest } = require("./functions/requests.js");
-// const { getState } = require('./functions/requests.js')
+// const { getState } = require('./functions/requests.js');
 const { getLobbies } = require("./functions/requests.js");
 
 let lobbyId = "000000";
