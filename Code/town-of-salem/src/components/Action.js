@@ -39,7 +39,7 @@ function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersTo
         );
 
         if (selectedUsers.length > 0 || gameState.state == "Voting")
-        {
+        {  
             descriptionElement[0].style.display = "none";
             setButtonPressed(true);
             let data = {
@@ -73,6 +73,7 @@ function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersTo
             postData(data);
         }
     }
+
 }
 
 function Action(props)
@@ -104,6 +105,7 @@ function Action(props)
         infoText = "Choose if " + props.judgedCharacter + " is guilty";
         buttonText = "GUILTY";
     }
+
     if (props.gameState.state == "Night") {
         infoText = "You have chosen:";
         let selectedUsers = Array.from(
@@ -137,7 +139,18 @@ function Action(props)
     );
     }
     else if (props.gameState.state === "Discussion")
-    {
+    { 
+        if(props.currentUser.isAlive === false)
+        return (
+            <div className={styles.actionContainer}>
+                <textarea 
+                     disabled = "true"  autoComplete="off" placeholder="You are dead, you can't send message anymore..." spellCheck="false" id={styles.messageTextArea}> 
+                </textarea>
+            </div>
+
+        );
+        else{
+            if(props.currentUser.isAlive === true)
         return (
             <div className={styles.actionContainer}>
                 <textarea 
@@ -151,7 +164,7 @@ function Action(props)
                 </div>
             </div>
 
-        );
+        );}
     }
     else
     {
