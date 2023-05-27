@@ -55,7 +55,7 @@
     "nightResults": ["You died", "Your role was blocked"]
   },
 
-  "state": "Lobby",
+  "state": "Discussion",
 
   "timeEndState": 1682300005,
   "judgedCharacter": "8"

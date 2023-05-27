@@ -13,7 +13,7 @@ import Signup from "./components/Signup";
 import Lobbies from "./components/Lobbies";
 const { getChatRequest } = require("./functions/requests.js");
 const { getUserProfileRequest } = require("./functions/requests.js");
-const { getState } = require('./functions/requests.js')
+//const { getState } = require('./functions/requests.js')
 const { getLobbies } = require("./functions/requests.js");
 
 let lobbyId = "000000";
@@ -67,15 +67,15 @@ for (let i = 0; i < 13; i++) {
 // VARIANTA DE TEST. PENTRU FINAL, PUR SI SIMPLU COMENTAT ASTA
 //SI FOLOSIT getState din requests.js, ( de decomentat sus )
 
-// async function getState(lobbyId, token) {
-//   let url = "../gameState.json";
-//   try {
-//     let res = await fetch(url);
-//     return await res.json();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+async function getState(lobbyId, token) {
+  let url = "../gameState.json";
+  try {
+    let res = await fetch(url);
+    return await res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 let currentUser = {
   userName: "Casu",

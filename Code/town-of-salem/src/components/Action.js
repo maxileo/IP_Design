@@ -144,23 +144,20 @@ function Action(props) {
         );
         else{
             if(props.currentUser.isAlive === true)
-        return (
-            <div className={styles.actionContainer}>
-                <div className={styles.selectedContainer}>
-                    <h3 id={styles.selectedTxt} >{infoText}</h3>
-                    <div id={styles.usersSelected}>
-                        <div className={styles.selectedUser} style={{ display: 'none' }}>User1</div>
-                        <div className={styles.selectedUser} style={{ display: 'none' }}>User2</div>
+            return (
+                <div className={styles.actionContainer}>
+                    <textarea 
+                        autoComplete="off" placeholder="..." spellCheck="false" id={styles.messageTextArea}> 
+                    </textarea>
+                    <div className={styles.buttonBackground}>
+                        <button 
+                            onClick={e => handleSendClick(e.target, props.gameState, props.currentUser, props.lobbyId, props.token)}
+                            id={styles.action}>Send
+                        </button>
                     </div>
                 </div>
-                <div className={styles.buttonBackground} style={{ display: 'block' }}>
-                    <button
-                        onClick={e => handleClick(e.target, props.gameState, props.currentUser, props.judgedCharacter, props.mapUsersToId, setButtonPressed)}
-                        id={styles.action}>{buttonText}
-                    </button>
-                </div>
-            </div>
-        );
+    
+            );
     }
     }
     else {
