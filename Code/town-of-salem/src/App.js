@@ -210,7 +210,7 @@ function App() {
   const [timeLeft, setTimeLeft] = useState();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const interval = setInterval(() => {
       token = getToken();
 
       const utcTimestamp = new Date().getTime();
@@ -229,8 +229,8 @@ function App() {
       
     }, 1000);
 
-    return () => clearTimeout(timer);
-  });
+    return () => clearInterval(interval)
+  }, []);
 
   if (token === null)
   {
@@ -284,9 +284,6 @@ function App() {
       }
     }
     else {
-      createObjects(token);
-
-
       if (gameState.state != "Lobby")
       {
         return (

@@ -9,10 +9,10 @@
  */
 
 // Temporary for testing
-// const baseUrl = "http://localhost:3000"
+// const baseUrl = "http://localhost:3000"  
 //const baseUrl = "https://5db2-46-97-168-226.ngrok-free.app"
 // const baseUrl = "http://192.168.43.218:3000"
-const baseUrl = "https:ip.tudorhutu.ro"
+const baseUrl = process.env.REACT_APP_API_BASE_URL
 
 const sendToLobby = async (lobbyId, token) => {
     console.log(token);
