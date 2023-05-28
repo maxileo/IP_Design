@@ -258,10 +258,10 @@ const updateWillRequest = async (lobbyId, time, will, token) => {
     return {errorStatus: response.status};
 }
 
-const createNewLobby = async () => {
+const createNewLobby = async (token) => {
     const response = await fetch(`${baseUrl}/lobbies`, {
         method: "POST", headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json", "Authorization": token
         }
     });
 

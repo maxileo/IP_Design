@@ -1,6 +1,7 @@
 import styles from '../css/lobbies.module.css';
 import LobbyContainer from './LobbyContainer';
 import { useState } from "react";
+const { createNewLobby } = require('../functions/requests.js')
 
 
 let lobbies = [{id: "ABC-DEF", users: 7}];
@@ -9,8 +10,8 @@ for (let i = 0; i < 20; i++)
 
 async function handleCreateLobbyClick(token)
 {
-    //let response = await sendCreateLobbyRequest(token);
-    window.location.pathname = "/game";
+    let response = await createNewLobby(token);
+    //window.location.pathname = "/game";
 }
 
 function handleCreateLobbyContainer(lobby, searchValue, token)

@@ -277,7 +277,7 @@ function App() {
         return (
           <div className='app'>
             <div className="content">
-              <Lobbies lobbies = {lobbies}/>
+              <Lobbies lobbies = {lobbies} token={token}/>
             </div>
           </div>
         );
