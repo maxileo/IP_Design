@@ -258,6 +258,20 @@ const updateWillRequest = async (lobbyId, time, will, token) => {
     return {errorStatus: response.status};
 }
 
+const createNewLobby = async () => {
+    const response = await fetch(`${baseUrl}/lobbies`, {
+        method: "POST", headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if (response.ok) {
+        return true;
+    }
+
+    return {errorStatus: response.status};
+}
+
 const startGameRequest = async (lobbyId, token) => {
     const response = await fetch(`${baseUrl}/state/${lobbyId}/start_game`, {
         method: "POST", headers: {
@@ -289,5 +303,5 @@ const getLobbies = async (token) => {
 
 module.exports = {
     registerRequest, loginRequest, getOwnProfileRequest, getUserProfileRequest, sendMessageRequest, getChatRequest,
-    getOwnWillRequest, getUserWillRequest, updateWillRequest, getState, sendToLobby, startGameRequest, getLobbies
+    getOwnWillRequest, getUserWillRequest, updateWillRequest, getState, sendToLobby, startGameRequest, getLobbies, createNewLobby
 }
