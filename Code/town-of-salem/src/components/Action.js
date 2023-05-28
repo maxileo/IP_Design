@@ -7,7 +7,7 @@ function postData(data)
 {
     console.log(JSON.stringify(data));
 
-    fetch('https:ip.tudorhutu.ro/state/' + sessionStorage.getItem("lobbyId"), {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/state/` + sessionStorage.getItem("lobbyId"), {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
