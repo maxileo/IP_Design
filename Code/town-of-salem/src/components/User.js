@@ -1,13 +1,11 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../css/users.module.css';
 import stylesAction from '../css/action.module.css';
 const { getUserWillRequest } = require('../functions/requests.js')
 
-function handleClick(target, user, currentUser, gameState)
-{
+function handleClick(target, user, currentUser, gameState) {
     let nrMaxSelection = currentUser.nrOfSelection;
-    if (user.isAlive && (gameState.state == "Selection" || gameState.state == "Night"))
-    {
+    if (user.isAlive && (gameState.state == "Selection" || gameState.state == "Night")) {
         let selectedUsers = Array.from(
             document.getElementsByClassName(styles.selected)
         );
@@ -16,11 +14,11 @@ function handleClick(target, user, currentUser, gameState)
 
         // if (selectedUsers.length < nrMaxSelection || target.classList.contains(styles.selected))
         //     target.classList.toggle(styles.selected);
-        if (nrMaxSelection === 1){
-            if(selectedUsers[0] !== target)
+        if (nrMaxSelection === 1) {
+            if (selectedUsers[0] !== target)
                 selectedUsers[0]?.classList.toggle(styles.selected);
             target.classList.toggle(styles.selected);
-        } else if (nrMaxSelection === 2){
+        } else if (nrMaxSelection === 2) {
             selectedUsers[1] = selectedUsers[0];
             selectedUsers[0] = target;
             selectedUsers[1]?.classList.toggle(styles.selected);
@@ -33,21 +31,18 @@ function handleClick(target, user, currentUser, gameState)
             document.getElementsByClassName(styles.selected)
         );
 
-        let selectedUsersAction = Array.from( document.getElementsByClassName(stylesAction.selectedUser));
-        for (let i = 0; i < selectedUsers.length; i++)
-        {
+        let selectedUsersAction = Array.from(document.getElementsByClassName(stylesAction.selectedUser));
+        for (let i = 0; i < selectedUsers.length; i++) {
             selectedUsersAction[i].style.display = "block";
             selectedUsersAction[i].innerText = selectedUsers[i].innerText;
         }
-        for (let i = selectedUsers.length; i < nrMaxSelection; i++)
-        {
+        for (let i = selectedUsers.length; i < nrMaxSelection; i++) {
             selectedUsersAction[i].style.display = "none";
         }
     }
 }
 
-async function handleDeadClick(target, lobbyId, token, userId)
-{
+async function handleDeadClick(target, lobbyId, token, userId) {
     console.log("cer will pt " + userId);
     let userName = target.parentElement.firstChild.innerText;
     let willElement = document.getElementById(styles.willContainer);
@@ -61,9 +56,8 @@ async function handleDeadClick(target, lobbyId, token, userId)
     //willText.innerText = "This is the will of user: " + userName;
 }
 
-function User(props)
-{
-    if(props.gameState.state === "Discussion") {
+function User(props) {
+    if (props.gameState.state === "Discussion") {
         const selectedUsers = Array.from(
             document.getElementsByClassName(styles.selected)
         );
@@ -73,16 +67,16 @@ function User(props)
 
     return (
         <div className={styles.userContainer}>
-            <div className = {styles.buttonBackground}>
-            <button onClick={e => handleClick(e.target, userObj, props.currentUser, props.gameState)} 
-                className={styles.listUserName}>
-                {userObj.userName} 
-            </button>
+            <div className={styles.buttonBackground}>
+                <button onClick={e => handleClick(e.target, userObj, props.currentUser, props.gameState)}
+                    className={styles.listUserName}>
+                    {userObj.userName}
+                </button>
             </div>
-            {userObj.isAlive ? <></> : (
-                <input onClick={e => handleDeadClick(e.target, props.lobbyId, props.token, userObj.userId)}
+            {!userObj.isAlive && userObj.userName !== props.currentUser.userName ? (
+                <input onClick={e => handleDeadClick(e.target, props.lobbyId, props.token)}
                     className={styles.deadIcon} type="image" src='/media/dead.png'></input>
-            )}
+            ) : <></>}
         </div>
     );
 }
