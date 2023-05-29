@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import styles from '../css/users.module.css';
 import stylesAction from '../css/action.module.css';
 const { getUserWillRequest } = require('../functions/requests.js')
@@ -14,8 +14,20 @@ function handleClick(target, user, currentUser, gameState)
 
         let usersSelectedElement = document.getElementById(stylesAction.usersSelected);
 
-        if (selectedUsers.length < nrMaxSelection || target.classList.contains(styles.selected))
+        // if (selectedUsers.length < nrMaxSelection || target.classList.contains(styles.selected))
+        //     target.classList.toggle(styles.selected);
+        if (nrMaxSelection === 1){
+            if(selectedUsers[0] !== target)
+                selectedUsers[0]?.classList.toggle(styles.selected);
             target.classList.toggle(styles.selected);
+        } else if (nrMaxSelection === 2){
+            selectedUsers[1] = selectedUsers[0];
+            selectedUsers[0] = target;
+            selectedUsers[1]?.classList.toggle(styles.selected);
+            selectedUsers[0]?.classList.toggle(styles.selected);
+        }
+        // console.log(selectedUsers[0]);
+        // console.log(target);
 
         selectedUsers = Array.from(
             document.getElementsByClassName(styles.selected)
@@ -51,7 +63,14 @@ async function handleDeadClick(target, lobbyId, token, userId)
 
 function User(props)
 {
+    if(props.gameState.state === "Discussion") {
+        const selectedUsers = Array.from(
+            document.getElementsByClassName(styles.selected)
+        );
+        selectedUsers.forEach(user => user.classList.toggle(styles.selected));
+    }
     let userObj = props.user;
+
     return (
         <div className={styles.userContainer}>
             <div className = {styles.buttonBackground}>
