@@ -34,8 +34,9 @@ function handleClick(target, user, currentUser, gameState)
     }
 }
 
-async function handleDeadClick(target, lobbyId, token)
+async function handleDeadClick(target, lobbyId, token, userId)
 {
+    console.log("cer will pt " + userId);
     let userName = target.parentElement.firstChild.innerText;
     let willElement = document.getElementById(styles.willContainer);
     willElement.style.display = "block";
@@ -44,14 +45,13 @@ async function handleDeadClick(target, lobbyId, token)
     willTitle.innerText = userName + "` will";
 
     let willText = willElement.lastChild;
-    willText.innerText = await getUserWillRequest(lobbyId, userName, token);
+    willText.innerText = await getUserWillRequest(lobbyId, userId, token);
     //willText.innerText = "This is the will of user: " + userName;
 }
 
 function User(props)
 {
     let userObj = props.user;
-
     return (
         <div className={styles.userContainer}>
             <div className = {styles.buttonBackground}>
@@ -61,7 +61,7 @@ function User(props)
             </button>
             </div>
             {userObj.isAlive ? <></> : (
-                <input onClick={e => handleDeadClick(e.target, props.lobbyId, props.token)}
+                <input onClick={e => handleDeadClick(e.target, props.lobbyId, props.token, userObj.userId)}
                     className={styles.deadIcon} type="image" src='/media/dead.png'></input>
             )}
         </div>

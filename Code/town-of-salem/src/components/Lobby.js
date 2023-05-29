@@ -2,6 +2,40 @@ import styles from '../css/lobby.module.css';
 import { useState } from "react";
 const { startGameRequest } = require('../functions/requests.js')
 
+async function postData(url, data)
+{
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    } catch ( error ) {
+        console.log(error);
+    }
+}
+
+async function handleChooseClick(target, setName, setPressed)
+{
+    let userName = document.getElementById(styles.name).value;
+
+    if (userName.length > 0)
+    {
+        let data = {
+            userId: ""
+        };
+        data.userId = userName;
+
+        await postData(process.env.REACT_APP_API_BASE_URL, data);
+
+        setName(userName);
+
+        setPressed(true);
+    }
+}
+
 async function handleStartClick(pressed, lobbyId, token)
 {
     let response = await startGameRequest(lobbyId, token);
