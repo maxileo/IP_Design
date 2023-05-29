@@ -46,6 +46,9 @@ function Navbar(props) {
   ) {
     roleColor = styles.townTxt;
   }
+
+
+
   return (
       <div>
         {/* {navbar} */}
@@ -62,29 +65,34 @@ function Navbar(props) {
           </div>
         </div>
 
+      
         {/* {will} */}
-        <div id={styles.willContainer} style={{ display: "none" }}>
-          <input
-              onClick={(e) => handleCloseDescriptionClick()}
-              id={styles.closeWill}
-              type="image"
-              src="/media/close.png"
-              alt=""
-          ></input>
-          <textarea
-              autoComplete="off"
-              placeholder="Write your WILL!"
-              id={styles.willText}
-          ></textarea>
-          <div className={styles.saveWillButton}>
-            <button
-                id={styles.saveButton}
-                onClick={(e) => handleSaveWillClick(props.lobbyId, props.token)}
-            >Save WILL
-            </button>
-          </div>
-        </div>
+  <div id={styles.willContainer} style={{ display: "none" }}>
+    <input
+      onClick={(e) => handleCloseDescriptionClick()}
+      id={styles.closeWill}
+      type="image"
+      src="/media/close.png"
+      alt=""
+    ></input>
+
+    <textarea autoComplete="off" placeholder="Write your WILL!" id={styles.willText}></textarea>
+    
+
+    {props.isAlive && (
+      <div className={styles.saveWillButton}>
+        <button
+          id={styles.saveButton}
+          onClick={(e) => handleSaveWillClick(props.lobbyId, props.token)}
+        >
+          Save WILL
+        </button>
       </div>
+    )}
+
+   
+  </div>
+  </div>
   );
 }
 export default Navbar;

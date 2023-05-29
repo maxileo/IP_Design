@@ -24,7 +24,6 @@ async function handleSendClick(target, gameState, currentUser, lobbyId, token)
 
     let response = await sendMessageRequest(lobbyId, textArea.value, token);
     textArea.value = "";
-    
     console.log(response);
 }
 
@@ -117,21 +116,33 @@ function Action(props)
     );
     }
     else if (props.gameState.state === "Discussion")
-    {
+    { 
+        if(props.currentUser.isAlive === false)
         return (
             <div className={styles.actionContainer}>
                 <textarea 
-                    autoComplete="off" placeholder="..." spellCheck="false" id={styles.messageTextArea}> 
+                     disabled = "true"  autoComplete="off" placeholder="You are dead, you can't send message anymore..." spellCheck="false" id={styles.messageTextArea}> 
                 </textarea>
-                <div className={styles.buttonBackground}>
-                    <button 
-                        onClick={e => handleSendClick(e.target, props.gameState, props.currentUser, props.lobbyId, props.token)}
-                        id={styles.action}>Send
-                    </button>
-                </div>
             </div>
 
         );
+        else{
+            if(props.currentUser.isAlive === true)
+            return (
+                <div className={styles.actionContainer}>
+                    <textarea 
+                        autoComplete="off" placeholder="..." spellCheck="false" id={styles.messageTextArea}> 
+                    </textarea>
+                    <div className={styles.buttonBackground}>
+                        <button 
+                            onClick={e => handleSendClick(e.target, props.gameState, props.currentUser, props.lobbyId, props.token)}
+                            id={styles.action}>Send
+                        </button>
+                    </div>
+                </div>
+    
+            );
+    }
     }
     else
     {

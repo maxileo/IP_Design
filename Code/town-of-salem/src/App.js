@@ -293,6 +293,7 @@ function App() {
               role={currentUser.role}
               lobbyId = {lobbyId}
               token = {token}
+              isAlive = {currentUser.isAlive}
             />
             <div className="content">
               <InfoAlert
