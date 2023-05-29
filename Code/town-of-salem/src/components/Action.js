@@ -20,9 +20,11 @@ function postData(data)
 async function handleSendClick(target, gameState, currentUser, lobbyId, token)
 {
     let textArea = document.getElementById(styles.messageTextArea);
-    textArea.value = "";
+    
 
     let response = await sendMessageRequest(lobbyId, textArea.value, token);
+    textArea.value = "";
+    
     console.log(response);
 }
 
