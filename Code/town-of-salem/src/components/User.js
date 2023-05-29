@@ -74,7 +74,7 @@ function User(props) {
                 </button>
             </div>
             {!userObj.isAlive && userObj.userName !== props.currentUser.userName ? (
-                <input onClick={e => handleDeadClick(e.target, props.lobbyId, props.token)}
+                <input onClick={e => handleDeadClick(e.target, props.lobbyId, props.token, userObj.userId)}
                     className={styles.deadIcon} type="image" src='/media/dead.png'></input>
             ) : <></>}
         </div>
