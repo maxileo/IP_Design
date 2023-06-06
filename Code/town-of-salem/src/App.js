@@ -11,10 +11,12 @@ import Chat from './components/Chat';
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Lobbies from './components/Lobbies';
+import stylesChat from './css/chat.module.css';
 const { getChatRequest } = require('./functions/requests.js')
 const { getUserProfileRequest } = require('./functions/requests.js')
 const { getState } = require('./functions/requests.js')
 const { getLobbies } = require('./functions/requests.js')
+
 
 
 let lobbyId = "000000";
@@ -143,7 +145,8 @@ async function createObjects(token) {
   timeLeftJson = Math.floor((currentGameState.timeEndState - utcTimestamp) / 1000);
   console.log(timeLeftJson);
 
-  if (currentGameState.state === "Discussion")
+  //if (currentGameState.state === "Discussion")
+  if (true)
   {
     // request-ul aici, ar trebui schimbat 0 si 0 cu lobbyId si tokenUser
 
@@ -166,32 +169,15 @@ async function createObjects(token) {
           {
             newMessages[i].userName = mapIdToUsers.get(newMessages[i].userId);
             messages.push(newMessages[i]);
+            
+            let chatDiv = document.getElementById(stylesChat.chatContainer);
+            if (chatDiv) {
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+            }
           }
         }
       }
     }
-
-
-    // de test
-    /*
-    messages = [
-      {
-        userName: "Mihai",
-        content: "Who seems sus??",
-        createdAt: 1682301505
-      },
-      {
-      userName: "Casutu",
-      content: "This is my message, I believe the mafioso is dienus!",
-      createdAt: 1682300005
-      },
-      {
-      userName: "Diana",
-      content: "Noo :(",
-      createdAt: 1682300505
-      }
-    ];
-    */
 
     // sort messages by createdAt field
     messages.sort(function(a, b) {
@@ -200,6 +186,7 @@ async function createObjects(token) {
       return 0;
     });
   }
+
   }
   return 1;
 }
@@ -283,7 +270,7 @@ function App() {
         return (
           <div className='app'>
             <div className="content">
-              <Lobbies lobbies = {lobbies}/>
+              <Lobbies lobbies = {lobbies} token={token}/>
             </div>
           </div>
         );
@@ -324,14 +311,26 @@ function App() {
                     lastState={lastState}
                   />
                 </div>
-                <Action
-                  gameState={gameState}
-                  currentUser={currentUser}
-                  judgedCharacter={judgedCharacter}
-                  mapUsersToId = {mapUsersToId}
-                  lobbyId = {lobbyId}
-                  token = {token}
-                />
+                <div className='chat-action-container'>
+                  <Action
+                    gameState={gameState}
+                    currentUser={currentUser}
+                    judgedCharacter={judgedCharacter}
+                    mapUsersToId = {mapUsersToId}
+                    lobbyId = {lobbyId}
+                    token = {token}
+                    isChat = {true}
+                  />
+                  <Action
+                    gameState={gameState}
+                    currentUser={currentUser}
+                    judgedCharacter={judgedCharacter}
+                    mapUsersToId = {mapUsersToId}
+                    lobbyId = {lobbyId}
+                    token = {token}
+                    isChat = {false}
+                  />
+                </div>
               </div>
 
               <div className="roleList">

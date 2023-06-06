@@ -287,7 +287,21 @@ const getLobbies = async (token) => {
     return {errorStatus: response.status};
 }
 
+const createNewLobby = async (token) => {
+    const response = await fetch(`${baseUrl}/lobbies`, {
+        method: "POST", headers: {
+            "Content-Type": "application/json", "Authorization": token
+        }
+    });
+
+    if (response.ok) {
+        return true;
+    }
+
+    return {errorStatus: response.status};
+}
+
 module.exports = {
     registerRequest, loginRequest, getOwnProfileRequest, getUserProfileRequest, sendMessageRequest, getChatRequest,
-    getOwnWillRequest, getUserWillRequest, updateWillRequest, getState, sendToLobby, startGameRequest, getLobbies
+    getOwnWillRequest, getUserWillRequest, updateWillRequest, getState, sendToLobby, startGameRequest, getLobbies, createNewLobby
 }

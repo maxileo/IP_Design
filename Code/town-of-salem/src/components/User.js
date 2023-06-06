@@ -66,16 +66,18 @@ function User(props)
     if (userObj.role)
         userToDisplay += (" ( " + userObj.role + " )"); 
 
+    let isTarget = props.currentUser.possibleTargets.includes(props.user.userId);
+
     return (
         <div className={styles.userContainer}>
             <div className = {styles.buttonBackground}>
             <button onClick={e => handleClick(e.target, userObj, props.currentUser, props.gameState)} 
-                className={styles.listUserName}>
+                className={isTarget ? styles.listUserName : styles.listUserNameNotTarget}>
                 {userToDisplay} 
             </button>
             </div>
             {userObj.isAlive ? <></> : (
-                <input onClick={e => handleDeadClick(e.target, props.lobbyId, props.token, props.currentUser.userId)}
+                <input onClick={e => handleDeadClick(e.target, props.lobbyId, props.token, props.user.userId)}
                     className={styles.deadIcon} type="image" src='/media/dead.png'></input>
             )}
         </div>

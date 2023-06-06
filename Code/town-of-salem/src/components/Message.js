@@ -2,6 +2,7 @@ import styles from '../css/chat.module.css';
 
 function Message(props)
 {
+
     return (
         <div className={props.sentByUser ? styles.sentByUser : styles.sentByOtherUser }>
             <div className={styles.columns}>

@@ -20,9 +20,9 @@ function postData(data)
 async function handleSendClick(target, gameState, currentUser, lobbyId, token)
 {
     let textArea = document.getElementById(styles.messageTextArea);
-    textArea.value = "";
 
     let response = await sendMessageRequest(lobbyId, textArea.value, token);
+    textArea.value = "";
     console.log(response);
 }
 
@@ -73,6 +73,22 @@ function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersTo
 
 function Action(props)
 {
+    if (props.isChat == true) {
+        return (
+            <div className={styles.actionContainer}>
+                <textarea 
+                    autoComplete="off" placeholder="..." spellCheck="false" id={styles.messageTextArea}> 
+                </textarea>
+                <div className={styles.buttonBackground}>
+                    <button 
+                        onClick={e => handleSendClick(e.target, props.gameState, props.currentUser, props.lobbyId, props.token)}
+                        id={styles.actionSend}>Send
+                    </button>
+                </div>
+            </div>
+
+        );
+    }
     if (props.gameState.state == "Selection") {
         let selectedUsers = Array.from(
             document.getElementsByClassName(stylesUser.selected)
@@ -115,23 +131,6 @@ function Action(props)
             </div>
         </div>
     );
-    }
-    else if (props.gameState.state === "Discussion")
-    {
-        return (
-            <div className={styles.actionContainer}>
-                <textarea 
-                    autoComplete="off" placeholder="..." spellCheck="false" id={styles.messageTextArea}> 
-                </textarea>
-                <div className={styles.buttonBackground}>
-                    <button 
-                        onClick={e => handleSendClick(e.target, props.gameState, props.currentUser, props.lobbyId, props.token)}
-                        id={styles.action}>Send
-                    </button>
-                </div>
-            </div>
-
-        );
     }
     else
     {

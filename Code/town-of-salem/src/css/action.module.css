@@ -84,6 +84,37 @@
     transition: 0.3s;
 }
 
+#actionSend{
+    background-color: transparent;
+
+    background-image: url('../svg/actionButton.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    padding: 2rem;
+    padding-left: 4.5rem;
+    padding-right: 4rem;
+
+    color: #FBDA7D;
+
+    font-size: 2rem;
+
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+#actionSend:hover{
+    transform: scale(1.05);
+}
+
 #action:hover{
     transform: scale(1.05);
 }

@@ -78,6 +78,27 @@
     cursor: pointer;
 }
 
+.listUserNameNotTarget{
+    padding: 0.6rem;
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+    min-width: 12rem;
+    background-color: transparent;
+
+    color: #FBDA7D;
+
+    background-image: url('../svg/notTarget.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    border: none;
+    outline: none;
+
+    transition: 0.3s;
+    
+    cursor: pointer;
+}
+
 .buttonBackground{
     background-color: transparent;
     display: flex;

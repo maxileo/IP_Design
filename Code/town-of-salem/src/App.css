@@ -23,3 +23,10 @@ body{
 
   align-items: center;
 }
+
+.chat-action-container{
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+}

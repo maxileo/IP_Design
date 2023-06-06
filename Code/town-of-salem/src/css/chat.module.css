@@ -3,7 +3,7 @@
     margin-left: 1rem;
 }
 
-.chatContainer{
+#chatContainer{
     padding: 0.5rem;
     max-width: 16rem;
     min-width: 16rem;
