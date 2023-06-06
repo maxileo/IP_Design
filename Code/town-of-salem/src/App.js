@@ -337,6 +337,7 @@ function App() {
           <div className="app">
             <Navbar
               mapIdToUsers={mapIdToUsers}
+              currentUser={currentUser}
               userName={currentUser.userName}
               role={currentUser.role}
               lobbyId = {lobbyId}

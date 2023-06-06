@@ -121,7 +121,7 @@ function Action(props)
         buttonText = props.currentUser.actionText;
     }
 
-    if ((props.gameState.state == "Voting" || props.gameState.state == "Selection" || props.gameState.state == "Night") && (props.currentUser.canAct !== false || props.isChat === false))
+    if ((props.gameState.state == "Voting" || props.gameState.state == "Selection" || props.gameState.state == "Night") && props.currentUser.canAct === true )
     {
     return (
         <div className={styles.actionContainer}>

@@ -5,6 +5,7 @@ const { updateWillRequest } = require('../functions/requests.js')
 
 
 async function handleWillClick(lobbyId, token, currentUser) {
+  console.log(currentUser);
   if (!currentUser.isAlive){
     return;
   }
