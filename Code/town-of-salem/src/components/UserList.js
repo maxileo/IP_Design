@@ -21,6 +21,7 @@ function UserList(props)
                     currentUser={props.currentUser}
                     lobbyId = {props.lobbyId}
                     token = {props.token} 
+                    lastState={props.lastState}
                     />)}
                 </div>
             </div>

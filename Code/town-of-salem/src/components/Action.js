@@ -20,6 +20,7 @@ function postData(data)
 async function handleSendClick(target, gameState, currentUser, lobbyId, token)
 {
     let textArea = document.getElementById(styles.messageTextArea);
+    textArea.value = "";
 
     let response = await sendMessageRequest(lobbyId, textArea.value, token);
     console.log(response);
@@ -62,6 +63,8 @@ function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersTo
                 }
             }
             
+            let buttonElem = document.getElementById(styles.action);
+            buttonElem.style.display = "none";
 
             postData(data);
         }

@@ -6,35 +6,38 @@ const { getUserWillRequest } = require('../functions/requests.js')
 function handleClick(target, user, currentUser, gameState)
 {
     let nrMaxSelection = currentUser.nrOfSelection;
-    if (user.isAlive && (gameState.state == "Selection" || gameState.state == "Night"))
+    if (user.isAlive && (gameState.state == "Selection" || gameState.state == "Night") && currentUser.possibleTargets.includes(user.userId) )
     {
-        let selectedUsers = Array.from(
-            document.getElementsByClassName(styles.selected)
-        );
+        let buttonElem = document.getElementById(stylesAction.action);
+        if ( buttonElem.style.display !== "none" ) {
+            let selectedUsers = Array.from(
+                document.getElementsByClassName(styles.selected)
+            );
 
-        let usersSelectedElement = document.getElementById(stylesAction.usersSelected);
+            let usersSelectedElement = document.getElementById(stylesAction.usersSelected);
 
-        if (selectedUsers.length < nrMaxSelection || target.classList.contains(styles.selected))
-            target.classList.toggle(styles.selected);
+            if (selectedUsers.length < nrMaxSelection || target.classList.contains(styles.selected))
+                target.classList.toggle(styles.selected);
 
-        selectedUsers = Array.from(
-            document.getElementsByClassName(styles.selected)
-        );
+            selectedUsers = Array.from(
+                document.getElementsByClassName(styles.selected)
+            );
 
-        let selectedUsersAction = Array.from( document.getElementsByClassName(stylesAction.selectedUser));
-        for (let i = 0; i < selectedUsers.length; i++)
-        {
-            selectedUsersAction[i].style.display = "block";
-            selectedUsersAction[i].innerText = selectedUsers[i].innerText;
-        }
-        for (let i = selectedUsers.length; i < nrMaxSelection; i++)
-        {
-            selectedUsersAction[i].style.display = "none";
+            let selectedUsersAction = Array.from( document.getElementsByClassName(stylesAction.selectedUser));
+            for (let i = 0; i < selectedUsers.length; i++)
+            {
+                selectedUsersAction[i].style.display = "block";
+                selectedUsersAction[i].innerText = selectedUsers[i].innerText;
+            }
+            for (let i = selectedUsers.length; i < nrMaxSelection; i++)
+            {
+                selectedUsersAction[i].style.display = "none";
+            }
         }
     }
 }
 
-async function handleDeadClick(target, lobbyId, token)
+async function handleDeadClick(target, lobbyId, token, userId)
 {
     let userName = target.parentElement.firstChild.innerText;
     let willElement = document.getElementById(styles.willContainer);
@@ -44,24 +47,35 @@ async function handleDeadClick(target, lobbyId, token)
     willTitle.innerText = userName + "` will";
 
     let willText = willElement.lastChild;
-    willText.innerText = await getUserWillRequest(lobbyId, userName, token);
-    //willText.innerText = "This is the will of user: " + userName;
+    willText.innerText = await getUserWillRequest(lobbyId, userId, token);
+    
 }
 
 function User(props)
 {
+    if(props.gameState.state !== props.lastState) {
+        const selectedUsers = Array.from(
+            document.getElementsByClassName(styles.selected)
+        );
+        selectedUsers.forEach(user => user.classList.remove(styles.selected));
+    }
+
     let userObj = props.user;
+    let userToDisplay = userObj.userName;
+
+    if (userObj.role)
+        userToDisplay += (" ( " + userObj.role + " )"); 
 
     return (
         <div className={styles.userContainer}>
             <div className = {styles.buttonBackground}>
             <button onClick={e => handleClick(e.target, userObj, props.currentUser, props.gameState)} 
                 className={styles.listUserName}>
-                {userObj.userName} 
+                {userToDisplay} 
             </button>
             </div>
             {userObj.isAlive ? <></> : (
-                <input onClick={e => handleDeadClick(e.target, props.lobbyId, props.token)}
+                <input onClick={e => handleDeadClick(e.target, props.lobbyId, props.token, props.currentUser.userId)}
                     className={styles.deadIcon} type="image" src='/media/dead.png'></input>
             )}
         </div>

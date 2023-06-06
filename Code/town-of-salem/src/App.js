@@ -56,6 +56,7 @@ function getLobbyId(){
 let usersList = [];
 let rolesList = [];
 let lobbies = [];
+let lastState = "";
 
 let currentGameState = {
   state: "lobby",
@@ -95,6 +96,7 @@ async function createLobbies(token) {
 }
 
 async function createObjects(token) {
+
   let gameStateJson = await getState(lobbyId, token);
 
   //if (gameStateJson.errorStatus !== null || gameStateJson.errorStatus !== undefined)
@@ -217,11 +219,15 @@ function App() {
       timeLeftJson = Math.floor((currentGameState.timeEndState - utcTimestamp) / 1000);
 
       if (token !== undefined && token !== null && !window.location.pathname.startsWith("/lobbies")) {
+        if (timeLeftJson <= 0) 
+          lastState = "CHANGE";
+        else
+          lastState = currentGameState.state;
         createObjects(token);
         setGameState(currentGameState);
       }
 
-      if (token !== undefined && token !== null) {
+      if (token !== undefined && token !== null && window.location.pathname.startsWith("/lobbies")) {
         createLobbies(token);
       }
 
@@ -300,6 +306,7 @@ function App() {
                 timeLeft={timeLeft}
                 currentUser={currentUser}
                 judgedCharacter={judgedCharacter}
+                mapIdToUsers={mapIdToUsers}
               />
 
               <div className="userList-action">
@@ -314,6 +321,7 @@ function App() {
                     currentUser={currentUser}
                     lobbyId = {lobbyId}
                     token = {token}
+                    lastState={lastState}
                   />
                 </div>
                 <Action

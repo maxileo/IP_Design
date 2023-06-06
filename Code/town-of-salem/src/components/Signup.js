@@ -51,8 +51,9 @@ function Signup(props)
         if (response["token"] !== null && response["token"] !== undefined)
         {
             console.log(response["token"]);
-            localStorage.setItem("token", response["token"]);
-            localStorage.setItem("userName", user.username);
+            //localStorage.setItem("token", response["token"]);
+            //localStorage.setItem("userName", user.username);
+            window.location.pathname = "/login";
         }
         else
         {

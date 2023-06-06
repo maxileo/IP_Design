@@ -1,6 +1,24 @@
 import styles from "../css/infoAlert.module.css";
 
 export default function InfoAlert(props) {
+  let nightResults = props.currentUser.nightResults;
+  
+  if (nightResults) {
+    for (let i = 0; i < nightResults.length; i++)
+    {
+      const newString = nightResults[i].replace(/[0-9]+/g, (match) => {
+        const mappedString = props.mapIdToUsers.get(match);
+        return mappedString ? mappedString : match;
+      });
+
+      nightResults[i] = newString;
+    }
+  }
+
+
+
+  
+
   if (props.gameState.state === "Voting")
     return (
       <div className={styles.infoAlertContainer}>
@@ -31,7 +49,7 @@ export default function InfoAlert(props) {
     return (
       <div className={styles.infoAlertContainer}>
         <h2 id={styles.Txt}>The night has ended.</h2>
-        {props.currentUser.nightResults.map((result) => (
+        {nightResults.map((result) => (
         <h2 className={styles.TxtResult}>&lt;{result}&gt;</h2>
         ))}
         <h2 id={styles.Txt}>Prepare for the day to start</h2>
