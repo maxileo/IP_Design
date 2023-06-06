@@ -277,6 +277,13 @@ function App() {
       }
     }
     else {
+      if (gameState.state == "End") {
+        return (
+          <div className='app'>
+            <p>This is the end of the game. To be done</p>
+          </div>
+        );
+      }
       if (gameState.state != "Lobby")
       {
         return (
@@ -329,6 +336,7 @@ function App() {
                     lobbyId = {lobbyId}
                     token = {token}
                     isChat = {false}
+                    lastState={lastState}
                   />
                 </div>
               </div>

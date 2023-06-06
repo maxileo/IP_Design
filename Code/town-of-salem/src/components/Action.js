@@ -29,7 +29,7 @@ async function handleSendClick(target, gameState, currentUser, lobbyId, token)
 let infoText = "";
 let buttonText = "";
 
-function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersToId)
+function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersToId, lastState)
 {
     if (currentUser.isAlive && (gameState.state == "Voting" || gameState.state == "Selection" || gameState.state == "Night"))
     {
@@ -63,8 +63,17 @@ function handleClick(target, gameState, currentUser, judgedCharacter, mapUsersTo
                 }
             }
             
+            
             let buttonElem = document.getElementById(styles.action);
             buttonElem.style.display = "none";
+            
+
+            if (gameState.state != "Night") {
+                setTimeout(()=> {
+                    let buttonElem = document.getElementById(styles.action);
+                    buttonElem.style.display = "block";
+                }, 3000);
+            }
 
             postData(data);
         }
@@ -125,7 +134,7 @@ function Action(props)
             </div>
             <div className={styles.buttonBackground}>
                 <button 
-                    onClick={e => handleClick(e.target, props.gameState, props.currentUser, props.judgedCharacter, props.mapUsersToId)}
+                    onClick={e => handleClick(e.target, props.gameState, props.currentUser, props.judgedCharacter, props.mapUsersToId, props.lastState)}
                     id={styles.action}>{buttonText}
                 </button>
             </div>

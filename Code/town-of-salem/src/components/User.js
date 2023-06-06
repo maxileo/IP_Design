@@ -6,7 +6,7 @@ const { getUserWillRequest } = require('../functions/requests.js')
 function handleClick(target, user, currentUser, gameState)
 {
     let nrMaxSelection = currentUser.nrOfSelection;
-    if (user.isAlive && (gameState.state == "Selection" || gameState.state == "Night") && currentUser.possibleTargets.includes(user.userId) )
+    if (user.isAlive && ((gameState.state == "Selection") || (gameState.state == "Night" && currentUser.possibleTargets.includes(user.userId) ) ) )
     {
         let buttonElem = document.getElementById(stylesAction.action);
         if ( buttonElem.style.display !== "none" ) {
@@ -67,6 +67,10 @@ function User(props)
         userToDisplay += (" ( " + userObj.role + " )"); 
 
     let isTarget = props.currentUser.possibleTargets.includes(props.user.userId);
+    if (props.gameState.state != "Night")
+        isTarget = true;
+    if (!props.user.isAlive)
+        isTarget = false;
 
     return (
         <div className={styles.userContainer}>

@@ -15,6 +15,15 @@ export default function InfoAlert(props) {
     }
   }
 
+  let actionText = props.currentUser.actionText;
+  if (actionText) {
+    const newString2 = actionText.replace(/[0-9]+/g, (match) => {
+      const mappedString = props.mapIdToUsers.get(match);
+      return mappedString ? mappedString : match;
+    });
+    actionText = newString2;
+  }
+
 
 
   
@@ -41,7 +50,7 @@ export default function InfoAlert(props) {
         <h2 id={styles.Txt}>Remaining {props.gameState.state} time:</h2>
         <h1 id={styles.Txt}>{props.timeLeft} sec</h1>
         <h2 id={styles.Txt}>
-          You have to choose someone to {props.currentUser.actionText}
+          You have to choose someone to {actionText}
         </h2>
       </div>
     );
