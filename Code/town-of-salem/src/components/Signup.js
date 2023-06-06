@@ -45,14 +45,15 @@ function Signup(props)
     e.preventDefault();
     setFormErrors(validateForm(user));
 
-    if (Object.keys(formErrors).length === 0) {
+    if ( Object.keys(formErrors).length === 0) {
         let response = await registerRequest(user.username, user.password);
         console.log(response);
         if (response["token"] !== null && response["token"] !== undefined)
         {
-            console.log(response["token"]);
-            localStorage.setItem("token", response["token"]);
-            localStorage.setItem("userName", user.username);
+            // console.log(response["token"]);
+            // localStorage.setItem("token", response["token"]);
+            // localStorage.setItem("userName", user.username);
+            window.location.pathname = "/login";
         }
         else
         {

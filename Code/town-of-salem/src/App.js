@@ -115,7 +115,6 @@ async function createObjects(token) {
   usersList = gameStateJson.users;
   for (let i = 0; i < usersList.length; i++)
   {
-    // usersList[i].userId = usersList[i].username;
     if (mapIdToUsers.get(usersList[i].userId) === undefined) {
       {
         let response = await getUserProfileRequest(usersList[i].userId, token);
