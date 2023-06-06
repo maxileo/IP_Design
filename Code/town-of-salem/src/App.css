@@ -30,3 +30,19 @@ body{
 
   align-items: center;
 }
+
+#deadBanner {
+  background-color: transparent;
+
+  background-image: url('./svg/dead.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 2rem;
+  padding-left: 4.5rem;
+  padding-right: 4rem;
+  width: 20rem;
+  height: 8rem;
+
+  margin-left: 1rem;
+}

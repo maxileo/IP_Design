@@ -286,6 +286,52 @@ function App() {
       }
       if (gameState.state != "Lobby")
       {
+        if (!currentUser.isAlive) {
+          return (
+            <div className="app">
+            <Navbar
+              userName={currentUser.userName}
+              role={currentUser.role}
+              lobbyId = {lobbyId}
+              token = {token}
+            />
+            <div className="content">
+              <InfoAlert
+                gameState={gameState}
+                timeLeft={timeLeft}
+                currentUser={currentUser}
+                judgedCharacter={judgedCharacter}
+                mapIdToUsers={mapIdToUsers}
+              />
+
+              <div className="userList-action">
+                <div className="chat-users-container">
+                  <Chat 
+                    messages={messages}
+                    currentUser={currentUser}
+                  />
+                  <UserList
+                    usersList={usersList}
+                    gameState={gameState}
+                    currentUser={currentUser}
+                    lobbyId = {lobbyId}
+                    token = {token}
+                    lastState={lastState}
+                  />
+                </div>
+
+                <div id="deadBanner"></div>
+
+              </div>
+
+
+              <div className="roleList">
+                <RoleList rolesList={rolesList} />
+              </div>
+            </div>
+          </div>
+          );
+        }
         return (
           <div className="app">
             <Navbar
