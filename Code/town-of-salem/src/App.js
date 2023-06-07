@@ -85,7 +85,7 @@ for (let i = 0; i < 13; i++)
 
 
 let currentUser = {
-  userName: "Casu"
+  userName: ""
 };
 let timeLeftJson = 0;
 let judgedCharacter = "";
@@ -290,6 +290,7 @@ function App() {
           return (
             <div className="app">
             <Navbar
+                currentUser={currentUser}
               userName={currentUser.userName}
               role={currentUser.role}
               lobbyId = {lobbyId}
@@ -335,6 +336,8 @@ function App() {
         return (
           <div className="app">
             <Navbar
+              mapIdToUsers={mapIdToUsers}
+              currentUser={currentUser}
               userName={currentUser.userName}
               role={currentUser.role}
               lobbyId = {lobbyId}

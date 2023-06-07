@@ -4,7 +4,11 @@ const { getOwnWillRequest } = require('../functions/requests.js')
 const { updateWillRequest } = require('../functions/requests.js')
 
 
-async function handleWillClick(lobbyId, token) {
+async function handleWillClick(lobbyId, token, currentUser) {
+  console.log(currentUser);
+  if (!currentUser.isAlive){
+    return;
+  }
   let descriptionElement = document.getElementById(styles.willContainer);
   let willElement = document.getElementById(styles.willText);
 
@@ -46,6 +50,15 @@ function Navbar(props) {
   ) {
     roleColor = styles.townTxt;
   }
+
+  let roleName = props.role;
+  const regex = /[0-9]+/g;
+  if(props.role?.includes("Executioner")){
+    roleName = props.role.replace(regex, (match) => {
+      const mappedString = props.mapIdToUsers.get(match);
+      return mappedString ? mappedString : match;
+    })
+  }
   return (
       <div>
         {/* {navbar} */}
@@ -54,9 +67,9 @@ function Navbar(props) {
             <img src="../media/dead.png" alt="profile" />
           </div>
           <h1 id={styles.Txt}>{props.userName}</h1>
-          <h1 className={roleColor}>({props.role})</h1>
+          <h1 className={roleColor}>({roleName})</h1>
           <div className={styles.writeWillButton}>
-            <button id={styles.willAction} onClick={(e) => handleWillClick(props.lobbyId, props.token)}>
+            <button id={styles.willAction} onClick={(e) => handleWillClick(props.lobbyId, props.token, props.currentUser)}>
               Write WILL
             </button>
           </div>
