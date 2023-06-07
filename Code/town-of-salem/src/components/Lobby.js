@@ -11,6 +11,8 @@ async function handleStartClick(pressed, lobbyId, token)
 function Lobby(props)
 {
     const [pressed, setPressed] = useState(false);
+    let usersInLobby = props.usersInLobby;
+    let nrOfUsers = usersInLobby.length;
 
     /*
     return (
@@ -39,6 +41,7 @@ function Lobby(props)
     return (
         <div className={styles.center}>
         <div className={styles.formContainer}>
+            <h1>USERS IN LOBBY: {nrOfUsers}</h1>
             <h1>WHEN YOU ARE READY PRESS START TO START THE GAME</h1>
             <div className={styles.buttonBackgroundLobby}>
                 <button 

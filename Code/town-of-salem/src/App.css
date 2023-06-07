@@ -46,3 +46,28 @@ body{
 
   margin-left: 1rem;
 }
+
+#butonLobbies{
+  border: 3px solid #FBDA7D;
+    background: rgb(68,55,48);
+    background: linear-gradient(180deg, rgba(68,55,48,1) 0%, rgba(41,32,29,1) 100%);
+
+    padding: 2rem;
+    padding-left: 4.5rem;
+    padding-right: 4rem;
+
+    color: #FBDA7D;
+
+    font-size: 2rem;
+
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+
+    transition: 0.4s;
+
+    cursor: pointer;
+}
+
+#butonLobbies:hover{
+  transform: scale(1.05);
+}

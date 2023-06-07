@@ -90,6 +90,7 @@ let currentUser = {
 let timeLeftJson = 0;
 let judgedCharacter = "";
 let messages = [];
+let usersInLobby = [];
 
 async function createLobbies(token) {
   let lobbiesJson = await getLobbies(token);
@@ -98,6 +99,7 @@ async function createLobbies(token) {
 }
 
 async function createObjects(token) {
+
 
   let gameStateJson = await getState(lobbyId, token);
 
@@ -111,12 +113,15 @@ async function createObjects(token) {
   currentGameState.state = gameStateJson.state;
   currentGameState.timeEndState = gameStateJson.timeEndState;
 
+  currentGameState.results = gameStateJson.results;
+
   if (gameStateJson.state !== "Lobby")
   {
-
   currentUser = gameStateJson.currentUser;
   currentUser.userName = getName();
   usersList = gameStateJson.users;
+  
+  
   for (let i = 0; i < usersList.length; i++)
   {
     // usersList[i].userId = usersList[i].username;
@@ -187,6 +192,9 @@ async function createObjects(token) {
     });
   }
 
+  }
+  else {
+    usersInLobby = gameStateJson.users;
   }
   return 1;
 }
@@ -278,15 +286,37 @@ function App() {
     }
     else {
       if (gameState.state == "End") {
+        //{ currentGameState.results.map((result) => <h1>{result}</h1> )}
+        //console.log(currentGameState.results);
+
+        if (currentGameState.results) {
+          for (let i = 0; i < currentGameState.results.length; i++)
+          {
+            const newString = currentGameState.results[i].replace(/[0-9]+/g, (match) => {
+              const mappedString = mapIdToUsers.get(match);
+              return mappedString ? mappedString : match;
+            });
+      
+            currentGameState.results[i] = newString;
+          }
+        }
+
         return (
           <div className='app'>
-            <p>This is the end of the game. To be done</p>
+            <div className="content">
+              <div className="endContainer">
+                <h1 style={{"color" : "#FBDA7D"}}>This is the end of the game</h1>
+                { currentGameState.results.map((result) => <h1 style={{"color" : "#FBDA7D"}}>{result}</h1> )}
+                <button id="butonLobbies" onClick={() => {window.location.pathname = "/lobbies";}}>BACK TO LOBBIES</button>
+              </div>
+            </div>
           </div>
         );
       }
       if (gameState.state != "Lobby")
       {
         if (!currentUser.isAlive) {
+          currentUser.possibleTargets = [];
           return (
             <div className="app">
             <Navbar
@@ -401,7 +431,7 @@ function App() {
       {
         return (
           <div className='app'>
-            <Lobby setName = {setName} token = {token} lobbyId = {lobbyId}/>
+            <Lobby setName = {setName} token = {token} lobbyId = {lobbyId} usersInLobby = {usersInLobby}/>
           </div>
         );
       }

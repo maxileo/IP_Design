@@ -39,15 +39,7 @@ function Navbar(props) {
       props.role === "Jester"
   ) {
     roleColor = styles.neutralTxt;
-  } else if (
-      props.role === "Sheriff" ||
-      props.role === "Lookout" ||
-      props.role === "Investigator" ||
-      props.role === "Jailor" ||
-      props.role === "Doctor" ||
-      props.role === "Escort" ||
-      props.role === "Medium"
-  ) {
+  } else {
     roleColor = styles.townTxt;
   }
 
